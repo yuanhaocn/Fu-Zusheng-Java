@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句   -->
+<mapper namespace="com.itheima.mybatis.mapper.UserMapper">
+
+	<!-- 根据用户名模糊查询 -->
+	<select id="findUserByQueryVo" parameterType="QueryVo" resultType="com.itheima.mybatis.pojo.User">
+		select * from user where username like "%"#{user.username}"%"
+	</select>
+	
+	<!--输出简单类型 -->
+	 <select id="countUser" resultType="Integer">
+	 	select count(1) from user
+	 </select>
+<!--==================================================================================================================== 	 --> 
+	<sql id="selector">
+		select * from user
+	</sql>
+	
+	 <!--感觉好像jstl语句，TMD
+	 	根据性别和名字查询用户  where标签可以去掉第一个前ANd   -->
+	 <select id="selectUserBySexAndUsername" parameterType="User" resultType="User">
+	 	<include refid="selector"/>
+	 	<where>
+		 	<if test="sex != null and sex != ''">
+		 		 and sex = #{sex} 
+		 	</if>
+		 	<if test="username != null and username != ''">
+			 	 and username = #{username}
+		 	</if>
+	 	</where>
+	 </select>
+<!--==================================================================================================================== 	 -->	 
+	 <!-- 多个ID (1,2,3)  注意collection的取值，list表示的是List集合 array表示的是数组-->
+	 <select id="selectUserByIds" parameterType="QueryVo" resultType="User">
+	 	<include refid="selector"/>
+	 	<where>
+	 		<foreach collection="list" item="id" separator="," open="id in (" close=")">
+	 			#{id}
+	 		</foreach>
+	 	</where>
+	 </select>
+<!--==================================================================================================================== 	 -->
+
+</mapper>

@@ -1,0 +1,362 @@
+一、概念
+流:流动 、流向 从一端移动到另一端  源头与目的地
+程序 与  文件|数组|网络连接|数据库  ，以程序为中心 
+二、IO流分类
+1、流向: 输入流与输出流
+2、数据:字节流:二进制，可以一切文件 包括  纯文本 doc 音频、视频等等
+	字符流:文本文件，只能处理纯文本
+3、功能:节点:包裹源头
+	处理:增强功能，提供性能
+三、字符流与字节流 （重点） 与文件
+1、字节流
+    输入流:InputStream  read(byte[] b) 、read(byte[] b, int off, int len)  +close() 
+	 FileInputStream()
+    输出流:OutputStream write(byte[] b)  write(byte[] b, int off, int len)  +flush() +close()
+	 FileOutputStream
+2、字符流
+   输入流:Reader read(char[] cbuf) read(char[] cbuf, int off, int len)  +close() 
+	FileReader()
+   输出流:Writer  write(char[] cbuf) write(char[] cbuf, int off, int len) +flush() +close()
+			  write(String str, int off, int len) 
+	FileWriter()
+四、操作
+1、举例:搬家               		  -->读取文件
+  	 1)、关联房子                  -->建立与文件联系
+  	 2)、选择搬家	      -->选择对应流
+  	 3)、搬家		 	  -->读取|写出
+		a)、卡车大小	  -->数组大小
+		b)、运输		  -->读取、写出
+   	4)、打发over		  -->释放资源
+2、操作
+1)建立联系
+2)选择流
+3)操作  数组大小+read 、write
+4)释放资源
+
+7.File
+	简介：
+		这是java中文件或者是抽象路径对应的类，本质是一个路径
+		
+	区别：
+		在linux和windows的区别，在windows里面\和/效果一致
+		但是在linux里面/是最常用的
+		
+	斜杠的区别：
+		/左斜杠广泛应用于linux系统，比如android、linux服务器
+			macos、网络传输http、智能硬件
+			
+		\右斜杠只应用与windows系统
+		
+	相对路径和绝对路径：
+		绝对路径是os中唯一的路径，再此路径下存在这唯一的文件
+			或者文件夹，根据绝对路径可以唯一定位文件
+			D:\javaSoft\idea\jre32\bin\awt.dll
+			这是个绝对路径
+			优点是简单直接，肯定可以找到或者肯定没有。
+			缺点是io效率低，同级文件夹下面的访问速度非常慢
+			
+		相对路径是在绝对路径的基础上进行延伸的路径，需要
+			以绝对路径作为依据,比如目前在
+			E:\MavenLib\mysql\
+			下面，我需要找到这个文件，此时路径变为这个样子
+			\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.pom
+			所以文件系统的检索方案是把绝对路径和相对路径进行拼接
+			优点是路径短，速度快
+			缺点是容易出错，比如需要从E:\MavenLib\mysql\到MavenLib下面的comments-io
+			里面，此时相对路径要这么写
+				..\comments-io才可以
+			
+			
+8.文件系统
+	是计算机维护文件的子操作系统，是现代操作系统开发的核心
+	常见的文件系统如下：
+		fat32   是windows在32位系统时代的存储格式，单个文件总大小不超过4G
+		ntfs	是windows在64位时代引出的一个格式，突破了4G限制，但是io效率降低了
+		ext3
+		ext4	是linux系统文件存储格式，不兼容ext3
+		hdfs	是hadoop系统的分布式存储系统，每个block包含128或者是256M的空间
+		
+	
+	常用的linux：
+		Redhat  centos   ubantu   deepin
+		
+	虚拟机：
+		vmware    vbox
+		
+9.File的构造方法
+	File(String pathname) 通过将给定路径名来创建一个新 File
+	File(String parent, String child) 根据 parent和 child 创建一个新 File
+	代码：
+		//标识制定字符串的路径
+		File file01 = new File("c://Users");
+		System.out.println(file01);
+		//使用两个字符串进行路径拼接
+		File file02 = new File("c://User","Administrator");
+		System.out.println(file02);
+
+		
+10.File常用的方法part01
+	boolean canExecute() 是否可以执行
+	boolean canRead()   是否可以读取
+	boolean canWrite()  是否可以写入
+	
+	权限问题，读权限、写权限和执行权限
+	读权限————代表当前文件可读，最低级的权限，如果没有读权限，
+			该文件对用户完全不可见
+			
+	写权限————代表文件是否可以追加，没有写权限是无法追加数据的
+	
+	
+	代码：
+		//使用File对象表示出hello.txt这个文件
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		//测试该文件的读权限
+		boolean read = file.canRead();
+		System.out.println(read);
+		//测试写入权限
+		boolean write = file.canWrite();
+		System.out.println(write);
+		//测试执行权限
+		boolean execute = file.canExecute();
+		System.out.println(execute);
+		
+		
+11.File常用的方法part02
+	int compareTo(File pathname)  按字母顺序比较两个文件名
+	字母顺序：	
+		对应字母的ascii码的顺序
+		
+	linux和windows在文件名字上的差异：
+		在windows里面，大小写不区分，所以hello.txt和HELLo.txt不区分，
+			在一个目录下不可以共存
+		在linux里面，大小写区分，所以hello.txt和HELLo.txt代表不同的文件，
+			在一个目录下可以共存
+		
+	boolean createNewFile() 当且仅当不存在指定名称的文件时，创建一个新的空文件
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//hehe.html");
+		try {
+			/*
+			 * 当且仅当文件不存在的时候创建新文件
+			 * 		并且返回true
+			 * 如果文件存在不进行任何操纵
+			 * 		并且返回false
+			 */
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+1.File方法之delete
+	boolean delete() 删除当前对象表示的文件或目录 
+	返回值：
+		true代表删除成功，false是删除失败
+		成功是文件首先存在，其次要具有执行权限
+		失败是文件不存在或者权限不足
+		
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		//删除存在的文件
+		file.delete();
+		
+		
+2.File方法deleteOnExit
+	void deleteOnExit() 在虚拟机正常关闭时，请求删除此抽象路径名表示的文件或目录
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		//在虚拟机关闭的时候删除文件,但是不意味这马上关闭jvm
+		file.deleteOnExit();
+		System.out.println("hello");
+		
+		
+	2.1插播Runtime下面的关闭虚拟机并清理的方法
+		//获取Runtime对象
+		Runtime runtime = Runtime.getRuntime();
+		System.out.println("hello world");
+		/*
+		 * 该方法是在jvm关闭的时候做一些必要的清理
+		 * hibernate在处理sessionFactroy的时候
+		 */
+		runtime.addShutdownHook(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("系统正在做最后的清理。。。");
+			}
+			
+		}));
+		System.out.println("hello world");
+		
+		
+3.File方法之equals
+	boolean equals(Object obj) 比较的是两个路径的名称、
+	代码：
+		File fileSrc = new File("C://Users//Administrator//Desktop//hello.txt");
+		File fileTarget = new File("C://Users//Administrator//Desktop//helo.txt");
+		//比较的是路径名
+		boolean b = fileSrc.equals(fileTarget);
+		System.out.println(b);
+		
+		
+4.File方法exists
+	boolean exists()  测试该对象是文件或文件夹还是抽象路径 
+	代码：	
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		//判断文件是否存在
+		if(file.exists()) {
+			//文件存在删除文件
+			file.delete();
+		}else {
+			//不存在创建新文件
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+			
+5.File方法getName
+	String getName()   返回file构造方法里面的参数
+	代码：	
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		//获取文件名(windows)或路径(linux)
+		String name = file.getName();
+		System.out.println(name);
+         
+		 
+6.File方法getPath
+	String getPath()  将此抽象路径名转换为一个路径名字符串 
+	代码：
+		//获取当前对象的完整路径URL
+		String path = file.getPath();
+		System.out.println(path);
+		
+		
+7.File方法isDirectory
+	boolean isDirectory()   判断当前路径是否是文件夹
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//a.txt");
+		//判断是不是一个文件夹,根据系统的文件系统判断
+		boolean b = file.isDirectory();
+		System.out.println(b);
+		
+8.File方法判断文件
+	boolean isFile() 判断是否是一个标准文件 
+	boolean isHidden()  判断文件是否是一个隐藏文件
+	代码：
+		File file01 = new File("C:\\Users\\Administrator\\AppData");
+		/*
+		 * 查看隐藏文件
+		 * 在windows里面设置可以查看隐藏文件
+		 * 在linux里面以.开头的是隐藏文件
+		 */
+		boolean h = file01.isHidden();
+		System.out.println(h);
+		File file02 = new File("C:\\Users\\Administrator\\Desktop\\note.txt");
+		//判断是不是标准文件，其他是个文件而不是文件夹
+		boolean b = file02.isFile();
+		System.out.println(b);
+		
+9.File方法lastModified
+	long lastModified() 查看文件最后一次被修改的时间
+	代码：
+		File file = new File("C:\\Users\\Administrator\\Desktop\\hello.txt");
+		//获取文件最后修改时间,返回值是毫秒数
+		long l = file.lastModified();
+		//把时间转为Date对象
+		Date date = new Date(l);
+		System.out.println(date);
+		
+		
+10.File方法listFiles
+	File[] listFiles() 得到当前抽象路径下面的所有的文件或文件夹
+	代码：
+		File file = new File("C:\\Users\\Administrator\\hehe");
+		//列出该目录下所有的子文件或子文件夹
+		File[] files = file.listFiles();
+		//遍历数组
+		for (int i = 0; i < files.length; i++) {
+			System.out.println(files[i]);
+		}
+		
+		
+11.File方法mkdir和mkdirs
+	boolean mkdir()  创建此抽象路径名指定的目录，不允许层级创建 
+	boolean mkdirs() 创建此抽象路径名指定的目录，允许层级创建 
+	代码：
+		File file = new File("C:\\Users\\Administrator\\Desktop\\a\\b\\c");
+		//创建file对象指定的文件夹,只能创建一个层级
+		file.mkdir();
+		
+		//允许创建多个层级的文件夹，支持一个层级
+		file.mkdirs();
+		
+		
+12.设计一个程序，遍历D盘的目录
+	思路：
+		判断一下D盘路径是文件还是文件夹，如果是文件直接打印
+		如果是文件夹，展示文件夹下面的文件或文件夹，依次递归
+		知道找到所有的文件为止
+		
+	代码：
+		public static void loopFile(File file) {
+			// 判断当前的file是不是文件，如果是直接输出
+			if (!file.isDirectory()) {
+				System.out.println(file);
+			} else {
+				// 如果是文件夹，对文件夹拆解,得到该文件夹下面的所有的文件或者文件夹
+				File[] files = file.listFiles();
+				//可以把files的非空判断放在循环里面
+				for (int i = 0; files!=null&& i < files.length; i++) {
+					//执行递归,参数是该文件夹下面的文件项
+					loopFile(files[i]);
+				}
+			}
+		}
+		
+		
+13.流的分类
+	输入流：input   reader
+	
+	
+	输出流：output   writer
+
+	
+14.在byte数组上的深入理解————-对象填充值的两种方式
+	1）代码
+		public static void main(String[] args) {
+			//需要自己创建数组
+			byte[] b = new byte[10];
+			fullArray(b);
+			//最终数组里面有值
+			System.out.println(Arrays.toString(b));
+		}
+		
+		public static void fullArray(byte[] b) {
+			//程序完成数据的填充
+			b[0]=97;
+			b[1]=98;
+			b[2]=99;
+			b[3]=100;
+			b[4]=101;
+			b[5]=102;
+			b[6]=103;
+		}
+	2)代码
+		public static void main(String[] args) {
+			//用户需要接受返回值
+			byte[] b = fullArray();
+			System.out.println(Arrays.toString(b));
+		}
+		
+		public static byte[] fullArray() {
+			//程序自己定义数组
+			byte[] b = new byte[10];
+			b[0]=97;
+			b[1]=98;
+			b[2]=99;
+			b[3]=100;
+			b[4]=101;
+			b[5]=102;
+			b[6]=103;
+			//程序返回数组
+			return b;
+		}

@@ -1,0 +1,115 @@
+1.能不能把对象存在文件里面？？？———— ObjectOutputStream
+	简介：
+		可以把序列化之后的对象，存储在文件里面，保证数据的持久化
+		
+	持久化：
+		把内存上的数据存储在硬盘上，完成数据从易丢失到保存的状态
+		内存，断电即消失，保存数据的过程称为持久化
+		
+	构造方法：
+		ObjectOutputStream(OutputStream out) 根据指定OutputStream对象ObjectOutputStream
+
+
+
+2.ObjectOutputStream方法之writeObject
+
+	void writeObject(Object obj) 将指定的对象写入 ObjectOutputStream。 
+	参数：
+		待写入的对象
+		
+	代码：
+		1）构建一个实体类
+			public class Book implements Serializable{
+				private Integer number;
+				private String name;
+				private Double price;
+				private String author;
+			}
+
+		2)测试代码	
+			File file = new File("C://Users//Administrator//Desktop//object.txt");
+			// 构建文件输出流
+			try (FileOutputStream fos = new FileOutputStream(file);
+					// 根据文件输出流构建对象输出流
+					ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+					//构建一个Book对象
+					Book book = new Book();
+					book.setNumber(1);
+					book.setAuthor("纳兰.明珠");
+					book.setName("《康熙字典》");
+					book.setPrice(45.97);
+					//把book对象存进文件
+					oos.writeObject(book);
+					//刷新数据
+					oos.flush();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+	结论：
+		调用ObjectOutputStream的writeObject方法的时候会把
+		要存储的对象自动序列化
+		
+		
+		
+			
+3.序列化和反序列化
+	序列化技术，不专属于java。指的是把逻辑的概念给线性化，对象是在
+	堆里面存储，堆是一个二维的空间，导致对象不是线性的结构。
+	io是一个线性的结构，底层只能是一个数组一个数组的复制数据，
+	因此把对象线性化的过程称为序列化。
+	
+	
+	反序列化指的是把序列化之后的对象还原为二维结构的过程
+	
+	
+	
+4.java中的序列化技术————Serializable
+	类通过实现Serializable 接口以启用其序列化功能。
+	可序列化类的所有子类本身都是可序列化的。
+	序列化接口没有方法或常量，仅用于标识可序列化的语义。
+	
+	序列化接口仅仅是一个标志而已，没有任何方法和属性
+	
+	
+	
+5.ObjectInputStream读取文档中的对象
+	Object readObject() 包装文件流读取通过ObjectOutputStream写出去的对象
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//object.txt");
+		try (
+				// 构建文件输入流
+				FileInputStream fis = new FileInputStream(file);
+				// 通过文件输入流构建对象输入流
+				ObjectInputStream ois = new ObjectInputStream(fis);) {
+
+			
+				//读取对象,这里不可以强转
+				Object object = ois.readObject();
+				//对象判断
+				if (object instanceof Book) {
+					//强制类型转换
+					Book book = (Book)object;
+					System.out.println(book);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+6.如果我不想要部分属性的值怎么办？？？
+	transient 关键字，是为了保持属性的活性
+		在序列化的时候不参与序列化过程，这时候如果
+		通过ObjectInputStream读取被该关键字修饰的属性
+		会展示出属性的默认值，数值类型的0
+		布尔类型的false，对象类型的null
+		
+	代码：
+		public class Book implements Serializable {
+			private Integer number;
+			private String name;
+			//该属性不会被序列化
+			private transient Double price;
+			private String author;
+		}
+		

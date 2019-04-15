@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xml注释-->
+<Books name="books属性">
+<!-- books注释1-->
+	<Book name="book属性">
+	<!--book注释1-->
+		<id>001</id>
+		<!--book注释1-->
+		<name>三国演义</name>
+		<!--book注释1-->
+	</Book>
+	<!-- books注释2-->
+	<Book>
+		<id>002</id>
+		<name>水许传</name>
+	</Book>
+	<!-- books注释3-->
+	<Book>
+		<id>003</id>
+		<name>红楼梦</name>
+	</Book>
+	<!-- books注释4-->
+</Books>

@@ -1,0 +1,176 @@
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class FilterDemo01 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("filter开始工作");
+		//放行，是使得request到达下一个拦截器
+		arg2.doFilter(req, resp);
+		System.out.println("拦截器已经放行");
+	}
+}
+
+
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class FilterDemo02 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("filter2开始工作");
+		arg2.doFilter(req, resp);
+		System.out.println("过滤器2结束工作");
+	}
+}
+
+
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class FilterDemo03 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("filter3开始工作");
+		//放行，是使得request到达下一个拦截器
+		arg2.doFilter(req, resp);  
+		System.out.println("拦截器3结束工作");
+	}
+}
+
+
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebServlet;
+
+//根据servletName拦截指定的servlet资源
+@WebFilter(servletNames = { "ServletDemo03" })
+public class FilterDemo04 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("filter4开始工作");
+	}
+}
+
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebServlet;
+
+//根据servletName拦截指定的servlet资源
+@WebFilter("/*")
+public class FilterDemo05 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("这是一个拦截所有的ilter5开始工作");
+		arg2.doFilter(req, resp);
+	}
+}
+
+
+
+package com.qfedu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebServlet;
+
+//根据servletName拦截指定的servlet资源
+@WebFilter("*.jsp")
+public class FilterDemo06 implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("这是一个拦截拦截所有的jsp过滤器");
+		arg2.doFilter(req, resp);
+	}
+}
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>BigFileUpload</display-name>
+	<filter>
+		<filter-name>filterDamo01</filter-name>
+		<filter-class>com.qfedu.filter.FilterDemo01</filter-class>
+	</filter>
+	<filter>
+		<filter-name>filterDamo02</filter-name>
+		<filter-class>com.qfedu.filter.FilterDemo02</filter-class>
+	</filter>
+	<filter>
+		<filter-name>filterDamo03</filter-name>
+		<filter-class>com.qfedu.filter.FilterDemo03</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>filterDamo01</filter-name>
+		<url-pattern>/servletdemo01</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>filterDamo02</filter-name>
+		<url-pattern>/servletdemo02</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>filterDamo03</filter-name>
+		<url-pattern>/servletdemo02</url-pattern>
+	</filter-mapping>
+</web-app>

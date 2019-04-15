@@ -1,0 +1,24 @@
+设置session的生命周期
+	session的生命周期：
+		活性的，如果设置默认为20分钟过期， 那么在第18分钟的时候操作了session，
+		那么20分钟的时候session不会过期，因为此时session过期时间被重置
+		
+	1）void	setMaxInactiveInterval(int interval)   设置session的生命周期，单位是秒
+	2）等着，静等30分钟
+	3）在当前项目的web.xml里面设置
+	web.xml代码:
+		  </welcome-file-list>
+		  <!-- 设置session的最大生命周期 -->
+		  <session-config>
+			<!-- 此时60是分钟，单位是分钟 -->
+			<session-timeout>60</session-timeout>
+		  </session-config>
+	4）void	invalidate()   强制销毁当前用户绑定的session，重新为当前用户分配一个session
+	5）重启服务器或者重启浏览器
+		注意：
+			如果重启浏览器，那么将无法恢复上次访问到时候，服务器为浏览器
+			分配的session对象，缺点是服务器资源浪费。事实上，之前的session
+			依然在服务器里面，不过我们无法找到那个session而已
+			
+		影响：
+			关闭网页后，再次打开需要重新登录

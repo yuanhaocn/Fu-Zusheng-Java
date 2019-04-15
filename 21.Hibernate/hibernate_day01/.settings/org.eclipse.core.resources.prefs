@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/cn/itheima=UTF-8
+encoding//src/cn/itheima/a_hello/Demo.java=UTF-8
+encoding//src/cn/itheima/b_api/SessionFactoryInstance.java=UTF-8
+encoding//src/cn/itheima/b_api/SessionInstance.java=UTF-8
+encoding//src/cn/itheima/domain/Customer.java=UTF-8
+encoding//src/cn/itheima/utils/HibernateUtils.java=UTF-8

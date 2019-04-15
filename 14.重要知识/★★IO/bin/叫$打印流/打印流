@@ -1,0 +1,88 @@
+7.System.out.println()方法——————PrintStream
+	PrintStream
+		System.out.println()相当于 ----》 PrintStream.println()
+		
+	简介：
+		为其他输出流提供了打印任何数据类型的可能，而且绝对不会出现
+		异常问题
+		
+	针对：
+		PrintStream   针对控制台
+		FileOutputStream  针对文件
+		
+		
+		
+8.PrintStream的构造方法
+	PrintStream(File file)   创建具有指定文件的新打印流
+	代码：
+		// 构建一个file对象
+		File file = new File("C://Users//Administrator//Desktop//print.txt");
+		try (// 获取PrintStream对象
+				PrintStream ps = new PrintStream(file);) {
+			//调用write方法
+			ps.write("helloworld".getBytes());
+			//刷新
+			ps.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	结论：
+		该流具有绕过文件操作流直接操作文件的可能，底层的流可以直接操作任何io行为
+		
+		
+9.关于PrintStream的print方法的骚操作
+	// 获取打印流
+	PrintStream psConsole = System.out;
+	// 是在控制台打印hello
+	psConsole.println("hello");
+
+	// *************************************
+	File file = new File("C://Users//Administrator//Desktop//print.txt");
+	PrintStream psFile = new PrintStream(file);
+	//是在文档里面写入hello
+	psFile.println("hello");
+	
+	
+	
+10.Scanner sc = new Scanner(System.in)
+	System.in的返回值是InputStream
+	
+	Scanner：
+		扫描器，扫描操作是线程阻塞，而等待用户的输入
+		如果用户不输入，一致处于阻塞状态，结束阻塞的标志
+		是回车或者是用户输入的空格
+		
+	
+11.Scanner的构造方法
+	Scanner(InputStream source)  构造一个新的 Scanner，它生成的值是从指定的输入流扫描的。
+	代码：
+		//用户的输入是输入流对象
+		Scanner sc = new Scanner(System.in);
+		//next本质是迭代器的扫描功能
+		String input = sc.next();
+		System.out.println(input);
+		
+	结论：	
+		next并不是用来做输入字符的，而是进行扫描用户的输入的
+		next扫描字符串，nextInt扫描整型
+		
+		
+12.Scanner的迭代器读取文档
+	Scanner(File source)   构造一个新的 Scanner，它生成的值是从指定文件扫描的
+	代码：
+		//构建file对象，为Scanner的构造方法
+		File file = new File("C:\\Users\\Administrator\\Desktop\\岳阳楼记.txt");
+		try {
+			//使用指定的文件构建Scanner对象
+			Scanner sc = new Scanner(file);
+			//创建循环进行迭代器操作，判断下一个缓冲区是否有数据
+			while(sc.hasNext()) {
+				//获取下一个String缓冲区
+				String s = sc.next();
+				System.out.println(s);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	

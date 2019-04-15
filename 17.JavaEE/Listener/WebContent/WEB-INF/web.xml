@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>Listener</display-name>
+
+	<listener id="ServletContextListenerDemo">
+		<listener-class>com.qfedu.listener.ServletContextListenerDemo</listener-class>
+	</listener>
+	<listener id="HttpSessionListenerDemo">
+		<listener-class>com.qfedu.listener.HttpSessionListenerDemo</listener-class>
+	</listener>
+	<listener id="ServletContextAttributeListenerDemo">
+		<listener-class>com.qfedu.listener.ServletContextAttributeListenerDemo</listener-class>
+	</listener>
+	<listener id="CountNumberOfSiteListener">
+		<listener-class>com.qfedu.servlet.CountNumberOfSiteListener</listener-class>
+	</listener>
+
+	<listener id="CountSumOfSiteListener">
+		<listener-class>com.qfedu.servlet.CountSumOfSiteListener</listener-class>
+	</listener>
+</web-app>

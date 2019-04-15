@@ -1,0 +1,30 @@
+package 对象的clone方法复制;
+
+import java.util.Date;
+
+/**
+ * 原型模式(深复制)
+ *
+ */
+public class Client2 {
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Date date = new Date(12312321331L);
+		Sheep2 s1 = new Sheep2("少利",date);
+		Sheep2 s2 = (Sheep2) s1.clone();   //实现深复制。s2对象的birthday是一个新对象！
+		
+		
+		System.out.println(s1);
+		System.out.println(s1.getSname());
+		System.out.println(s1.getBirthday());
+		
+		date.setTime(23432432423L);//两个对象指向的date不是一个对象，所以互不影响，实现深复制
+		
+		System.out.println(s1.getBirthday());
+		
+		
+		s2.setSname("多利");
+		System.out.println(s2);
+		System.out.println(s2.getSname());
+		System.out.println(s2.getBirthday());	
+	}
+}

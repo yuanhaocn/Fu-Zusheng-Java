@@ -1,0 +1,166 @@
+库操作：
+CREATE DATABASE fzs;//创建数据库
+DROP DATABASE fzs;//删除数据库
+DROP TABLE fzs;//删除表
+
+CREATE DATABASE fzs CHARACTER SET gbk;//创建数据库同时指定字符集
+
+
+展示：
+SHOW DATABASES;//展示数据库
+SHOW CREATE DATABASE fzs//展示数据库fzs信息
+
+
+表:
+
+字段操作
+ALTER TABLE fzs		ADD mmp INT(5) primary key;
+ALTER TABLE fzs		DROP mmp;
+ALTER TABLE fzs 	MODIFY NAME VARCHAR(200);//改变字段的定义
+RENAME TABLE fzs 	TO lzy;
+
+
+记录操作
+INSERT INTO fzs 	VALUE(8,NULL,99);//插入一行记录 
+INSERT INTO 表名（列名1，列名2 ...）VALUES(列值1，列值2...);
+
+DELETE FROM fzs 	WHERE score=44;//删除score=44的行记录
+UPDATE fzs 	SET score=99,fox=100 	WHERE id=6;
+
+
+
+查询：********************************************************************************************************
+
+语法结构： 
+
+
+SELECT 列名1,列名2，.... 
+
+FROM  表名 
+
+WHERE 条件 
+{ 
+
+ GROUP BY 分组字段
+  
+ HAVING 分组条件
+
+ ORDER BY 排序条件
+
+  limit 分页条件
+  
+  }
+
+查询语句书写顺序：select – from- where- group by- having- 	order by-limit     
+查询语句执行顺序：from - where -group by -having - select - 	order by-limit 
+
+
+查询操作
+SELECT * 		FROM student;
+SELECT *		FROM student 	WHERE age=15;
+
+SELECT * 						FROM student;
+SELECT DISTINCT gender 			FROM student;
+SELECT DISTINCT gender,sname 	FROM student;//去重
+
+SELECT *		FROM student	WHERE age>10 AND gender='male';
+SELECT *		FROM student 	WHERE age=30;
+SELECT *		FROM student 	WHERE age>30 AND age<50 AND gender='male';
+
+IN:
+SELECT *		FROM student 	WHERE gender IN('male');
+SELECT *		FROM student 	WHERE gender IN('female');
+
+别名
+SELECT sid AS 主键,sname AS 学生姓名,age AS 学生年龄,gender AS 学生性别 	FROM stu;//给列添加别名
+
+ORDER BY:
+SELECT * 		FROM fzs 		ORDER BY id ASC;//排序
+
+统计函数(针对列操作)
+SELECT sid,sname,MAX(age) 	FROM fzs;
+SELECT AVG(age) 		FROM fzs;
+SELECT SUM(age)			FROM fzs;
+SELECT COUNT(*)			FROM fzs;
+
+
+获取系统时间SELECT SYSDATE() FROM DUAL;//DUAL为伪表
+SELECT IFNULL(mgr,0) FROM fzs;
+
+LIKE
+SELECT *		FROM student 	WHERE sname LIKE '_i%';
+SELECT *		FROM student 	WHERE sname LIKE '___';
+
+
+分组 GROUP BY
+
+SELECT deptno, SUM(sal) 	FROM emp GROUP BY deptno;//查询每个部门的部门编号和每个部门的工资和
+SELECT deptno,COUNT(*) 		FROM emp GROUP BY deptno;//查询每个部门的部门编号以及每个部门的人数：
+SELECT deptno,COUNT(*) 		FROM emp WHERE sal>1500 GROUP BY deptno;//查询每个部门的部门编号以及每个部门工资大于1500的人数：
+
+
+ HAVING子句
+SELECT deptno, SUM(sal) FROM emp GROUP BY deptno HAVING SUM(sal) > 9000;//查询工资总和大于9000的部门编号以及工资和：
+
+##隐式内连接
+SELECT * FROM emp,dept 			WHERE emp.`deptno`=dept.`deptno`;
+
+##显式内连接
+SELECT * FROM emp INNER JOIN dept 	ON emp.`deptno`=dept.`deptno`;
+
+##右连接
+SELECT * FROM emp RIGHT JOIN dept 	ON dept.`deptno`=emp.`deptno`;
+
+##作为左外连,查询部门信息，关联出emp 信息
+SELECT  * FROM dept LEFT JOIN emp 	ON dept.`deptno` = emp.`deptno` ;
+
+#子查询
+SELECT * FROM (SELECT * FROM emp) AS e;
+
+
+
+//建造一个表TABLE
+CREATE TABLE `country` (
+  
+ `Code` char(3) NOT NULL DEFAULT '',
+  
+ `Name` char(52) NOT NULL DEFAULT '',
+  
+ `Continent` enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') NOT  NULL DEFAULT 'Asia',
+  
+ `Region` char(26) NOT NULL DEFAULT '',
+  
+ `SurfaceArea` float(10,2) NOT NULL DEFAULT '0.00',
+  
+ `IndepYear` smallint(6) DEFAULT NULL,
+  
+ `Population` int(11) NOT NULL DEFAULT '0',
+  
+ `LifeExpectancy` float(3,1) DEFAULT NULL,
+  
+ `GNP` float(10,2) DEFAULT NULL,
+  
+ `GNPOld` float(10,2) DEFAULT NULL,
+  
+ `LocalName` char(45) NOT NULL DEFAULT '',
+  
+ `GovernmentForm` char(45) NOT NULL DEFAULT '',
+  
+ `HeadOfState` char(60) DEFAULT NULL,
+  
+ `Capital` int(11) DEFAULT NULL,
+  
+ `Code2` char(2) NOT NULL DEFAULT '',
+  
+ PRIMARY KEY (`Code`)
+)
+
+      注：having与where的区别:
+
+   	1.having是在分组后对数据进行过滤,where是在分组前对数据进行过滤             
+
+	2.having后面可以使用分组函数(统计函数)，where后面不可以使用分组函数。
+
+	WHERE是对分组前记录的条件，如果某行记录没有满足WHERE子句的条件，那么这行记录不会参加分组；而HAVING是对分组后数据的约束。
+
+

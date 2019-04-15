@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dogs>
+	<Dog>
+		<number>001</number>
+		<name>博美</name>
+	</Dog>
+	<Dog>
+		<number>002</number>
+		<name>泰迪</name>
+	</Dog>
+	<Dog>
+		<number>003</number>
+		<name>柯基</name>
+	</Dog>
+</Dogs>

@@ -1,0 +1,405 @@
+字节流:可以处理一切文件，包括二进制 音频、视频 、doc等
+节点流:   InputStream FileInputStream
+ 		 OutputStream FileOutputStream
+
+一、读取文件
+1、建立联系   File对象 源头
+2、选择流     文件输入流  InputStream FileInputStream
+3、操作  : byte[] car =new byte[1024];  +read+读取大小
+              输出
+4、释放资源 :关闭
+二、写出文件
+1、建立联系   File对象  目的地
+2、选择流     文件输出流  OutputStream FileOutputStream
+3、操作  :  write() +flush
+4、释放资源 :关闭
+三、文件拷贝 程序为桥梁
+1、建立联系   File对象 的源头和 目的地
+2、选择流两个流     
+	 文件输入流  InputStream FileInputStream
+	  文件输出流  OutputStream FileOutputStream
+3、操作  :  拷贝不断的读取，直接while出去
+	 byte[] flush =new byte[1024]; 
+	 int len =0;	//接收长度
+	  while(-1!=(len=输入流.read(flush))){  
+		 输出流.write(flush,0,len)	//不断写出去，字节数组写出去
+	  }
+             输出流.flush
+4、释放资源 :关闭 两个流
+
+四、文件夹拷贝
+1、递归查找子孙级文件|文件夹
+2、文件 复制(IO流复制)
+     文件夹  创建
+3、	   	A
+      /    \
+    a.txt    b
+             |
+            b.txt
+
+         AA
+          |
+          A
+        /    \
+      a.txt	  b
+              |
+              b.txt  
+4、不能将父目录拷贝到子目录中
+    删除超长目录
+
+1.FileInputStream
+	简介：
+		文件字节输入流，可以从文档中读取字节到jvm里面
+		
+
+2.构造方法
+	FileInputStream(File file) 通过加载file对象创建一个文件输入流
+    代码：
+		//构建一个路径
+		String path = "C://Users//Administrator//Desktop//test.txt";
+		//使用指定的路径构建文件对象
+		File file = new File(path);
+		try {
+			//使用指定的File对象构建文件输入流
+			FileInputStream fis  = new FileInputStream(file);
+			System.out.println(fis);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+  
+	   
+  
+	FileInputStream(String name)  通过加载一个路径创建一个文件输入流
+    代码：
+		//构建路径字符串，有可能不存在
+		String path = "C://Users//Administrator//Desktop//test.txt";
+		try {
+			// 根据一个URL字符串构建文件输入流
+			FileInputStream fis = new FileInputStream(path);
+			System.out.println(fis);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+3.关于FileNotFoundException		
+	文件无法加载异常，一是文件不存在，二是文件没有读权限
+	由于linux的发型版本不一致，有些linux的读和执行合在一起了
+	
+	
+4.FileInputStream的核心方法read
+	int read(byte[] b) 从此输入流中把字节读入一个 byte 数组中
+		是把文件转为byte数组，放入jvm
+		
+	参数：	
+		byte数组，一般作为1024的长度，开发者自己构建
+
+	返回值：
+		是int类型，如果不是-1，代表本次读取的字节数
+		
+		-1代表已经到达文档末尾，后续没有字节可读取
+		这是读取结束的标志
+		
+	代码:
+		FileInputStream fis  = new FileInputStream(file);
+		//构建一个字节数组，长度为1024
+		byte[] bytes = new byte[1024];
+		//把流里面的数据存入数组里面，返回值是存进数组的长度
+		int read = fis.read(bytes);
+		System.out.println(read);
+		
+		
+5.把byte数组进行解析
+	思路：把byte转为String字符串
+	代码：
+		/*
+		 * 把byte数组转为字符串
+		 * 注意构建中传入起始位置0
+		 * 和结束位置是read方法的返回值
+		 */
+		String s = new String(bytes,0,read);
+		System.out.println(s);
+		
+		
+6.滕王阁序太长，读不全，怎么办？？？
+	思路：
+		1）把数组搞长一点
+		2）保持数组长度不变，采用循环读取或者递归
+		
+	代码：
+		//构建一个字节数组
+		byte[] bytes = new byte[1024];
+		/*
+		 * 不知道结束时间，使用while
+		 * 条件是read方法返回值不等于-1即可
+		 */
+		while(fis.read(bytes)!=-1) {
+			//循环体把每次得到的数组转为字符串
+			String s = new String(bytes);
+			System.out.print(s);
+		}
+		
+7.修复读取最后一次的bug
+	思路：
+		必须使用read的返回值
+		
+	代码：
+		/*
+		 * 此时while仅仅要进行判断，还要进行每次读取长度数值的保存 在判断前后进行赋值即可
+		 */
+		// 定义一个整型标识长度
+		int count = 0;
+		while ((count = fis.read(bytes)) != -1) {
+			//使用数组和开始0和结束的count构建字符串
+			String s = new String(bytes,0,count);
+			System.out.print(s);
+		}
+	
+8.关于close方法------多数开发者比较喜欢的方案
+	void close()    关闭当前流，节约系统资源，本质是100%成功率的gc
+	代码：	
+		// 在外部声明FileInputStream引用,并且初始化为null
+		FileInputStream fis = null;
+		try {
+			// 在里面做赋值操作
+			fis = new FileInputStream(file);
+			
+		}
+	
+	
+		finally {
+			// 不管流是否使用在最后都需要进行关闭
+			//此时必须保证fis不是null否则空指针异常
+			if (fis!=null) {				
+				try {
+					//关闭流并释放资源
+					fis.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+9.关于简单的流关闭方案
+	代码：
+		/*
+		 * 在1.8上，我们对流关闭进行了扩充
+		 * 在try小括号里面定义的流会在使用完毕之后，自动关闭
+		 * 使用的是和jvm的对其唤醒机制
+		 */
+		try(FileInputStream fis = new FileInputStream(file);) {
+			byte[] bytes = new byte[1024];
+			int count = 0;
+			while ((count = fis.read(bytes)) != -1) {
+				String s = new String(bytes, 0, count);
+				System.out.print(s);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+10.skip方法
+	long skip(long n)         跳过和丢弃此输入流中数据的 n 个字节
+	参数：
+		n    要跳过的字节数
+	返回值：
+		跳过的实际字节数，可能是0代表到达文档末尾，-1代表不跳过任何字节
+
+	
+	代码：
+		/*
+		 * 希望跳过5个字节，返回值是实际跳过的字节数
+		 * 如果需要跳过一些字节，需要在read方法之前跳过
+		 */
+		long number = fis.skip(5);
+		fis.read(bytes);
+		System.out.println(new String(bytes));
+		System.out.println(number);
+		
+	
+
+11.markSupported方法
+	boolean markSupported()   测试此输入流是否支持 mark 和 reset 方法
+	代码：
+		FileInputStream fis = new FileInputStream(file);
+		//检测是否可以支持mark
+		boolean b = fis.markSupported();
+		System.out.println(b);
+	
+
+	
+12.mark方法和reset方法
+	void mark(int readlimit)    在此输入流中标记当前的位置 
+	参数：
+		readlimit   就是在多少个字节之内可以随时反悔
+		
+
+	void reset()   将此流重新定位到最后一次对此输入流调用 mark 方法时的位置
+	
+			
+	代码：
+		// 强制mark一下
+		fis.mark(300);
+		byte[] bytes = new byte[1024];
+		fis.read(bytes);
+		System.out.println(new String(bytes));
+		//把流重新定位到上次mark的位置
+		fis.reset();
+		fis.read(bytes);
+		System.out.println(new String(bytes));
+		
+		
+13.关于乱码问题
+	原因：
+		1）如果数组长度为1
+			此时根本无法存储，字符最小占用2个字节，所以全都乱码
+			
+		2）如果数组长度为2或长度很短
+			此时无法进行正确的编码，比如
+			10001   01110     10001   0111110001
+			  a        你			好
+			  
+			乱码一定出现在两次读取交接的位置
+			
+			
+	解决方案：
+		1）数组长度适当大一些，1024
+		2）尽量不要包含中英混写的状态
+		3）FileInputStream无法解决这个问题!!!!
+	
+文件按字节输出	
+	9.FileOutputStream构造方法演示
+	FileOutputStream(File file)   创建一个往指定文件里面写入数据的文件输出流
+	代码：
+		//构建文件路径
+		String path = "C://Users//Administrator//Desktop//out.txt";
+		//根据路径构建file对象
+		File file = new File(path);
+		try {
+			//根据file构建文件输出流
+			FileOutputStream fos = new FileOutputStream(file);
+			System.out.println(fos);
+		} catch (FileNotFoundException e) {e.printStackTrace();}
+	结论：	
+		如果文件不存在，那么FileOutputStream类会自行创建一个出来
+		
+10.FileOutputStream的write方法
+	void write(byte[] b)   将byte 数组写入此文件输出流中
+	参数：	
+		byte数组，即将写入txt文档的数据的字节表示形式
+		
+11.希望把用户输入的数据存放到out.txt文档中
+	String path = "C://Users//Administrator//Desktop//out.txt";
+	File file = new File(path);
+	try(FileOutputStream fos = new FileOutputStream(file);) {
+		//接收用户的输入
+		Scanner sc = new Scanner(System.in);
+		System.out.println("please input some words...");
+		String input = sc.nextLine();
+		//使用getBytes方法把字符串转为字节数组
+		byte[] bytes = input.getBytes();
+		//调用write方法把字节数组写入文档
+		fos.write(bytes);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+12.为什么我写不进去，为什么别人都有数据
+	public void flush()   强制把数组里面的数据写入文档中
+	代码：
+		//执行fiush，强制刷出数据
+		fos.flush();
+           
+
+13.能不能多输入几句，用户输入"886"的时候输入结束
+	否则可以无限制输入
+	
+	就是用瓢来操作水是一个道理，我不管你的水是从什么地方来的
+	我只关心我这个瓢里面有没有水，，而且必须是水（字节数组）
+	然后要倒到哪里去，就这样子
+	
+	思路：
+		需要一个while循环，条件是!input.equals("886")
+		把每次的用户输入都通过write方法写出去
+		!(input = sc.nextLine()).equals("886")
+		这一句值得学习
+		
+	代码：
+		// 定义一个input的引用
+		String input = "";
+		/*
+		 * 构建while循环,两个作用
+		 * 1是初始化input的值
+		 * 2是用来判断input和886是否相等
+		 */
+		while (!(input = sc.nextLine()).equals("886")) {
+			// 循环转为byte数组
+			byte[] bytes = input.getBytes();
+			// 循环写出数据
+			fos.write(bytes);
+		}
+		fos.flush();
+		
+14.能不能换个文档格式，word、execl和ppt可以吗
+	//这里支持多种文件格式，包含html和word
+	String path = "C://Users//Administrator//Desktop//hello.xls";
+	
+	
+	
+15.能不能追加写而不是覆盖写，保留之前的记录
+	该类提供一个两个参数，第二个参数为布尔类型的构造方法
+	FileOutputStream(File file, boolean append) 创建一个文件输出流对象
+	参数：	
+		1）是要存放数据的文档
+		2）是否追加，默认是false不追加
+		
+	代码：
+		//参数可以设置为在文档中追加一些数据
+		FileOutputStream fos = new FileOutputStream(file,true);
+		
+		
+16.能不能换行，可以的
+	//斜杠n是换行的意思
+	byte[] bytes = input.concat("\n").getBytes();
+	
+
+17.输出格式化问题
+	语法:
+		System.out.printf();
+		
+	规则：
+		%d  代表整数
+		%s  代表字符串
+		
+	代码：
+		/*
+		 * 该方法具有来那个参数：
+		 * 	1）第一个参数是字符串，在字符串中可以使用规则
+		 *  2）第二个参数是Object...，使用具体的值代替前面的参数，
+		 *  	注意此时对应是按照顺序一一对应
+		 */
+		System.out.printf("现在我们打印整数%d和字符串%s",12,"nihao");
+		
+		
+18.FileOutputStream的write方法（了解）
+	void write(int b)   将指定字节写入此文件输出流
+	参数：
+		b是个bug，应该是byte类型的	
+
+		
+		
+		
+			
+		
+		
+
+
+
+	
+    
+  

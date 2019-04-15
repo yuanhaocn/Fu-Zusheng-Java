@@ -1,0 +1,74 @@
+
+1.转换流之OutputStreamWriter
+简介：
+	这个流Writer的子类，完成字符到字节的转换
+	
+场景：
+	接收Scanner的输入转为字节
+	
+2.OutputStreamWriter构造方法
+OutputStreamWriter(OutputStream out) 创建使用默认字符编码的 OutputStreamWriter
+
+3.OutputStreamWriter的write
+void write(String str, int off, int len) 写入字符串的某一部分转为字节流 
+代码：
+	// 构建打印字节流作为参数
+	PrintStream ps = System.out;
+	try (// 构建字符转换流
+			OutputStreamWriter osw = new OutputStreamWriter(ps);) {
+		// 调用write方法进行流转换
+		osw.write("hello world");
+		// 流刷新
+		osw.flush();
+	} catch (Exception e) {e.printStackTrace();}
+	
+	
+4.能不能接收两个文档的输入到控制台，使用一个流进行合并？？？
+场景：
+	百度网盘的多文件下载使用的就是队列流
+	
+	
+5.SequenceInputStream 
+简介：
+把很多输入流串联。从第一个输入流开始读取，直到到达文件末尾，
+接着从第二个输入流，依次类推，直到到达包含的最后一个输入流的文件末尾为止。 
+
+6.SequenceInputStream构造方法(第一个)
+SequenceInputStream(InputStream s1, InputStream s2) 
+    按照s1和s2的顺序合并两个输入流，读取的时候也是按照这个顺序读取
+	
+场景：
+	依次读取滕王阁序和兰亭集序读入控制台
+	
+	
+代码：
+	// 构建两个文件对象
+	File file01 = new File("C://Users//Administrator//Desktop//兰亭集序.txt");
+	File file02 = new File("C://Users//Administrator//Desktop//滕王阁序.txt");
+	try (	// 根据文件对象构建文件输入流
+			FileInputStream fis01 = new FileInputStream(file01);
+			FileInputStream fis02 = new FileInputStream(file02);
+			// 使用缓冲流包装两个文档输入流
+			BufferedInputStream bis01 = new BufferedInputStream(fis01);
+			BufferedInputStream bis02 = new BufferedInputStream(fis02);
+			// 使用两个缓冲流构建队列流
+			SequenceInputStream sis = new SequenceInputStream(bis01, bis02);) {
+
+		byte[] bytes = new byte[1024];
+		int number = 0;
+		while((number=sis.read(bytes))!=-1) {
+			System.out.println(new String(bytes,0,number));
+		}} catch (Exception e) {}
+	
+	
+7.能不能同时读取三个文档到控制台，并且打印，并且输出到一个文件里面
+思路：
+	1）三个输入流，使用队列流合并其中的两个，在使用队列流合并
+		队列流和剩下的一个
+		
+	2）直接使用队列流读取多个输入流作为参数
+	
+8.SequenceInputStream构造方法(第二个)
+SequenceInputStream(Enumeration<? extends InputStream> e) 
+      参数是枚举的引用，一般结合Vector集合elements方法整合即可
+	  

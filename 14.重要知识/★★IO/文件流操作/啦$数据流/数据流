@@ -1,0 +1,105 @@
+13.能不能使用io保存基本数据类型？？？————DataOutputStream
+	简介：
+		允许应用程序以适当方式将基本 Java 数据类型写入输出流中
+		
+	构造方法：
+		DataOutputStream(OutputStream out) 创建一个将数据写入指定基础输出流
+		一般用来包装FileOutputStream这个流
+		
+14.DataOutputStream的常用方法
+	void writeXXX(XXX v) 将一个 XXX值写入基础输出流,通过文件输出流把值输出到文本里面
+	代码：
+		// 构建文件输出流
+		try (FileOutputStream fos = new FileOutputStream(file);
+				// 根据文件输出流构建数据输出流对象
+				DataOutputStream dos = new DataOutputStream(fos);) {
+				//写出int类型
+				dos.writeInt(10);
+				//写出double类型
+				dos.writeDouble(12.13);
+				//写出布尔类型
+				dos.writeBoolean(false);
+		} catch (Exception e) {e.printStackTrace();}
+		
+	结论：	
+		数据可以写出，但是程序员无法看懂
+		
+		
+15.DataOutputStream的常用方法之writeUTF
+	void writeUTF(String str) 强制把将一个字符串以UTF-8的格式写入基础输出流。 
+	代码：
+		FileOutputStream fos = new FileOutputStream(file);
+		DataOutputStream dos = new DataOutputStream(fos);
+		//强制写出utf8的字符串
+		dos.writeUTF("hello");
+		dos.writeUTF("你好");
+	
+	
+16.DataInputStream
+	简介：
+		允许应用程序从底层输入流中读取基本 Java 数据类型
+		
+	构造方法：	
+		DataInputStream(InputStream in)   使用InputStream对象创建一个 DataInputStream
+		
+17.DataInputStream方法之readXXX
+	XXX readXXX() 	读取基本数据类型到当前流中
+	代码：
+		FileInputStream fis = new FileInputStream("C://Users//Administrator//Desktop//test.txt");
+		// 使用fis包装DataInputStream对象
+		DataInputStream dis = new DataInputStream(fis);
+		// 读取基本数据类型
+		int i = dis.readInt();
+		System.out.println(i);
+		
+	结论：
+		DataInputStream无法正确读取文档中的任何基本数据类型
+		因为只允许读取DataOutputStream写出去的数据
+		
+		
+18.整合DataInputStream和DataOutputStream
+	原则：
+		DataInputStream只能读取由DataOutputStream写出去的数据
+		
+	代码：
+		try (FileInputStream fis = new FileInputStream(file);
+			 DataInputStream dis = new DataInputStream(fis);
+			 FileOutputStream fos = new FileOutputStream(file);
+			 DataOutputStream dos = new DataOutputStream(fos);) {
+			// 第一步，把基本类型数据写入文档
+			dos.writeInt(12);
+			dos.writeDouble(13.14);
+			dos.writeBoolean(true);
+			dos.writeUTF("test will pass,winner,ok,good");
+			// 第二步，把文档中的基本数据类型读进来
+			int readInt = dis.readInt();
+			double readDouble = dis.readDouble();
+			boolean readBoolean = dis.readBoolean();
+			String readUTF = dis.readUTF();
+			// 第三步，输出读入的数据
+			System.out.println(readInt);
+			System.out.println(readDouble);
+			System.out.println(readBoolean);
+			System.out.println(readUTF);
+		} 
+		
+19.以上操作可能导致的异常
+	1)数据无法正常读取的问题
+		注意，保证数据的读取顺序和数据的存储顺序一致
+		
+	2)IOException————当且仅当流关闭之后读取可能导致异常
+		不要在流关闭之后读取数据
+		
+	3)EOFException——————数据没有那么多，你要获取更多的数据
+		文档中的数据没有你想获取的这么多导致该异常
+		
+	
+	
+		
+          
+
+
+		
+	
+	
+		

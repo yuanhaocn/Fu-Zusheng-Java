@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--action属性设置需要提交到那个servlet，注意这里只能写URI 其他的都不行  -->
+	<form action="/Day12PM/rdemo04" >
+	<!-- 一定要设置name属性，后端只能根据name属性获取前端表单字段的值-->
+	username:<input type="text",name="username"/><br>
+	password:<input type="password" name="password"/><br>
+	sex:<input type="radio" name="sex" value="boy"/>男
+		<input type="radio" name="sex" value="girl"/>女
+	<!--提交按钮一定要是submit,否则没有 提交数据的能力  -->
+	<br><input type="submit"/>
+	</form>
+</body>
+</html>

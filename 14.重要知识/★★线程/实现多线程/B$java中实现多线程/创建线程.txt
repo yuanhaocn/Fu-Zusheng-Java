@@ -1,0 +1,253 @@
+1.Thread常用方法之currentThread方法
+	static Thread currentThread()    返回对当前正在执行的线程对象的引用
+	代码：
+		public void run() {
+			//this.setName("线程名称1");
+			//setName("线程名称2");
+			Thread.currentThread().setName("线程名称3");
+			//以上三种方法效果一致
+			String name  = getName();
+			System.out.println(name);
+		}
+		
+	结论：
+		currentThread方法可以获取当前的线程对象
+		
+		
+2.构建线程对象的方法之二————实现Runnable接口
+	1）构建线程类实现runnable接口
+		//实现Runnable接口
+		public class MyThread implements Runnable{
+			//重写Run方法
+			@Override
+			public void run() {
+				System.out.println("hello world");
+			}
+		}
+		
+	2）通过标准线程类启动线程
+		public static void main(String[] args) {
+			//先构建标准线程对象的时候使用Runnable接口的实现类作为构造方法的参数
+			MyThread myThread = new MyThread();
+			Thread thread = new Thread(myThread);
+			//通过标准线程对象的start方法启动线程
+			thread.start();
+		}
+		
+		
+3.实现Runnable接口问题是原来的所有的方法，都不能用了？？？
+	public void run() {
+		//currentThread允许在非标准线程类子类对象里面执行Thread的方法
+		Thread.currentThread().setName("张三");
+		System.out.println("hello world");
+		String name = Thread.currentThread().getName();
+		System.out.println(name);
+	}
+	
+	结论：
+		currentThread在实现Runnable接口的类里面使用Thread的方法
+		
+		
+4.实现Callable接口——————回调函数(了解)
+
+
+5.线程生命周期getState
+	Thread.State getState() 返回该线程的当前状态 
+		
+
+6.State之NEW
+	NEW是线程对象被创建但是未被启动时的状态，称为线程就绪状态。
+	
+	代码：
+		Thread thread = new Thread();
+		State state = thread.getState();
+		System.out.println(state);
+		
+7.State之RUNNABLE
+	RUNNABLE是线程通过start方法启动之后的状态，代表可运行状态
+	指的是线程本身已经准备好了，只缺少时间片或者资源
+	
+	代码：
+		Thread thread = new Thread();
+		//启动线程
+		thread.start();
+		State state = thread.getState();
+		System.out.println(state);
+		
+8.State之TERMINATED
+	TERMINATED是线程正常结束之后的状态，表示着当前线程对象被gg了
+	这是线程寿终正寝的状态
+	
+	代码：
+		ThreadPlus threadPlus = new ThreadPlus();
+		threadPlus.start();
+		try {
+			//main方法所在线程睡眠
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		State state = threadPlus.getState();
+		System.out.println(state);
+		
+		
+9.State之RUNNING
+	RUNNING是线程获得时间片正在执行过程的状态，一般由RUNNABLE状态
+	获得时间片转换而来
+	
+	
+10.State之BLOCKED
+	BLOCKED是线程加锁状态，被强行夺取时间片之后，当前线程的特殊的
+	Runnable状态
+	代码：
+		1）在ThreadPlus的run里面添加如下代码
+			for (int i = 0; i < 200; i++) {
+				if (i==100) {
+					Thread.yield();
+				}
+				System.out.println("this is my thread class...");
+			}
+			
+		2）测试类添加死循环监听即可
+			ThreadPlus threadPlus = new ThreadPlus();
+			threadPlus.start();
+			while(true) {
+				State state = threadPlus.getState();
+				System.out.println(state);
+			}
+			
+			
+11.State之WAITING
+	WAITING是线程等待状态，等待时间片的来临，当且仅当，线程曾经被
+	执行但是没有执行完毕才会是waiting，如果一次都没执行过是runnable
+	状态
+	
+	本质：当前线程由于join方法，导致要等待其他线程执行完毕之后执行
+	
+	
+12.State之TIME_WAITING
+	 TIMED_WAITING是在调用wait方法和join(long )或者sleep方法的时候出现
+	 代码：
+		1）ThreadPro代码
+			public class ThreadPro {
+				public ThreadA ta;
+				class ThreadA extends Thread {
+					@Override
+					public void run() {
+						for (int i = 0; i < 100; i++) {
+							System.out.println("A");
+							if (i == 60) {
+								try {
+									ta.join(3000);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				}
+				class ThreadB extends Thread {
+					@Override
+					public void run() {
+						for (int i = 0; i < 100; i++) {
+							System.out.println("B"+"    "+ta.getState());
+						}
+					}
+				}
+		}
+		
+		2）测试代码
+			ThreadPro threadPro = new ThreadPro();
+			ThreadA threadA = threadPro.new ThreadA();
+			threadPro.ta = threadA;
+			ThreadB threadB = threadPro.new ThreadB();
+			threadA.start();
+			threadB.start();
+			
+			
+13.线程临界资源问题—————火车票取票问题
+	场景：
+		有1000张票，A和B两人取票，每次取去10张
+	
+	分析：
+		A不知道B怎么取票，B也不知道A怎么取得
+		但是程序要设计出显示剩余票量的问题
+		
+14.临界资源代码
+	线程设计：
+		public class ThreadMax {
+			//定义1000张票
+			private int ticket = 1000;
+			//定义一个线程
+			class ThreadA extends Thread{
+				@Override
+				public void run() {
+					//不知道能取多少次票，所以while循环
+					while(ticket>0) {
+						//取票逻辑
+						ticket-=10;
+						System.out.println("快手取了10张票，还剩"+ticket+"张票~");
+					}
+				}
+			}
+			//再定义一个线程
+			class ThreadB extends Thread{
+				@Override
+				public void run() {
+					while(ticket>0) {
+						ticket-=10;
+						System.out.println("抖音取了10张票，还剩"+ticket+"张票！");
+					}
+				}
+			}
+
+		}
+		
+	测试代码：
+		public static void main(String[] args) {
+			ThreadMax threadMax = new ThreadMax();
+			ThreadA threadA = threadMax.new ThreadA();
+			ThreadB threadB = threadMax.new ThreadB();
+			threadA.start();
+			threadB.start();
+		}
+		
+15.取票出现问题了
+	结果：
+		快手取了10张票，还剩0张票~
+		抖音取了10张票，还剩380张票！
+		
+	分析：	
+		代码没有问题，问题出现在线程的不可控上
+		
+		也就是说A和B对数据的修改都是有效的，
+		在某一次循环期间，A和B都拿到了票数为50这个数，
+		A相对来说速度快，在A和B都进入while之后，
+		A率先-10，此时真实的票数是40，
+		但是B由于执行速度慢或其他原因拿到的仍然是50
+		此时存在计算出错的问题，这个就是临界资源访问问题
+		
+	
+16.临街资源问题解决思路
+	1）限制A和B的相对速度，有序错开AB执行
+		但是该做法失去线程的必要性
+		
+	2）设立监听机制，对增删改查实时同步数据
+		但是该方法问题在于效率低，服务器压力很大
+		
+	3）自治，我取票的时候，其他所有人都失去增删改的
+		机会，等待我取完票，所有人公平竞争取票机会
+		
+
+		
+			
+			
+			
+			
+			
+					
+					
+				
+				
+
+			

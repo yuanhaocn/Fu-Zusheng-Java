@@ -1,0 +1,93 @@
+2018-06-14 20:28:51 --> 运行MyBatis-CMEU...
+---------------------->  at pers.cmeu.Main.main(Main.java:40) 
+ 
+2018-06-14 20:28:53 --> 初始化首页...
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:168) 
+ 
+2018-06-14 20:28:53 --> 初始化首页成功!
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:193) 
+ 
+2018-06-14 20:28:53 --> 加载左侧数据库树与事件....
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:194) 
+ 
+2018-06-14 20:28:56 --> 加载所有数据库到左侧树集成功!
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:317) 
+ 
+2018-06-14 20:28:56 --> 执行查询默认配置信息并加载到首页...
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:324) 
+ 
+2018-06-14 20:28:56 --> 加载配置信息到首页成功!
+---------------------->  at pers.cmeu.controller.IndexController.initialize(IndexController.java:326) 
+ 
+2018-06-14 20:29:22 --> 加载所有表....
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:273) 
+ 
+2018-06-14 20:29:23 --> 加载所有表成功!
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:291) 
+ 
+2018-06-14 20:29:23 --> 加载所有表....
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:273) 
+ 
+2018-06-14 20:29:23 --> 加载所有表成功!
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:291) 
+ 
+2018-06-14 20:29:24 --> 将表的数据加载到数据面板...
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:297) 
+ 
+2018-06-14 20:29:24 --> 将表的数据加载到数据面板成功!
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:307) 
+ 
+2018-06-14 20:29:25 --> 加载所有表....
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:273) 
+ 
+2018-06-14 20:29:25 --> 加载所有表成功!
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:291) 
+ 
+2018-06-14 20:29:28 --> 初始化数据库连接窗口....
+---------------------->  at pers.cmeu.controller.ConnectionController.initialize(ConnectionController.java:47) 
+ 
+2018-06-14 20:29:28 --> 初始化数据库连接成功!
+---------------------->  at pers.cmeu.controller.ConnectionController.initialize(ConnectionController.java:52) 
+ 
+2018-06-14 20:29:33 --> 将表的数据加载到数据面板...
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:297) 
+ 
+2018-06-14 20:29:33 --> 将表的数据加载到数据面板成功!
+---------------------->  at pers.cmeu.controller.IndexController.lambda$3(IndexController.java:307) 
+ 
+2018-06-14 20:29:51 --> 打开修改属性窗口...
+---------------------->  at pers.cmeu.controller.IndexController.updateEntity(IndexController.java:403) 
+ 
+2018-06-14 20:29:51 --> 初始化修改属性页...
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:113) 
+ 
+2018-06-14 20:29:51 --> 执行获取表的主键列...
+---------------------->  at pers.cmeu.controller.SetAttributeController.initTablePrimaryKey(SetAttributeController.java:204) 
+ 
+2018-06-14 20:29:51 --> 获取表的主键列成功!
+---------------------->  at pers.cmeu.controller.SetAttributeController.initTablePrimaryKey(SetAttributeController.java:208) 
+ 
+2018-06-14 20:29:51 --> 获得表的所有列并初始化成类的属性...
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:124) 
+ 
+2018-06-14 20:29:51 --> 获得表的所有列并初始化成类的属性成功!
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:137) 
+ 
+2018-06-14 20:29:51 --> 初始化创建类配置信息...
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:163) 
+ 
+2018-06-14 20:29:51 --> 初始化创建类配置信息-->成功!
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:172) 
+ 
+2018-06-14 20:29:51 --> 初始化属性页成功!
+---------------------->  at pers.cmeu.controller.SetAttributeController.init(SetAttributeController.java:185) 
+ 
+2018-06-14 20:29:51 --> 打开修改属性窗口成功!
+---------------------->  at pers.cmeu.controller.IndexController.updateEntity(IndexController.java:417) 
+ 
+2018-06-14 20:30:18 --> 取消所有属性的修改...
+---------------------->  at pers.cmeu.controller.SetAttributeController.cancel(SetAttributeController.java:389) 
+ 
+2018-06-14 20:30:20 --> 关闭MyBatis-CMEU!!!
+---------------------->  at pers.cmeu.Main.main(Main.java:42) 
+ 

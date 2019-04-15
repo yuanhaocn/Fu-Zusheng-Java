@@ -1,0 +1,177 @@
+1.我们把桌面的hello.txt文件复制到D盘helloCopy.txt根目录
+	思路：	
+		文件从桌面读取到eclipse里面，推荐使用fileinputstream
+		文件从eclipse输出到D盘里面，推荐使用fileoutputstream
+	
+	代码：
+		// 构建文件所在的file对象
+		File fileSrc = new File("C://Users//Administrator//Desktop//JDK_API_1_6_zh_CN.CHM");
+		// 构建目标文件夹所在的目录对象
+		File fileTarget = new File("d://jdk.chm");
+		// 根据fileSrc对象构建文件输入流对象
+		// 根据fileTarget对象构建文件输入流对象
+		try (FileInputStream fis = new FileInputStream(fileSrc);
+				FileOutputStream fos = new FileOutputStream(fileTarget);) {
+			// 需要一个数组存储每次的字节
+			byte[] bytes = new byte[1024];
+			// 需要一个变量记录每次读取的字节数
+			int number = 0;
+			// 边读取边复制
+			while((number=fis.read(bytes))!=-1) {
+				//往外输出
+				fos.write(bytes, 0, number);
+			}
+			//最后加一个flush
+			fos.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+2.文件复制速度怎么样？？
+	代码：
+		//监听开始拷贝的时间
+		long startTime = System.currentTimeMillis();
+		while ((number = fis.read(bytes)) != -1) {
+			fos.write(bytes, 0, number);
+		}
+		fos.flush();
+		//监听结束拷贝的时间
+		long endTime = System.currentTimeMillis();
+		//计算消耗的毫秒数
+		System.out.println(endTime-startTime);
+		
+	结果：
+		拷贝600M的数据消耗了18s，这个速度太慢了
+		
+		
+3.文件复制速度能不能提高一些
+	bufferedInputStream和bufferedoutputstream
+
+
+4.BufferedInputStream
+	简介：增强字节输入流的能力，鸟枪换炮
+		提供一个缓冲区，暂时截留过来的字节，如果字节总量到达
+		缓冲区的时候，统一发送到接收方
+		
+		
+5.BufferedInputStream构造方法
+	BufferedInputStream(InputStream in)   允许把所有的字节输入流以及子类的对象进行封装
+	代码：
+		FileInputStream fis = new FileInputStream(file);
+		//使用缓冲字节输入流封装文件字节输入流
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		System.out.println(bis);
+          
+		  
+6.使用缓冲流改装文件文件复制的代码
+	File fileSrc = new File("C://Users//Administrator//Desktop//ideaIU-2018.1.win.zip");
+	File fileTarget = new File("d://idea.zip");
+	// 构建缓冲字节输入流包装文件字节输入流
+	// 构建缓冲字节输出流包装文件字节输出流
+	try (FileInputStream fis = new FileInputStream(fileSrc);
+			FileOutputStream fos = new FileOutputStream(fileTarget);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);) {
+		byte[] bytes = new byte[1024];
+		int number = 0;
+		long startTime = System.currentTimeMillis();
+		//读取和写出都要使用缓冲流操作
+		while ((number = bis.read(bytes)) != -1) {
+			bos.write(bytes, 0, number);
+		}
+		//数据刷新也要使用缓冲流
+		bos.flush();
+		long endTime = System.currentTimeMillis();
+		System.out.println(endTime - startTime);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+7.总结一下缓冲字节流
+	在速度上的确有所提升，但是也尽然，当且仅当数据量很少的时候
+	传输速度会变的很慢，此时不建议使用缓冲流
+	
+	数据量比较大的时候，适当的使用缓冲流，比如说vip加速下载等。。。
+	
+	
+8.BufferedReader
+	简介：增强字符输入流的能力，鸟枪换炮，从而实现字符、数组和行的高效读取。
+		
+	构造方法：
+		BufferedReader(Reader in) 创建一个使用默认大小输入缓冲区的缓冲字符输入流
+		默认的缓冲区是最优的缓冲区，不需要额外配置
+		
+		
+9.BufferedReader方法之readLine
+	String readLine() 读取一个文本行
+	参数：
+		没有参数
+		
+	返回值:
+		返回的是读取到的数据，如果读完了返回null
+		
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//岳阳楼记.txt");
+		// 使用file构建文件字符输入流
+		// 实用BufferedReader包装filereader对象
+		try (FileReader fr = new FileReader(file); 
+				BufferedReader br = new BufferedReader(fr);) {
+			/*
+			 * 按照一行读取
+			 * 返回值如果是字符串，那就是读取到的数据
+			 * 如果是null代表读到文档末尾
+			 */
+			//定义一个变量保存每次得到的字符串
+			String  s = "";
+			while((s = br.readLine())!=null) {
+				//直接打印s即可
+				System.out.println(s);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+10.关于read和readLine方法说明
+	最开始的时候，流位于文档的开始位置也就是文档之前，
+	每调用一次该方法，都会依次往后读取一些数据
+	很像迭代器的next方法一样，底层是指针的实现
+	，因此强烈建议每调用一次该方法，要么用数组接受
+	，对于readLine方法使用字符串变量接收
+	
+	
+11.BufferedWriter(了解)
+	
+	
+	
+12.BufferedReader的mark方法和reset方法
+	代码：
+		String  s = "";
+		//使用mark标记
+		br.mark(100);
+		String string = br.readLine();
+		System.out.println(string);
+		//使用reset重置
+		br.reset();
+		String resString = br.readLine();
+		System.out.println("--------------------------------");
+		System.out.println(resString);
+		
+	结论：
+		如果不设置mark，两个readLine会依次读取下去，效果如下：
+			庆历四年春，滕子京谪守巴陵郡。越明年，政通人和，百废具兴。
+			--------------------------------
+			予观夫巴陵胜状，在洞庭一湖。衔远山，吞长江，浩浩汤汤，横无际涯
+			
+		如果设置mark，在第二个readLine之前调用reset方法，那么读取文档的指针会
+		回到mark标记的位置，从mark位置重新读取
+		
+		
+	注意：
+		mark方法具有一个参数为整型，代表最大可以重复读取的字符数，一旦超出
+		会抛出ioException异常
+		

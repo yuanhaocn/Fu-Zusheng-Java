@@ -1,0 +1,51 @@
+25.代码习惯——————不知道怎么写
+	A.找到要用的java类，尝试构建对象
+		1）直接new
+		2）抽象类的静态方法Calander
+		3）单例模式的静态方法getInstance或者newInstance或者getXXX
+		4）匿名内部类 ThreadLocal
+	
+	eclipse：使用Ctrl+Shift+T调出结构树，查看继承关系
+	idea：双击shift即可
+	
+	B.对象构建出来之后，接下来万能.大法，参照代码热度
+		1）增
+			add concat insert append put set initXXX 
+		2)删
+			remove  delete  pop  nouse distroy   exit
+			
+		3)改
+			update  setXXX  replaceXXX  match   change
+			
+		4)查
+			serch  select  get  list   toXXX   [i]
+			charAt    indexof
+			
+		
+	C.方法可能需要参数
+		1）自己构建参数
+			byte[]   char[]
+			
+		2）作为方法的参数列表，传入参数
+			file   String path
+			
+		3）内置特定参数	
+			Calander   1---》year
+			
+	D.逻辑的理解
+		1）中心逻辑
+			围绕型逻辑，指的是该类的所有方法，围绕的都是当前对象的属性设置
+			Student
+			
+		2）线性逻辑
+			是按照顺序一步一步点下去，比如io操作
+			
+		3）参数逻辑
+			对象不停地作为其他对象构建过程中所需要的参数
+			比如file和String的path和流的关系
+			最常见也是最简单的！！！
+			
+			
+			
+	
+		  

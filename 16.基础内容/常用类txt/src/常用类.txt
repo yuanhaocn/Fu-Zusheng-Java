@@ -1,0 +1,1091 @@
+﻿1.常用类
+	随机数   时间    系统(mssql)      jvm       字符串    数据类型    等等 
+
+	String   StringBuffer   StringBuilder   Date    Calnder     System      Runtime    Math
+	Throwable     包装类   SimpleDateFormat    
+2.String
+	包：java.lang.String
+	构建对象的方式：
+		1）new 
+3.关于String的构造方法
+	1）String(byte[] bytes, Charset charset)通过使用指定的 charset 解码指定的 byte 数组，构造String。
+	代码：
+		// 构建一个字符数组
+		byte[] b = { 97, 65, 43 };
+		// 使用utf-8的编码格式编码字符串
+		String s = new String(b, Charset.forName("gbk"));
+		System.out.println(s);
+	2）String(byte[] bytes, int offset, int length)通过使用平台的默认字符集解码指定的 byte 子数组，构造一个新的 String
+	代码：
+		byte[] b = {65,97,66,98,99};
+		/*
+		 * 参数：
+		 * 	1.byte数组
+		 *  2.起始位置，从下标为1的位置开始，包含当前位置
+		 *  3.长度
+		 */
+		String s = new String(b,1,3);
+		System.out.println(s);
+		
+		
+	3）String(char[] value, int offset, int count) 分配一个新的 String，它包含取自字符数组参数一个子数组的字符。
+	代码：
+		char[] c = { 's', 'u', 'n', 'c', 'k' };
+		/*
+		 * 参数
+		 * 1.char数组
+		 * 2.起始位置，从下标为1的位置开始，包含当前位置
+		 * 3.长度
+		 */
+		String s = new String(c,3,2);
+		System.out.println(s);
+		
+	4）String(String original) 新创建的字符串是该参数字符串的副本
+	代码：
+		//使用已知字符串构建新的字符串
+		String ss = "hello world";
+		String s = new String(ss);
+		System.out.println(s);
+		
+		
+4.字符编码
+	ascii   unicode(字符集)
+	gb2312   gbk   iso-8859-1  iso-8859-2     utf-8(字符编码)
+	乱码原因：
+		1）当前字符编码不支持中文
+		2）编码和解码的字符编码不一致————写的时候用的gbk，看的时候用的utf-8(最常见)
+		
+	乱码的解决方案：
+		1）换个字符编码
+		2）统一编码和解码格式
+		
+		
+5.StringIndexOutOfBoundsException
+	全等于ArrayIndexOutOfBoundsException
+	
+	
+6.关于String的两种创建问题
+	/*
+	 * 以下两种写法完全相同：
+	 * 	String本身是个类，new构建很正常
+	 *  等号的写法是为了仿照C语言的写法，一般采用这种写法
+	 */
+	String s1 = new String("hello world");
+	String s2 = "hello world";
+	System.out.println(s1);
+	System.out.println(s2);
+	
+	
+7.String常用方法之charAt
+	char	charAt(int index)    返回指定索引处的字符
+	代码：
+		String s = "sunck is a good man";
+		/*
+		 * 参数是下标，注意不要越界，否则StringIndexOutOfBoundsException
+		 * 返回值是当前位置的元素，注意下标是从0开始
+		 */
+		char c = s.charAt(6);
+		System.out.println(c);		
+8.源代码解读
+	按住ctrl，点击类名，可以查看源代码
+	String本质：
+		private final char[] value;
+9.字典顺序
+	三种情况：
+		1）某个索引处的字符不同
+		2）长度不同
+		3）长度和字符都不相同
+	如果长度相同，以hello和world为例：
+		String a = "hello";
+		String b = "world";
+		int i = a.compareTo(b);
+		System.out.println(i);
+		结论：第一个不等的字符的ascii码的差值
+	如果长度不同，但是要求一个字符串作为另一个字符串的一部分，
+	以hello和hell为例：
+		String a = "hello";
+		String b = "hell";
+		int i = a.compareTo(b);
+		System.out.println(i);
+		结论：两个字符串长度的差值
+		
+	如果都不相同，以hello和siri为例：
+		String a = "hello";
+		String b = "siri";
+		int i = a.compareTo(b);
+		System.out.println(i);
+		结论：先按照第一个不同的字符ascii比较
+10.String常用方法之compareTo
+	int  compareTo(String anotherString)    按字典顺序比较两个字符串
+	代码：
+		String a = "hello";
+		String b = "siri";
+		//返回值是长度的差或者ascii码的差
+		int i = a.compareTo(b);
+		System.out.println(i);
+11.String常用方法之concat
+	String	concat(String str)  将指定字符串连接到此字符串的结尾
+	代码：	
+		String s1 = "hello";
+		String s2 = "world";
+		String s3 = s1.concat(s2);
+		System.out.println(s3);
+	结论：
+		1）效果和+号一样，从来不用
+		2）必须接收返回值，原字符串不变
+12.String常用方法之contains
+	boolean	contains(CharSequence s) 当且仅当此字符串包含指定的 char 值序列时，返回 true。
+	CharSequence称为字符序列，是一个类，是String的另类表现形式
+	代码：
+		String s = "helloworld";
+		/*
+		 * 参数是String类型字符串
+		 * 返回值是布尔类型，代表包含和不包含
+		 */
+		boolean result = s.contains("ro");
+		System.out.println(result);
+13.String常用方法之endsWith
+	boolean	endsWith(String suffix) 判断是不是以指定的字符串结尾
+	代码：
+		String s = "hello";
+		//参数是待匹配字符串
+		boolean b = s.endsWith("hello");
+		System.out.println(b);		
+14.String常用方法之equals
+	boolean	equals(Object anObject) 将此字符串与指定的对象比较，如果相等返回true
+		不等返回false
+	代码：
+		String s ="sunck is a good man";
+		//参数是待比较字符串，这里的比较是完全相同
+		boolean b = s.equals("sunck is a good man");
+		System.out.println(b);		
+15.equals和==的区别
+	范围上：
+		equals只能用于引用数据类型，不能用于基本数据类型
+		== 可以用于两种		
+	效果上：
+		equlas比较的是引用数据类型的首地址
+		==对于基本数据类型比较值，对于引用数据类型比较的是引用部分		
+16.关于==在引用数据类型里面的说明
+	代码：
+		Object o1 = new Object();
+		Object o2 = new Object();
+		Object o3 = o1;
+		//因为o1和o2的首地址不同
+		System.out.println(o1==o2);
+		//因为o1和o3的首地址相同，赋值的时候o1把首地址赋给了o3
+		System.out.println(o1==o3);		
+	原理：
+		画图
+				
+17.关于equals在引用数据类型里面的说明
+	代码：
+		Object o1 = new Object();
+		Object o2 = new Object();
+		Object o3 = o1;
+		System.out.println(o1.equals(o2));
+		System.out.println(o1.equals(o3));		
+	原理：
+		和==一致	
+18.总结
+	==和equals效果一致，区别是==侧重于栈的解释，equals侧重于堆的解释
+	1.String方法之equalsIgnoreCase
+	boolean equalsIgnoreCase(String anotherString)将此 String 与另一个 String 比较，不考虑大小写。
+	代码：
+		String s = "hello";
+		//忽略大小写，指的是每一个字符，常用于验证码
+		boolean b = s.equalsIgnoreCase("HeLlO");
+		System.out.println(b);
+2.String方法之getBytes
+	byte[] getBytes() 获取字符串每一个字符的ascii码组成的数组
+	代码：
+		String s = "你";
+		//得到指定字符串的ascii码的数组
+		byte[] bytes = s.getBytes();
+		System.out.println(Arrays.toString(bytes));
+3.String方法之indexOf
+	int indexOf(String str)  返回指定字符串在此字符串中第一次出现处的索引
+	代码：
+		String s = "sunck is a good man";
+		//参数是待查找字符串，返回值是待字符串在当前字符串第一次出现的位置的首字母下标
+		int index = s.indexOf("good");
+		System.out.println(index);
+	结论：
+		1）返回值是待字符串在当前字符串第一次出现的位置的首字母下标
+		2）存在多个待查找字符串，这里只能返回第一个
+		3）找不到该字符串返回-1
+	int indexOf(String str, int fromIndex) 
+		参数：	
+			1.待查找字符串
+			2.起始位置
+	代码：
+		String s = "sunck is a good man";
+		//第二个参数代表起始位置开始查找，包含起始位置
+		int index = s.indexOf("n",6);
+		System.out.println(index);
+4.String方法之length
+	int length()  返回此字符串的长度。
+	代码：
+		int[] arr = new int[10];
+		String s = "helloworld";
+		//数组的length是一个属性
+		System.out.println(arr.length);
+		//字符串的length()是一个方法
+		System.out.println(s.length());
+5.String方法之isEmpty
+	boolean isEmpty()   如果字符串为空字符串，返回真，否则为假
+	代码：
+		//空字符串
+		String s1 = "";
+		//空格字符串
+		String s2 = "       ";
+		//空对象
+		String s3 = null;
+		System.out.println(s1.isEmpty());
+		System.out.println(s2.isEmpty());
+		//这里会导致空指针异常
+		System.out.println(s3.isEmpty());
+6.String方法之lastIndexOf
+	int lastIndexOf(String str) 返回指定子字符串在此字符串中最右边出现处的索引。
+	代码：
+		String s = "sunck is a good man";
+		int index = s.lastIndexOf("n");
+		System.out.println(index);
+	结论：
+		1）从后往前查找指定字符串
+		2）找到之后返回该字符串的首元素从前往后的下标
+		3）找不到返回-1
+	int lastIndexOf(String str, int fromIndex) 从后往前查找指定字符串找到返回首元素下标 ，否则-1
+	代码：
+		String s = "sunck is a good man";
+		//第二个参数是下标，定义了查询的区间是从该位置起，往左反向查询
+		int index = s.lastIndexOf("a",5);
+		System.out.println(index);	
+7.正则表达式
+	是一些使用特殊符号和数字和字母组成的表达式，我们约定一些符号就有特殊含义
+	比如：+代表前面的字符出现一次或多次
+	
+	数量词：
+		?   0次或1次
+		+   1次或多次  
+		*   0次或多次
+	范围词：
+		[a-z] 代表a-z之间的任意一个字符
+		[A-Z] 代表A-Z之间的任意一个字符
+		[helo]代表四个字符中的任意一个
+		[0-9]
+	泛范围词：
+		\d   代表数字
+		\w   代表数字和字母
+		\W   代表非数字和字母
+8.String方法之matches
+	boolean matches(String regex) 判断此字符串是否匹配给定的正则表达式，是为true，否则是false
+	代码：
+		String ss="2645313145121";
+		String regex="[1-9][0-9]{4,9}";
+		boolean b = ss.matches(regex);
+		System.out.println(b);
+9.String方法之replace
+	String replace(String target, String replacement) 把指定的字符串全部替换为其他字符串
+	代码：
+		String s = "sunck is a good good man";
+		//注意字符串本身不变，要接收返回值
+		String ss = s.replace("good", "nice");
+		System.out.println(ss);
+	结论：	
+		1）是对字符串的全部替换
+		2）接受返回值，原字符串不变
+10.String方法之replaceAll
+	String replaceAll(String regex, String replacement) 
+          使用给定的字符串替换此字符串所有匹配给定的正则表达式的子字符串
+	代码：	
+		String s = "sunck is a good good man";
+		String regex = "go+d";
+		String ss = s.replaceAll(regex, "nice");
+		System.out.println(ss);
+11.String方法之replaceFirst
+	String replaceFirst(String regex, String replacement) 
+        使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。
+
+12.String方法之split
+	String[] split(String regex) 根据给定正则表达式的匹配拆分此字符串
+	场景：
+		1，吴彦祖，18，男，上海，明星，帅
+	
+	根据逗号拆分源数据代码：
+		String s ="雷军!45!男!北京海淀!小米!江苏紫米科技有限公司!CEO!are!you ok";
+		//根据逗号拆分字符串，返回值是拆分后的字符串数组
+		String[] ss = s.split("!");
+		System.out.println(Arrays.toString(ss));
+		
+13.String方法之startsWith
+	boolean startsWith(String prefix) 测试此字符串是否以指定的前缀开始
+	代码：
+		String s = "sunck is  a nice man";
+		//参数是待匹配字符串，返回值是布尔代表是否以此开头
+		boolean b = s.startsWith("sunck");
+		System.out.println(b);
+		
+		
+14.String方法之substring
+	String substring(int beginIndex, int endIndex) 
+        返回一个新字符串，它是此字符串从begin到end进行截取获得
+		  
+	参数：
+		1是字符串开始，2是字符串结束
+		
+	返回值：
+		截取获得的新的字符串
+		
+	代码：
+		String s = "wuyz is a good man";
+		//范围包含起始不包含结束，包前不包后
+		String ss = s.substring(5, 8);
+		System.out.println(ss);
+		
+		
+15.String方法之toCharArray
+	char[] toCharArray() 将此字符串转换为一个新的字符数组
+	代码：
+		String s = "sunck is a good man";
+		//把字符串转为字符数组
+		char[] array = s.toCharArray();
+		System.out.println(Arrays.toString(array));
+		
+		
+16.大小写转换————转为大写字母
+	String toUpperCase() 将此 String 中的所有字符都转换为大写
+	代码：
+		String s = "tencent is a GOOD company";
+		//小写转达写遇到大写不管
+		String ss = s.toUpperCase();
+		System.out.println(ss);
+		
+		
+17.大小写转换————转为小写字母
+	String toLowerCase() 将此 String 中的所有字符都转换为小写 
+	代码：
+		String s = "I LOVE JAVA";
+		//大写转小写，如果是小写那么不变
+		String ss = s.toLowerCase();
+		System.out.println(ss);
+		
+18.String方法之trim(非常重要)
+	String trim()   返回字符串的副本，忽略前导空白和尾部空白。 
+	场景：
+		登录页面，用户名的前面和后面的空格
+		
+	代码：
+		String s = "     he    ll   o     ";
+		String ss = s.trim();
+		System.out.println(ss);
+		
+	结论：
+		1）仅仅去除前面和后面的空格，中间的不行
+		2）一般在用户名上加上该方法！！！
+		
+19.equals和==在String中的表现
+	无论何种方式构建的String，equals方法永远是比较的值
+	对于两种方式构建的字符串的区别：
+		1）new的方式
+			String s1 = new String("hello");
+			String s2 = new String("hello");
+			//比较的是值，只要值一样一定是true
+			System.out.println(s1.equals(s2));
+			//比较的是首地址，首地址不一样肯定是false
+			System.out.println(s1==s2);
+			
+		2）==的方式
+			String s1="hello";
+			String s2="hello";
+			/*
+			 * jvm对String进行优化，
+			 * 把String类型数据放入值栈，
+			 * 每次新创建的String的时候总是先看看值栈里面存不存在
+			 * 如果存在那就把首地址直接存进新的变量，
+			 * 而不再在堆里面开辟新的空间
+			 */
+			System.out.println(s1==s2);
+			//比较的是值，只要值一样一定是true
+			System.out.println(s1.equals(s2));
+			
+			
+			
+20.被final修饰的引用数据类型
+	
+	1.StringBuffer类
+	对String的补充
+	
+	
+2.StringBuffer常用方法之构造方法
+	StringBuffer()   构造一个其中不带字符的字符串缓冲区，其初始容量为 16 个字符
+	
+	StringBuffer(CharSequence seq) 使用指定的字符串构造一个字符串缓冲区
+	
+	StringBuffer(String str) 使用指定的字符串构造一个字符串缓冲区(常用)
+	
+	
+3.append方法
+	StringBuffer append(String str) 把任何数据类型追加到stringbuffer后面
+	代码：
+		StringBuffer sb = new StringBuffer("sunck");
+		//append方法,不需要接收返回值即可得到追加之后的结果
+		sb.append("is a good man");
+		System.out.println(sb);
+		
+		
+4.length方法和capacity方法
+	int capacity()     返回当前容量，不是字符个数
+	int length()       返回长度，得到的是字符数 
+	代码：
+		StringBuffer sb = new StringBuffer("abcdefgn");
+		 sb.append("123eqweqeqeqeqwqw");
+		 //字符个数
+		 int length = sb.length();
+		 //空间容量
+		 int capacity = sb.capacity();
+		 System.out.println(length);
+		 System.out.println(capacity);
+		 
+		 
+5.charAt方法
+	char charAt(int index)  返回此序列中指定索引处的 char 值
+	代码：
+		StringBuffer sb = new StringBuffer("helloworld");
+		//获取指定位置的字符，如果小于0或大于长度会越界异常
+		char c = sb.charAt(3);
+		System.out.println(c);
+		
+6.delete方法
+	StringBuffer delete(int start, int end)     移除此序列的子字符串中的字符
+	参数：
+		start是开始位置   end是结束位置
+		
+	代码：
+		StringBuffer sb = new StringBuffer("sunck is a good man");
+		/*
+		 * 注意下标越界问题——————end必须大于start，否则也会越界
+		 * 规律依然是包前不包后
+		 * 依然不需要接收返回值，修改的是原来的字符串
+		 */
+		sb.delete(1,3);
+		System.out.println(sb);
+		
+7.deleteCharAt方法
+	StringBuffer deleteCharAt(int index) 移除此序列指定位置的 char
+	代码：
+		StringBuffer sb = new StringBuffer("guobin is bad man...");
+		//删除指定位置的字符
+		sb.deleteCharAt(7);
+		System.out.println(sb);
+		
+		
+8.indexof方法
+	int indexOf(String str, int fromIndex) 
+          从指定的索引处开始，返回第一次出现的指定子字符串在该字符串中的索引 
+		
+	代码:
+		StringBuffer sb = new StringBuffer("helloworld");
+		//参数是待查找字符和开始位置，包含当前位置
+		int index = sb.indexOf("o",6);
+		System.out.println(index);
+		
+		
+9.insert方法
+	StringBuffer insert(int offset, String str)  将字符串插入此字符序列中 
+	代码：
+		StringBuffer sb = new StringBuffer("hello");
+		//第一个参数是位置，在当前位置之前插入，第二个参数是插入的各种数据类型
+		sb.insert(3, "world");
+		System.out.println(sb);
+				
+10.lastindexof方法
+	int lastIndexOf(String str)  返回最右边出现的指定子字符串在此字符串中的索引
+	代码：
+		StringBuffer sb = new StringBuffer("guobin is a bad boy");
+		//从后往前检索，但是下标是从该前往后算
+		int index = sb.lastIndexOf("n");
+		System.out.println(index);
+		
+11.replace方法
+	StringBuffer replace(int start, int end, String str)使用给定 String 中的字符替换此序列的子字符串中的字符。 
+	代码：
+		StringBuffer sb = new StringBuffer("hello world");
+		/*
+		 * 参数：
+		 * 1.起始位置
+		 * 2.结束位置
+		 * 3.可替换字符串
+		 * 包前不包后
+		 */
+		sb.replace(2, 6, "****");
+		System.out.println(sb);
+		
+		
+12.reverse方法(了解)
+	StringBuffer reverse()  将此字符序列用其反转形式取代
+	代码：
+		StringBuffer sb = new StringBuffer("hello world");
+		//反转字符串的每一个字符
+		sb.reverse();
+		System.out.println(sb);
+		
+13.setCharAt方法
+	void setCharAt(int index, char ch) 将给定索引处的字符设置为 ch
+	代码：
+		StringBuffer sb = new StringBuffer("helloworld");
+		//参数第一个是位置，第二个是该位置准备设置的字符
+		sb.setCharAt(2, '%');
+		System.out.println(sb);
+		
+		
+14.substring方法
+	String substring(int start, int end) 字符串截取
+	参数：
+		1.开始位置，包含
+		2.结束位置，不包含
+	代码：
+		StringBuffer sb = new StringBuffer("no one can give the life you want");
+		//必须接受返回值，因为是String类型，参数还是包前不包后
+		String s = sb.substring(3, 7);
+		System.out.println(s);
+		
+15.trimToSize方法
+	void trimToSize()  尝试减少用于字符序列的存储空间
+	代码：	
+		StringBuffer sb = new StringBuffer("helloworld");
+		System.out.println(sb.capacity());
+		//尝试压缩存储空间，会影响容量的值
+		sb.trimToSize();
+		System.out.println(sb.capacity());
+	注意：
+		一般不要使用，会影响性能
+		
+		
+16.关于String和StringBuffer的关系
+	常用性：
+		String比StringBuffer常用太多
+		
+	兼容性：
+		框架和组件对String的兼容性很好，对StringBuffer不兼容
+		
+	转换性：
+		String和StringBuffer之间可以自由转换，都是 CharSequence 的子类
+		
+	方法易用性：
+		String的方法倾向于查询
+		StringBuffer的方法倾向于增删改
+		
+	本质：
+		String的本质是：
+			private final char[] value;
+			 
+		StringBuffer的本质：
+			char[] value;
+			
+			
+17.关于StringBuilder的问题
+	1）方法和StringBuffer完全一致
+	2）和StringBuffer的区别是线程安不安全的问题
+		StringBuffer安全，StringBuilder不安全
+		
+		
+		
+18.String和StringBuffer和StringBuilder的关系
+	1）三者可以任意转换，使用构造方法转换
+	2）StringBuffer安全，StringBuilder和String不安全
+	3）StringBuffer慢，StringBuilder和String比较快，速度排序
+		String>StringBuilder>StringBuffer
+		
+19.Date时间类
+	所在的包：java.util.Date
+	常见的类：Scanner  Arrays
+	简介：
+		类 Date 表示特定的瞬间，精确到毫秒。
+		java的零点时刻：1970年1月1日  0:00:00
+		里面绝大部分的方法全都过时了
+
+20.Date的构造方法
+	Date() 分配 Date 对象并初始化此对象，以表示当前的系统时间，可以自动识别所在的时区
+	代码：
+		//获取的是当前的时间，上海的时间
+		Date date = new Date();
+		System.out.println(date);
+		
+	Date(long date) 表示自从标准基准时间以来的指定毫秒数，做精准的时间表示
+	代码：
+		//00:00:00是格林尼治时间，我们是东八区所以是08:00:00
+		Date date = new Date(60000);
+		System.out.println(date);
+		
+21.getTime方法
+	long getTime()  
+	代码：
+		Date date = new Date();
+		//代表从格林尼治时间到现在的毫秒数
+		long time = date.getTime();
+		System.out.println(time);
+		
+	
+	
+		
+          
+1.Date常用方法之setTime
+	void setTime(long time)设置此 Date 对象，时间是传入参数距离格林尼治时间的差值
+	代码：	
+		Date date = new Date();
+		//参数是long类型
+		date.setTime(3000);
+		System.out.println(date);
+				
+2.Calendar
+	日历类，主要用来代替Date类
+	简介：
+		本类是一个抽象类
+		
+3.Calendar类的方法——————获取对象，单例模式
+	static Calendar getInstance()   使用默认时区和语言环境获得一个日历
+	代码：	
+		//获取日历类的对象
+		Calendar c = Calendar.getInstance();
+		//数据太过于复杂和繁琐
+		System.out.println(c);
+		
+4.Calendar类的方法——————获取时间
+	Date getTime() 得到当前的时间对象
+	代码：
+		Calendar c = Calendar.getInstance();
+		//获取当前的时间，返回值是Date类型
+		Date time = c.getTime();
+		System.out.println(time);
+		
+	
+
+	
+	int get(int field) 返回给定日历字段的值,参数是整型
+		我们约定1代表年   2代表月
+		
+	代码：
+		Calendar c = Calendar.getInstance();
+		//设置该方法参数为静态属性即可  获取年
+		int year = c.get(Calendar.YEAR);
+		//默认状态下，月份从0开始最大为11
+		int month = c.get(Calendar.MONTH);
+		//获取天数是获取今天是本月的第几天
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		/*
+		 * 获取现在的小时
+		 * 需要注意：
+		 * 	HOUR_OF_DAY指的当前的小时，24进制的
+		 * 	HOUR是12进制的，分为AM和PM
+		 */
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		//获取现在的分钟
+		int minute = c.get(Calendar.MINUTE);
+		//获取现在的秒
+		int second = c.get(Calendar.SECOND);
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(day);
+		System.out.println(hour);
+		System.out.println(minute);
+		System.out.println(second);
+		
+		
+5.Calendar类的方法——————设置时间
+	void set(int field, int value)  将给定的日历字段设置为给定值
+	参数：
+		int类型的代表年月日等字段的唯一标识
+		int类型的参数是给指定的字段设置的值
+		
+	代码：
+		Calendar calendar = Calendar.getInstance();
+		//设置年月日
+		calendar.set(Calendar.YEAR, 2008);
+		//月份是从0开始
+		calendar.set(Calendar.MONTH,7);
+		calendar.set(Calendar.DAY_OF_MONTH,8);
+		//设置时分秒
+		calendar.set(Calendar.HOUR_OF_DAY, 20);
+		calendar.set(Calendar.MINUTE, 8);
+		calendar.set(Calendar.SECOND,8);
+		
+	void set(int year, int month, int date) 快捷设置年月日
+	void set(int year, int month, int date, int hourOfDay, int minute) 快捷设置年月日时分
+	void set(int year, int month, int date, int hourOfDay, int minute) 快捷设置年月日时分秒
+                 
+	代码：
+		Calendar c = Calendar.getInstance();
+		//仅设置年月日，时分秒默认是当前的时分秒
+		c.set(2008, 7, 8);
+		System.out.println(c.getTime());
+		//设置年月日时分秒
+		c.set(2008, 4, 12, 14, 53, 5);
+		System.out.println(c.getTime());
+		
+	void setTime(Date date)    使用给定的 Date 设置此 Calendar 的时间
+	代码：
+		Date date = new Date(13131321);
+		Calendar c = Calendar.getInstance();
+		//使用Date对象构建Calendar对象
+		c.setTime(date);
+		System.out.println(c.getTime());
+
+		
+6.Calendar类的方法—————获取时区
+	TimeZone  getTimeZone()  获得时区
+	代码：
+		//获取当前的时区
+		TimeZone timeZone = c.getTimeZone();
+		System.out.println(timeZone);
+				
+7.SimpleDateFormat
+	包：java.text.DateFormat
+	简介：
+		在字符串和时间对象之间自由转换
+		
+	
+
+	
+8.SimpleDateFormat之构造方法
+	SimpleDateFormat(String pattern) 用给定的模式的日期格式构造 SimpleDateFormat对象
+	pattern参数是日期格式：
+		yyyy/MM/dd hh:mm:ss    2018/03/28 15:11:12
+		dd-MM-yyyy hh:mm:ss    28-03-2018 15:11:12
+			
+9.时间转为字符串
+	String format(Date date)    将一个 Date 对象转为时间字符串
+	代码：
+		//定义一个转换格式，这里的英文字母具有特殊的含义，不能换
+		String pattern ="yyyy/MM/dd kk:mm:ss";
+		//把转换格式传入sdf对象作为参数
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		//构建一个时间对象
+		Date date = new Date();
+		//把时间进行格式化为字符串
+		String result = sdf.format(date);
+		System.out.println(result);
+		
+	注意：
+		1）特殊的字母不允许更换，否则会出现异常
+		2）/可以换成中文
+		
+		
+10.字符串转为时间
+	Date parse(String source)   根据字符串转为日期对象
+	代码：
+		// 构建字符串,必须是时间字符串，而且要和下面pattern保持格式一致
+		String s = "2008-08-08 20-08-08";
+		// 构建模式字符串，转换规则
+		String pattern = "yyyy-MM-dd KK-mm-ss";
+		//构建sdf对象
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		try {
+			//把字符串转为日期对象
+			Date date = sdf.parse(s);
+			System.out.println(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	注意：
+		1）字符串必须是时间字符串，而且和模式串保持一致的格式
+		2）依然需要注意yyyy-MM-dd KK-mm-ss具有特殊含义
+		
+		
+11.Runtime
+	简介：
+		每个 Java 应用程序都有一个唯一的 Runtime 类实例，使该程序能够与jvm连接
+		沟通当前的程序和jvm的关系
+		
+	本质：
+		runtime和程序一一对应
+		
+12.Runtime的方法之获取对象
+	static Runtime getRuntime()    返回与当前 Java 应用程序相关的运行时对象
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		//runtime对象是单例的
+		System.out.println(runtime);
+		
+		
+13.Runtime的常用方法————availableProcessors
+	int availableProcessors()  返回当前计算机处理器的核数
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		int i = runtime.availableProcessors();
+		System.out.println(i);
+		
+		
+14.Runtime的常用方法————exit
+	void exit(int status) 终止当前正在运行的 Java 虚拟机，关机
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		//正常关闭jvm虚拟机
+		runtime.exit(0);
+		//后面的代码不执行，此时jvm关闭了
+		System.out.println("hello");
+		
+15.Runtime的常用方法————freeMemory
+	long freeMemory()    返回 Java 虚拟机中的空闲内存量 
+	单位是b
+	单位排序：	
+		b  k   m   g  t  p  z   ....
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		long freeMemory = runtime.freeMemory();
+		//这是60M，是jvm的可用内存
+		System.out.println(freeMemory/1024/1024);
+1.Runtime方法之halt(不建议使用)
+	void halt(int status)  强行终止目前正在运行的jvm
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		//强制关闭jvm，速度很快，但是容易丢失数据
+		runtime.halt(0);
+		//后面的代码无法执行
+		System.out.println("helloworld");
+		
+2.Runtime方法之maxMemory
+	long maxMemory() 返回 jvm 试图使用的最大内存量
+	long totalMemory()   返回 Java 虚拟机中的内存总量
+	代码：
+		Runtime runtime = Runtime.getRuntime();
+		//获取jvm所用全部的内存
+		long totalMemory = runtime.totalMemory();
+		//获取jvm试图占用的最大内存
+		long maxMemory = runtime.maxMemory();
+		//剩余内存
+		long freeMemory = runtime.freeMemory();
+		System.out.println(totalMemory/1024/1024+"M");
+		System.out.println(maxMemory/1024/1024+"M");
+		System.out.println(freeMemory/1024/1024+"M");
+			
+3.gc机制
+	历史：
+		析构函数，和构造函数相反，是用来销毁对象，C语言依靠析构进行内存管理
+		内存占用越来越高，真实可用的数据没有多少—————内存泄漏
+		
+	java中使用gc机制避免内存泄漏。java不把内存管理的权限给开发者，
+	java提供gc进行自动管理。
+		
+		
+	原理：
+		jvm会给每个对象分配一个整形的变量，称为引用计数器，该变量
+		表示该对象被引用的次数。引用次数越多，数值越大，对象越安全
+		一旦引用计数器变为0的时候，jvm有可能会回收该对象
+		
+		
+	回收时机：
+		jvm有固定的运行周期和运行时机，一般周期取决于内存使用状况，
+		如果内存占用一直很低，gc永不执行。如果内存超过阀值，gc才有可能执行
+		gc的执行时机和力度由jvm控制，程序员无法干涉，但是可以使用gc方法建议执行
+		
+	一定回收：
+		1）引用计数器为0并且该对象很久没有使用
+		2）jvm达到最大可用内存，gc会自动清理
+		
+4.Runtime方法之gc方法
+	不保证一定执行，只是程序员建议回收，回不回收看jvm的心情
+	代码：
+		//上面这个对象在堆内存有，栈内存的引用消失了
+		Object object = new Object();
+		System.out.println(object);
+		//有引用指向可以使用，栈内存存放引用，堆内存存放具体对象
+		object = new Object();
+		System.out.println(object);
+		//两个引用指向一个对象
+		Object o1 = object;
+		//建议回收
+		Runtime runtime = Runtime.getRuntime();
+		runtime.gc();
+	
+	
+5.Math
+	定义类数学的常用函数，包含苹方、立方、开平方根、随机数、三角函数tan   cos  sin  
+	
+	
+6.Math的常用属性
+	分别是pi（圆周率）和e（自然对数的底）
+	代码：
+		double pi = Math.PI;
+		double e = Math.E;
+		System.out.println(pi);
+		System.out.println(e);
+		
+7.Math方法之abs
+	static double abs(double a)   返回 double 值的绝对值
+	代码:
+		double abs = Math.abs(-12.12);
+		System.out.println(abs);
+		
+8.Math方法之log
+	static double log(double a)  返回 double 值的自然对数
+	代码：
+		double log = Math.log(12);
+		System.out.println(log);
+		
+9.Math方法之min和max
+	static int max(int a, int b) 返回两个 int 值中较大的一个
+	static int min(int a, int b) 返回两个 int 值中较小的一个
+	代码：
+		int a = 12;
+		int b = 15;
+		int min = Math.min(a, b);
+		int max = Math.max(a, b);
+		System.out.println(min);
+		System.out.println(max);
+		
+10.Math方法之pow
+	static double pow(double a, double b) 返回第一个参数的第二个参数次幂的值
+	代码：
+		int a = 12;
+		double pow = Math.pow(12, 2);
+		System.out.println(pow);
+		
+	8.916100448256E12科学技术法，8.9底数  E是10的意思    12是12次方
+	
+	
+11.Math方法之random
+	static double random() 返回带正号的 double 值，该值大于等于 0.0 且小于 1.0
+	代码：
+		//随机数范围是[0,1)
+		double random = Math.random();
+		System.out.println(random);
+		
+12.Math方法之sqrt
+	static double sqrt(double a) 返回正确舍入的 double 值的正平方根
+	代码：
+		double sqrt = Math.sqrt(5050);
+		System.out.println(sqrt);
+		
+13.System
+	是操作系统的对象，是一个工具类，包含常用的系统方法和其他散碎的方法
+
+14.System方法之arraycopy
+	static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length) 
+	参数：
+		1)原数组    2)从哪个位置开始拷贝    3)拷到哪个数组    4)从新数组哪个位置开始存储    5)拷贝多长
+		
+	代码：	
+		//定义一个数组
+		int[] arr  = {1,4,5,2,1,76,43,45,6};
+		//定义一新的数组
+		int[] brr = new int[arr.length];
+		//数组拷贝
+		System.arraycopy(arr, 4, brr, 5, 3);
+		//数组遍历
+		System.out.println(Arrays.toString(brr));
+		
+		
+15.System方法之currentTimeMillis
+	static long currentTimeMillis() 返回以毫秒为单位的当前时间
+	相当于Date的getTime方法
+	
+	代码：	
+		//获取系统当前时间,单位是毫秒
+		long currentTimeMillis = System.currentTimeMillis();
+		//构建Date对象
+		Date date = new Date(currentTimeMillis);
+		System.out.println(date);
+		
+		
+16.System方法之getenv
+	static String getenv(String name) 获取指定名称的环境变量值 
+	代码：
+		//参数必须是已经存在的环境变量名
+		String s = System.getenv("path");
+		System.out.println(Arrays.toString(s.split(";")));
+	
+	
+17.八大基本数据类型的包装类
+	Byte Short Integer Long Float Double Boolean Character
+	
+	
+18.以Integer为例
+	最大的用途是允许把基本数据类型存放在堆里面
+	构造方法：
+		Integer(int value) 使用对应的基本数据类型构造一个新的 Integer 对象
+		代码：
+			//此时i存放在栈，12这个数字在堆里面
+			Integer i = new Integer(12);
+			//直接打印i还是值,因为重写了toString
+			System.out.println(i);
+			
+		Integer(String s) 把数字字符串转为一个新的 Integer 对象，否则会出异常
+		代码：
+			//s只能包含数字，不允许包含其他字符
+			String s = "1213";
+			Integer i = new Integer(s);
+			System.out.println(i);
+			
+			
+19.Integer方法之intValue
+	int intValue() 以 int 类型返回该 Integer 的值
+	本质：数据从堆往栈的迁移————拆箱
+	代码：
+		Integer i = new Integer(1215);
+		//把包装类转为基本数据类型
+		int intValue = i.intValue();
+		System.out.println(intValue);
+		
+		
+20.Integer方法之parseInt
+	static int parseInt(String s)  将数字字符串转为int基本数据类型
+	代码：
+		String s = "12324";
+		//s必须是数字字符串，必须在int范围之内
+		int i = Integer.parseInt(s);
+		System.out.println(i);
+		
+		
+21.包装类总结
+	常用方法：
+		XXXvalue()     把对应的包装类转为基本数据类型
+		parseXXX()     将字符串转为对应的基本数据类型，Character除外
+		
+		
+22.Random类
+	专门处理随机数的类，纯伪随机的数字
+	伪随机问题：
+		在一次随机期间，如果用相同的种子创建两个 Random 实例，它们将生成并返回相同的数字
+		
+	构造方法：
+		Random() 使用随机的种子数创建一个新的随机数生成器
+		代码：
+			Random random01 = new Random();
+			Random random02 = new Random();
+			System.out.println(random01);
+			System.out.println(random02);
+		
+		种子数仅限于了解！！！
+		Random(long seed) 使用单个 long 种子创建一个新的随机数生成器
+		代码：
+			//伪随机的本质就是方程求职问题，种子数固定，随机数一定固定
+			Random random01 = new Random(11);
+			System.out.println(random01.nextInt());
+			Random random02 = new Random(11);
+			System.out.println(random02.nextInt());
+			
+			
+23.获取整数随机数
+	int nextInt() 返回一个随机数，不可控，没有范围的随机数字
+	代码：
+		Random random = new Random();
+		//数字不可控
+		int i = random.nextInt();
+		System.out.println(i);
+		
+	int nextInt(int n) 返回一个限制范围伪随机数，[0,n)
+	代码：	
+		Random random = new Random();
+		//这是50--100的随机数
+		int i = random.nextInt(50)+50;
+		System.out.println(i);
+
+24.获取小数随机数
+	double nextDouble()   返回一个随机数，是小数
+	代码：
+		Random random = new Random();
+		//得到0在1之间的随机数，范围是[0,1)
+		double d = random.nextDouble();
+		System.out.println(d);	

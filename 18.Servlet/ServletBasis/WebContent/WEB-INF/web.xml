@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>ServletBasis</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>characterEncoding</param-name>
+		<param-value>gb2312</param-value>
+	</context-param>
+	<context-param>
+		<param-name>author</param-name>
+		<param-value>lemon</param-value>
+	</context-param>
+	<context-param>
+		<param-name>version</param-name>
+		<param-value>2.0.1</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>demo01</servlet-name>
+		<servlet-class>a$Create_Servlet_Method.ServletDemo01</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>demo02</servlet-name>
+		<servlet-class>a$Create_Servlet_Method.ServletDemo02</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>demo03</servlet-name>
+		<servlet-class>a$Create_Servlet_Method.ServletDemo03</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>demo04</servlet-name>
+		<servlet-class>b$HttpServletAttributes.HttpConfig</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>HttpContext</servlet-name>
+		<servlet-class>b$HttpServletAttributes.HttpContext</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>demo01</servlet-name>
+		<url-pattern>/demo01</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>demo02</servlet-name>
+		<url-pattern>/demo02</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>demo03</servlet-name>
+		<url-pattern>/demo03</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>demo04</servlet-name>
+		<url-pattern>/demo04</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HttpContext</servlet-name>
+		<url-pattern>/HttpContext</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HttpContextGetInitPara</servlet-name>
+		<url-pattern>/HttpContextGetInitPara</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>HttpConfigGetInitPara</servlet-name>
+		<servlet-class>b$HttpServletAttributes.HttpContextGetInitPara</servlet-class>
+		<init-param>
+			<param-name>characterCoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>author</param-name>
+			<param-value>YanzuWu</param-value>
+		</init-param>
+		<init-param>
+			<param-name>version</param-name>
+			<param-value>1.0</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HttpConfigGetInitPara</servlet-name>
+		<url-pattern>/HttpConfigInitPara</url-pattern>
+	</servlet-mapping>
+</web-app>

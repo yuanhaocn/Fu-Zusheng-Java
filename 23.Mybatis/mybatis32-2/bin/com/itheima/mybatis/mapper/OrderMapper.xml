@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句  -->
+<mapper namespace="com.itheima.mybatis.mapper.OrderMapper">
+	
+<!-- 	<select id="selectOrdersList" resultType="Orders">
+，当ORM原文件类的属性名和数据库的字段名不一致的时候使用这样复杂的方式类把属性名和字段名对应起来
+resultMap="orders"和id="orders"必须一致
+column代表的是数据库的字段名，property代表的是属性名，还可以有类型约束(可以不写)如
+<result column="user_id" property="userId" javaType="String" jdbcType="varchar"/>
+
+	单表查询的时候要把对应不起来的属性特意标注出来，能和表对应起来的属性不用写出来
+-->
+	<resultMap type="Orders" id="orders">
+		<result column="user_id" property="userId"/>
+	</resultMap>
+	
+	<select id="selectOrdersList" resultMap="orders">
+		SELECT id, user_id, number, createtime, note FROM orders 
+	</select>
+<!--==========================================================================================================-->
+	<!-- 
+		//一对一关联 查询  以订单为中心 关联用户
+	public List<Orders> selectOrders();
+	复杂查询的时候必须要用resultMap，因为类的里面属性比较复杂，和表不是一一对应了
+	
+	多表查询的时候要把多有的对应列都写出来
+	result标签：
+		column:数据库的字段名
+		property:orders类中与其数据库对应的字段名
+	association标签：
+		property：orders类中的用来一对一的属性名
+		javaType：类型名
+	 -->
+	 <resultMap type="Orders" id="order">
+	 	<result column="id" property="id"/>
+	 	<result column="user_id" property="userId"/>
+	 	<result column="number" property="number"/>
+	 	<!-- 一对一设置标签 -->
+	 	<association property="user" javaType="User">
+	 		<id column="user_id" property="id"/>
+	 		<result column="username" property="username"/>
+	 	</association>
+	 </resultMap>
+	 
+	 <select id="selectOrders" resultMap="order">
+	 	SELECT 
+	 	o.id,
+	    o.user_id, 
+	    o.number,
+	 	o.createtime,
+	 	u.username 
+	 	FROM orders o 
+	 	left join user u 
+	 	on o.user_id = u.id
+	 </select>
+<!--==========================================================================================================--> 
+	
+	
+	 <!-- 
+	 
+	 	//一对多关联
+	public List<User> selectUserList(); -->
+	<resultMap type="User" id="user">
+		<id column="user_id" property="id"/>
+		<result column="username" property="username"/>
+		<!-- 一对多 ofType="Orders"表示list里面每个对象的类型-->
+		<collection property="ordersList" ofType="Orders">
+			<id column="id" property="id"/>
+			<result column="number" property="number"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectUserList" resultMap="user">
+		SELECT 
+	 	o.id,
+	    o.user_id, 
+	    o.number,
+	 	o.createtime,
+	 	u.username 
+	 	FROM user u
+	 	left join orders o 
+	 	on o.user_id = u.id
+	</select>
+
+</mapper>

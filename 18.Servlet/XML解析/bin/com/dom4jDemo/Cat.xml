@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cats>
+	<Cat number ="001" name="波斯猫"></Cat>
+	<Cat number ="002" name="黑寡妇"></Cat>
+	<Cat number ="003" name="中华田园猫"></Cat>
+</Cats>

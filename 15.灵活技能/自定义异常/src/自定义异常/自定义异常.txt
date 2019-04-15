@@ -1,0 +1,153 @@
+1.异常
+异常机制，指的是程序遇到不可解决的问题的处理方案。
+类是java的核心，异常也是用类去实现的
+
+
+2.Throwable
+	这个类是java异常的祖先类，他爹是Object，所在包java.lang里面
+	简介：
+		只有Throwable的子类才可以通过java虚拟机进行处理和识别。
+		两个子类Error 和 Exception
+		Error代表错误，很明确的结论，本质是一个假命题！
+		Exception代表异常，指的是特殊情况导致的偶发的错误。
+		
+		
+3.Throwable的构造方法
+	Throwable(String message)  构造带指定详细消息的新的异常对象
+	参数：
+		指的是异常的信息，比如在除零操作里面，/by zero就是异常信息，
+		也就是message这个字符串
+		Exception in thread "main" java.lang.ArithmeticException: / by zero
+			at com.throwable.www.Demo01.main(Demo01.java:5)
+			
+			
+4.Throwable常用方法之getMessage
+	String getMessage()   返回错误信息字符串
+	本质是message这个属性的访问器方法，也就是getter方法
+	代码：
+		try {
+			ByZeroException.chufa(12, 0);
+		} catch (Throwable e) {
+			//直接获取简略的信息
+			String message = e.getMessage();
+			System.out.println(message);
+		}
+		
+5.Throwable常用方法之printStackTrace
+	void printStackTrace()  打印message信息以及具体的错误代码行
+	
+	
+6.以除零操作为例，进行自定义异常
+	自定义异常类：
+		//必须继承异常类的父类Throwable
+		public class ByZeroException extends Throwable {
+			//本类需要实现一个参数为String类型的有参构造	
+			public ByZeroException(String message) {
+				super(message);
+				// TODO Auto-generated constructor stub
+			}
+
+			/*
+			 * 一个方法里面可能会抛出很多异常
+			 * 所以需要在方法头上使用throws抛出异常的祖先类类型 
+			 * 异常和返回值一样，最后抛给方法调用者
+			 */
+			public static double chufa(double a,double b) throws Throwable {
+				//除数b进行非零判断
+				if (b==0) {
+					/*
+					 * 出现异常了
+					 * throw是抛出的含义，指的是把Throwable的子类对象从方法中抛出去
+					 * 最后的message会经过本类的构造方法传给Throwable，Throwable对象会把message
+					 * 传回本类对象，实现了继承
+					 */
+					throw new ByZeroException("除数不得为零!");	//message和返回值一样，还会回来
+				}else {
+					//不是0正常运算
+					return a/b;
+				}
+			}
+		}
+		
+	测试代码：
+		public static void main(String[] args)  {
+			/*
+			 * 如果调用的方法里面存在异常抛出行为，那么方法调用会划红线
+			 * 处理异常方案有两个：
+			 * 		1)使用try...catch...语法自动捕获该异常并处理，一般采用第一个
+			 * 		2)不处理，把该异常继续往上抛出   throws Throwable
+			 */
+			try {
+				double res = ByZeroException.chufa(12, 0);
+				System.out.println(res);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+7.try。。。catch语法
+	异常捕获处理语法
+	语法：
+		try {
+			System.out.println(3/0);
+			System.out.println("helloworld");
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	注意：
+		try里面是正常的代码结构，该写啥写啥
+		catch小括号里面是异常Throwable的对象，这时候需不要方法调用或传参
+		e是当前异常对象，如果在try里面的代码出现了问题，此时try的代码立即
+		停止执行,转而马上执行catch大括号里面的代码。
+		e.printStackTrace()是打印异常具体信息包含：
+			异常的message和异常类的全类名以及导致该异常出现的代码行
+					
+
+8.关于finally的描述
+	代码：
+		try {
+			ByZeroException.chufa(12, 0);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("this  is  finally code...");
+		}
+		
+	结论：
+		1）finally里面的代码不管是否发生异常一定会执行
+			通常用来收尾，比如在IO操作里面关闭流操作
+			
+		2）finally比retrun厉害，即便出现了retrun，finally代码
+			依然可以执行
+			
+		3）finally代码永远都会执行，除非关闭jvm
+		
+		
+9.throw和throws的问题
+	throw后面必须抛出异常类的对象，比如：
+		throw new ByZeroException("除数不得为零!");
+	此时throw把异常对象抛给方法头了，一个方法里面可以有很多个throw
+	可以抛出很多异常
+	
+	throws后面必须跟异常的名称或者Throwable或者Exception
+	当然如果抛出的异常太多，也可以把多个异常的名字罗列在后面，比如：
+		throws ByZeroException,NullPointerException
+		
+
+10.异常处理机制
+	1）try。。。catch。。。
+		这是捕获并处理异常，一般建议使用这个方法
+		
+	2）throws Throwable
+		不处理，这是继续上抛异常，任何时候绝对不允许在main
+		方法上使用throws，此时异常被抛给jvm，此时异常是灾难性的，
+		没有任何处理和挽回的余地
+		
+		
+11.关于Error和Exception
+	这两个子类没有自己的方法，完全是继承Throwable的方法
+	常用的是Exception，少写Throwable即可

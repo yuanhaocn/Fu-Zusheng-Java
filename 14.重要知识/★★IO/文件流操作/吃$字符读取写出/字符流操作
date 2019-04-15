@@ -1,0 +1,144 @@
+字符流:只能处理 纯文本，全部为可见字符  .txt  .html
+节点流 Reader FileReader
+          Writer FileWriter
+一、纯文本读取
+1、建立联系
+2、选择流 Reader FileReader
+3、读取 char[] flush =new char[1024];
+4、关闭
+二、纯文本写出
+1、建立联系
+2、选择流   Writer FileWriter
+3、读取 write(字符数组,0,长度)+flush
+	write(字符串)
+	append(字符|字符串)
+4、关闭
+
+1.乱码问题的解决方案————FileReader
+	简介：
+		专门处理文档文本的输入和输出问题，为了代替FileInputStream在文本处理上的不足
+		
+	思路：	
+		采用char数组代替byte类型数组
+
+2.FileReader的read方法
+	int read(char[] cbuf)  将FileReader流里面的数据按照字符的格式读入字符数组
+	参数：
+		char数组，按照字符的顺序一个一个的获取文本中的字符
+			任何字符都只占一个字符空间，'男'和'@'和97所占的字符空间相同
+			
+	返回值：
+		数字代表读取的字符个数，-1代表阅读到文档结束
+		
+3.彻底解决乱码问题的代码实现
+	// 先构建文件的path路径
+	String path = "C://Users//Administrator//Desktop//test.txt";
+	// 根据文件路径构建file对象
+	File file = new File(path);
+	// 根据file对象构建fileReader对象
+	try (FileReader fr = new FileReader(file);){
+		//定义一个保存阅读字符数的变量
+		int number = 0;
+		//构建长度为1的字符数组
+		char[] chars = new char[1024];
+		//while循环读取数据并且给number赋值
+		while((number=fr.read(chars))!=-1) {
+			//String的构造方法支持char数组构建
+			String s = new String(chars,0,number);
+			//打印s不需要换行
+			System.out.print(s);
+		}
+	} catch (Exception e) {e.printStackTrace();}
+	
+	
+4.FileReader的getEncoding
+	String getEncoding()   查看当前标准文件字符输入流使用的字符编码的名称
+	代码：
+		//查看当前输入流的编码格式,当前ide使用的编码规范
+		String encoding = fr.getEncoding();
+		System.out.println(encoding);
+	
+5.FileReader的ready
+	boolean ready()  判断此流是否已经准备好用于读取 
+	说明：
+		实际上是在判断read0()方法是否已经就绪
+		
+	代码：
+		//检测底层转换之前是否就绪
+		boolean b = fr.ready();
+		System.out.println(b);
+		
+6.检测一下FileReader是否支持mark
+	代码：
+		//是否支持mark和reset
+		boolean b = fr.markSupported();
+		System.out.println(b);
+		
+	结论：
+		因为本质是字节流，所以不支持mark
+		
+7.能不能换个方向？？？我想把一个字符串存进文本文档或者word或者ppt
+	网页也可以考虑？？？
+	
+	按照方向来说，针对eclipse开发环境，我们应该做输出流
+	
+8.FileOutputStream	
+	简介：
+		从开发环境往外输出到文本文档或者word文档中
+		
+
+文件按字符输出	
+19.FileWriter
+	简介：
+		专门处理文本类型的输入问题，对于一些特殊的汉字
+		或者是偏僻字体，比如丨、乧、祎、樑
+		
+	注意：
+		此时操作的是char类型的数组
+		
+20.FileWriter方法之write
+	void write(String str, int off, int len) 写入字符串的某一部分
+	代码：
+		File file = new File("C://Users//Administrator//Desktop//hello.txt");
+		try (FileWriter fw = new FileWriter(file);) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("请输入数据。。。");
+			String input = sc.nextLine();
+			//支持直接写入字符串
+			fw.write(input);
+		} 
+		
+21.FileWriter方法之append
+	Writer append(CharSequence csq)  将指定字符串添加到此 writer 
+	代码：
+		try (FileWriter fw = new FileWriter(file);) {
+			//先写入一个hello
+			fw.write("hello ");
+			Scanner sc = new Scanner(System.in);
+			System.out.println("请输入数据。。。");
+			String input = sc.nextLine();
+			//追加用户输入的字符串进入流里面
+			fw.append(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+22.既然append方法和带有布尔类型参数的构造方法效果一致
+	怎么选择？？
+	
+	append方法在加载文档的时候的效率明显优于构造方法
+	
+23.流的总结
+	分类标准：
+		方向：输入流  输出流  参照物是ide
+		  
+		本质：字节流  字符流  参照物是数组的类型是byte和char
+		
+	FileInputStream和FileReader的区别：
+		1）针对范围不同，FileInputStream针对的是除却文本之外的所有多媒体
+			格式————图片、音频、视频、动画，FileReader只针对文本格式
+			
+		2）操作对象不同，FileInputStream操作字节数组，FileReader
+			操作的是字符数组
+			
+		3）效率不同，对于文本而言，FileReader的速度是是完虐FileInputStream

@@ -1,0 +1,16 @@
+a$Create_Servlet_method
+	创建servlet的三种方法，
+		a$Create_Servlet_Method.ServletDemo01---》》implements Servlet
+		a$Create_Servlet_Method.ServletDemo02---》》extends GenericServlet 
+		a$Create_Servlet_Method.ServletDemo03---》》extends HttpServlet（最常用，最重要）
+
+
+b$HttpServlet对extends HttpServlet进行研究，着重研究两个对象,它们是对属性的操作
+	ServletConfig sc =getServletConfig();
+
+	ServletContext context01 = getServletConfig().getServletContext();
+	ServletContext context02 = getServletContext();
+
+	
+c$Dispatcher中是对ServletContext 的研究，主要是研究ServletContext 对象的getRequestDispatcher(String str)方法
+getRequestDispatcher(String str)方法是一个调度员的角色，用来各个servlet之间，servlet与html之间的数据交互

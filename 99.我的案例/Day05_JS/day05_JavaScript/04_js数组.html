@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>数组</title>
+	</head>
+
+	<body>
+		<script>
+			/*js中定义数组的方式:4种*/
+			/*1.var cars=new Array();
+			  2.var cars=new Array(长度);
+			  3.var cars=new Array("元素1","元素2".....);
+			  4.var cars=["车1","车2",....];
+			 * */
+			//1.var cars=new Array();
+			var cars = new Array();
+			cars[0] = "大奔";
+			cars[1] = "奔奔";
+			cars[2] = "小奔";
+			cars[3] = "三蹦子";
+			cars[4] = "奥拓";
+			/*数组的遍历*/
+			for (var index in cars) {
+				document.write(index + ":" + cars[index] + "<br />");
+			}
+			//2.var cars=new Array(长度);
+			//注意:js的数组,谁让有个带长度的方法,其实没有卵用!
+			var persons = new Array(3);
+			persons[0] = "凡凡";
+			persons[1] = "涛涛";
+			persons[2] = "晗晗";
+			persons[3] = "洋洋";
+			/*数组的遍历*/
+			for (var index in persons) {
+				document.write(index + ":" + persons[index] + "<br />");
+			}
+			//3.var cars=new Array("元素1","元素2".....);
+			var pers = new Array("李代沫", "柯震东", "房祖名", "张默");
+			/*数组的遍历*/
+			for (var index in pers) {
+				document.write(index + ":" + pers[index] + "<br />");
+			}
+			//4.var cars=["车1","车2",....];最常用的方式
+			var ps = ["黄海波", "宁财神", "小强"];
+			/*数组的遍历*/
+			for (var index in ps) {
+				document.write(index + ":" + ps[index] + "<br />");
+			}
+			
+			/*拼接数组的方法:concat();
+			  往数组中插入值的方法:push();
+			  删除数组中某个值的方法:pop();
+			 排序方法:sort(). 
+			 * */
+			
+			//注意:变量的作用域.全局变量和局部变量
+			//concat()方法
+			function concatTest() {
+				//拼接pers和ps数组,形成"监狱风云"!
+				//concat()方法的返回值是一个新的数组
+				//在方法中,一个变量前面没有var,该变量属于全局变量
+				//result=pers.concat(ps);
+				//在方法中,一个变量前面有var,该变量是局部变量
+				var result = pers.concat(ps);
+				document.write(result);
+			}
+			
+			//document.write(result);
+			//往数组中添加元素的函数,push()
+			function pushTest() {
+				ps.push("满文军");
+				ps.push("周立波");
+				document.write(ps);
+			}
+			//往数组中删除元素的函数,pop()
+			function popTest() {
+				ps.pop();
+				ps.pop();
+				document.write(ps);
+			}
+			//往数组中排序的函数,sort()
+			function sortTest() {
+				var nums = [3, 1, 9, 2, 10, 299, 6];
+				nums.sort();
+				document.write(nums);
+			}
+			
+			//升序或降序排列
+			function sortTest2() {
+				var nums = [3, 1, 9, 2, 10, 299, 6];
+				nums.sort(function(x, y) {
+					return x - y; //升序排列
+					//return y-x;//降序排列
+				});
+				document.write(nums);
+			}
+		</script>
+
+		<button onclick="concatTest()">concat方法</button>
+		<button onclick="pushTest()">push方法</button>
+		<button onclick="popTest()">pop方法</button>
+		<button onclick="sortTest()">sort方法</button>
+		<button onclick="sortTest2()">sort2方法</button>
+	</body>
+
+</html>

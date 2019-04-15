@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的面板</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+	<body>
+		<!--class="easyui-xxx"-->
+		<div id="panel" class="easyui-panel" style="padding: 20px;">
+			<p>Panel面板</p>
+		</div>
+		
+		<script>
+			//panel,accordion,tree,datagrid等
+			//$("#id").tree({})
+			$("#panel").panel({
+				width:400,
+				height:300,
+				title:'标题',
+				tools:[{//json数组类型,key-value
+					iconCls:'icon-add',
+					handler:function(title){//处理点击事件
+						alert("add被点击了..."+title);
+					}
+				},{
+					iconCls:'icon-save',
+					handler:function(){//处理点击事件
+						alert("save被点击了...");
+					}
+				}]
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace的值此时必须是接口的全路径! -->
+<mapper namespace="com.syc.dao.mapper.PersonMapper">
+
+	<!-- type:要操作的JavaBean的全路径 -->
+	<!-- resultMap:建立起JavaBean和表的映射关系 -->
+	<resultMap type="person" id="personMap">
+		<!-- id:表示主键 -->
+		<id column="pid" property="pid" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+	</resultMap>
+
+	<select id="findById" parameterType="int" resultType="person">
+		select * from person 
+		where pid=#{pid}
+	</select>
+	
+	<select id="findByName" parameterType="string" resultType="person">
+		select * from person 
+		where name=#{name}
+	</select>
+	
+	<select id="findAll"  resultMap="personMap">
+		select * from person 
+	</select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui导航</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+	</head>
+	
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+	<body>
+		
+		<!--layui-nav:导航样式-->
+		<ul class="layui-nav layui-bg-cyan layui-layout-left">
+			
+			<li class="layui-nav-item layui-this"><a href="#">控制台<span class="layui-badge">9</span></a></li>
+			
+			<li class="layui-nav-item">
+				<a href="#"><img src="img/houzi.jpg" class="layui-nav-img"/>个人中心</a>
+				<dl class="layui-nav-child">
+					<dd><a href="#">修改信息</a></dd>
+					<dd><a href="#">安全管理</a></dd>
+					<dd><a href="#">个人账户</a></dd>
+				</dl>
+			</li>
+			
+			<li class="layui-nav-item"><a href="#">退出<span class="layui-badge-dot"></span></a></li>
+		</ul>
+		
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element',function(){
+				//获取模块变量
+				var elmt=layui.element;
+				
+				//elmt.render();
+			});
+		</script>
+	</body>
+</html>

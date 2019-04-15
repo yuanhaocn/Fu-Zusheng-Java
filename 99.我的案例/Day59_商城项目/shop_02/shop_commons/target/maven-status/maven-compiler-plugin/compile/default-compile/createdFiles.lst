@@ -1,0 +1,5 @@
+com\syc\common\utils\IDUtils.class
+com\syc\common\pojo\EasyUIDataGridResult.class
+com\syc\common\pojo\EasyTreeNode.class
+com\syc\common\utils\FtpUtil.class
+com\syc\common\utils\JsonUtils.class

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 存放在Spring容器内的Java类,被称为一个bean -->
+	<!-- 配置一个bean,id是该bean的唯一标识;class:用来关联该bean的类路径 -->
+	<!-- 配置好这个bean之后,该bean的控制权就反转给了Spring容器,也就是该对象由Spring容器来负责创建. -->
+	<!-- Spring容器创建对象的方式:1.通过类的构造方法来创建;2.通过静态工厂来创建;3.通过实例工厂来创建 -->
+	<bean id="hello" class="com.syc.spring.hello01.HelloWorld"/>
+
+</beans>

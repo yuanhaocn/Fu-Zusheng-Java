@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>表格</title>
+	</head>
+
+	<body>
+		<table border="1px" cellspacing="0px" cellpadding="5px" align="center">
+			<tr>
+				<td>
+					用户名:
+				</td>
+				<td>
+					<input type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					密码:
+				</td>
+				<td>
+					<input type="password" />
+				</td>
+			</tr>
+			<tr align="center">
+				<!--colspan="2",列的合并,占据2列-->
+				<td colspan="2">
+					<input type="button" value="登陆" />
+					<input type="reset" value="取消" />
+				</td>
+			</tr>
+		</table>
+
+		<table border="1px" cellspacing="0px" cellpadding="5px" align="center">
+			<tr>
+				<td>部门名称</td>
+				<td>部门收入</td>
+				<td>合计</td>
+			</tr>
+			<tr>
+				<td>部门1</td>
+				<td>2000</td>
+				<!--rowspan:合并行-->
+				<td rowspan="2"></td>
+			</tr>
+			<tr>
+				<td>部门3</td>
+				<td>3000</td>
+			</tr>
+		</table>
+
+		<br />
+
+		<table border="1px" cellspacing="0px" cellpadding="5px" align="center">
+			<!--指定表的名称部分-->
+			<caption>部门收入表</caption>
+			<!--thead,tbody,tfoot,使得表的结构更清晰规范-->
+			<thead>
+				<!--th与td都是单元格,但是一般情况th只用在表头部分-->
+				<th>部门名称</th>
+				<th>部门收入</th>
+				<th>合计</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>部门1</td>
+					<td>2000</td>
+					<!--rowspan:合并行-->
+					<td rowspan="2"></td>
+				</tr>
+				<tr>
+					<td>部门3</td>
+					<td>3000</td>
+				</tr>
+			</tbody>
+			<tfoot align="center">
+				<td colspan="3">备注1</td>
+			</tfoot>
+		</table>
+	</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui面包屑导航</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body>
+
+		<!--layui-breadcrumb:面包屑导航样式-->
+		<span class="layui-breadcrumb">
+			<a href="#">新闻</a>
+			<a href="#">国内</a>
+			<a href="#">国际</a>
+			<a href="#">民生</a>
+		</span>
+		
+		<!--lay-separator:自定义分隔符-->
+		<span class="layui-breadcrumb" lay-separator="-">
+			<a href="#">新闻</a>
+			<a href="#">国内</a>
+			<a href="#">国际</a>
+			<a href="#">民生</a>
+		</span>
+		
+		<span class="layui-breadcrumb" lay-separator="|">
+			<a href="#">新闻</a>
+			<a href="#">国内</a>
+			<a href="#">国际</a>
+			<a href="#">民生</a>
+		</span>
+
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element', function() {
+				//获取模块变量
+				var elmt = layui.element;
+
+				//elmt.render();
+			});
+		</script>
+	</body>
+
+</html>

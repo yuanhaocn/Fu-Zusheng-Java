@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>layer</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<button class="layui-btn" type="button" id="upBtn">
+			<i class="layui-icon">&#xe62f;</i>文件上传			
+		</button>
+
+		<script src="layui/layui.js"></script>
+
+		<script>
+			layui.use('upload', function() {
+				var upload = layui.upload;
+				
+				upload.render({
+					elem:'#upBtn',
+					url:'',//关联文件服务器地址
+					method:'post',//请求方法
+					accept:'file',//指定允许上传的文件类型
+					//exts:'txt',//允许上传的文件后缀
+					auto:true,
+					size:10*1024*1024,//
+					multiple:true,//运行多文件上传
+					number:3,//多文件上传时的数量
+					drag:true,//拖拽上传文件
+					done:function(){
+						console.log("上传完毕...");
+					},
+					error:function(){
+						console.log("失败...");
+					}
+				});
+			})
+		</script>
+
+	</body>
+
+</html>

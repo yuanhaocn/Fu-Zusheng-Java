@@ -1,0 +1,92 @@
+ubuntu 16.04 LTS 安装 nginx
+
+ubuntu 下使用源码安装nginx　有点儿麻烦,  需要提前安装 pcre  和　zlib .
+
+一　安装前的准备
+
+      1. 下载: pcre-8.39.zip, 
+
+      2. 下载: zlib-1.2.8.tar.xz, 
+
+　    3. 下载: nginx-1.11.2.tar.gz, 
+
+
+　解压文件：
+
+　  1.  tar -zxvf  nginx-1.11.2.tar.gz
+
+    2.  tar -Jxvf  zlib-1.2.8.tar.xz
+
+    3.  unzip pcre-8.39.zip
+
+二　安装 pcre-8.39.zip
+
+    1. 进入目录：cd  pcre-8.39
+
+    2. 执行命令:  ./configure
+
+    3. 执行命令:  make
+
+    4. 执行命令:  sudo make install
+
+
+三   安装　zlib-1.2.8.tar.xz
+
+    1. 进入目录: cd zlib-1.2.8
+
+     2. 执行命令: ./configure
+
+    3. 执行命令: make
+
+    4. 执行命令: sudo make install
+
+
+四 安装  nginx-1.11.2.tar.gz
+
+    1. 进入目录: cd nginx-1.11.2
+
+    2. 执行命令: ./configure
+
+    3. 执行命令: make
+
+    4. 执行命令: sudo make install,   安装成功之后，默认会在 /usr/local 下创建nginx 目录
+
+    5. 修改目录权限：
+
+五　检测配置文件是否正确
+
+    1. 检测命令: sudo /usr/local/nginx/sbin/nginx -t
+
+六  nginx 的启动
+
+     1. 启动命令：sudo /usr/local/nginx/sbin/nginx
+　    
+        进入到/sbin目录下,./nginx也可以启动.
+
+     2. 浏览器中输入: localhost:80, nginx 默认监听80 端口
+
+七　重新加载配置文件
+
+　nginx 安装之后默认的配置文件位置： /usr/local/nginx/conf/nginx.conf , 可以进行修改端口号等操作，  修改之后，无需重启服务，直接重新加载配置文件即可
+
+　1. 重新加载配置文件命令:   /usr/local/nginx/sbin/nginx -s reload,  重启之后会分配新的进程ID
+
+八 nginx 的关闭：
+
+　1. 使用killall 命令:  sudo  killall nginx  
+
+  2. 使用stop命令 ./nginx -s stop
+
+  3. 使用quit命令(推荐) ./nginx -s quit
+
+九  总结
+
+　1.  nginx 安装需要依赖gcc , prce, zlib 包，gcc 默认已安装，所以需要手工安装prce 和 zlib
+
+    2. nginx 默认占用端口是80
+
+    3. nginx 默认安装目录为 /usr/local/nginx, 日志为/usr/local/nginx/logs, 所以需要修改权限
+
+    4. 由于笔者使用的是ubuntu 桌面版，登录的用户没有root权限，所以很多地方都需要使用sudo 来操作
+
+    

@@ -1,0 +1,27 @@
+HTML:"骨架"           -----HTML5
+    搭建网页骨架
+CSS:"皮肤"            -----CSS3
+    进行网页的样式美化
+JavaScript:"灵魂"     -----JS6 ECMAScript6
+    给页面添加行为和特效, "动起来"---->静态页面
+
+如何适配不同的浏览器?    
+jQuery是一个封装好的js库.
+		||
+		||
+Bootstrap----->适配移动端的前端框架.
+Vue,Anguelar.....,MVC
+layui---->基于jQuery进一步封装库
+easyui--->基于就Query的进一步封装库
+
+html+css+js+jQuery + "加载数据"(ajax/websocket---->json) 
+
+layui-----><div class="layui-xxx"></dvi>
+easyui是一个基于jQuery的搭建后端页面的插件集合(库).
+
+sublime text3 :
+
+
+
+
+

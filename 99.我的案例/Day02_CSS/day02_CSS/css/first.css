@@ -1,0 +1,28 @@
+/*注意:在css文件中,不允许出现任何的html标签*/
+
+/*通用的样式*/
+/*标签选择器*/
+div{
+	width: 100px;
+	height: 100px;
+	color: gray;
+}
+
+/*类选择器,.类名*/
+.mydiv{
+	background: red;
+	width: 150px;
+	height: 150px;
+	color: white;
+	font-size: 30px;
+}
+
+/*id选择器*/
+#div4{
+	background: green;
+	width: 180px;
+	height: 180px;
+	color: white;
+	font-size: 30px;
+}
+

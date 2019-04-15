@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<form action="/day20_http/requestDemo4" method="post">
+		UserName:<input type="text" name="name" placeholder="请输入用户名"><br/>
+		PassWord:<input type="password" name="pass" placeholder="请输入密码"><br/>
+		<select name="address">
+			<option>浙江</option>
+			<option>江苏</option>
+			<option>上海</option>
+		</select>
+		<br/>
+		爱好:
+		<input type="checkbox" name="hobit" value="篮球">篮球
+		<input type="checkbox" name="hobit" value="足球">足球
+		<input type="checkbox" name="hobit" value="网球">网球
+		<br/>
+		<textarea rows="10" cols="5" name="tips"></textarea>
+		<br/>
+		<input type="submit" value="提交">
+		
+		<!-- <a href="http://localhost:8080/cls.avi">点击下载</a> -->
+	</form>
+</body>
+</html>

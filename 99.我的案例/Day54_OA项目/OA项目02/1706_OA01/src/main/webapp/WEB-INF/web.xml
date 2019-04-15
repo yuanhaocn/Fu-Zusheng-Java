@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>1706_OA01</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 前端控制器 -->
+  <servlet>
+  	<servlet-name>SpringMVC</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:application.xml</param-value>
+  	</init-param>
+  	<!-- 设置Servlet的启动顺序 -->
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SpringMVC</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 监听器 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:mybatis.xml</param-value>
+  </context-param>
+  
+  <!-- 配置过滤器 -->
+  <filter>
+  	<filter-name>EncodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>EncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>CustomFilter</filter-name>
+  	<filter-class>com.syc.oa.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CustomFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 对jsp进行全局配置 -->
+  <jsp-config>
+  	<jsp-property-group>
+  		<!-- 匹配哪些jsp -->
+  		<url-pattern>*.jsp</url-pattern>
+  		<!-- 是否忽略el表达式 -->
+  		<el-ignored>false</el-ignored>
+  		<!-- 是否验证js脚本 -->
+  		<scripting-invalid>true</scripting-invalid>
+  		<!-- 引入一个jsp文件, 作用就是把tablib.jsp中的局部变量提升为全局变量.-->
+  		<include-prelude>/WEB-INF/jsp/taglib.jsp</include-prelude>
+  	</jsp-property-group>
+  </jsp-config>
+  
+  <!-- 配置全局的错误页面 -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/404.html</location>
+  </error-page>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/500.html</location>
+  </error-page>
+  
+</web-app>

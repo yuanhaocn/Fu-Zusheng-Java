@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax01</title>
+<script type="text/javascript" src="js/ajax.js"></script>
+
+<script type="text/javascript">
+	function getRequest() {
+		
+		//点击按钮,html页面向服务器发起get请求;服务器收到请求之后,做出响应,然后把响应返回到
+		//html页面中.
+
+		//1.获取XMLHttpRequet对象.
+		var xhr = getXMLHttpRequest();
+
+		//4.处理服务器回调回来的响应信息.
+		//onreadystatechange:当就绪状态发生改变的时候....
+		//readyState:就绪状态的状态码,0~4,一共有5个值.
+		//0:浏览器与服务器的请求未初始化;
+		//1:与服务器的连接已经建立;
+		//2:服务器接收到了浏览器发来的请求;
+		//3:请求正在处理中;
+		//4:请求已经处理完了,并且响应也已经就绪.
+		
+		//status:就是http协议中的响应码.
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {//readyState=4表示与服务器成功的建立了连接,且服务器也返回了响应.
+				//接收服务器的响应信息
+				//返回是一个xml格式的数据.
+				//xml=xhr.responseXML;
+				//返回普通的文本信息.
+				var msg = xhr.responseText;
+				document.getElementById("msg").innerHTML = msg;
+			}
+		}
+
+		//2.建立与服务器的连接.
+		//xhr.open("get/post",url,true/false);
+		//open()方法中3个参数:①.请求方式;②.服务器或者要请求的资源的url地址;
+		//③.是否异步,true表示异步,默认为异步,false表示同步.
+		//尽量不要使用同步方式.
+		xhr.open("GET", "http://localhost:8080/day27_AJAX/firstServlet",true);
+
+		//3.发送请求
+		xhr.send();
+	}
+</script>
+
+</head>
+<body>
+	<input type="button" value="Get请求" onclick="getRequest()">
+	<p id="msg"></p>
+	<input type="button" value="其他操作" onclick="alert('其他操作')">
+</body>
+</html>

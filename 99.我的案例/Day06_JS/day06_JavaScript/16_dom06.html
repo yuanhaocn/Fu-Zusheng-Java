@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>dom编程</title>
+		<script>
+			function domFunc(){
+				var tbl=document.getElementById("tbl");
+				//parentElement
+				//var pElmt=tbl.parentElement;
+				//alert("节点名称:"+pElmt.nodeName+"\n节点类型:"+pElmt.nodeType+"\n节点值:"+pElmt.nodeValue);
+				
+				//获取父节点
+				//var pNode=tbl.parentNode;
+				//alert("节点名称:"+pNode.nodeName+"\n节点类型:"+pNode.nodeType+"\n节点值:"+pNode.nodeValue);
+				
+				//获取子节点
+				/*var nodes=tbl.childNodes;
+				for(var i=0;i<nodes.length;i++){
+					var names=nodes[i].nodeName;
+					alert("名称:"+names);
+				}*/
+				
+				var pNode=tbl.parentNode;
+				//previousElementSibling:获得前面兄弟节点
+				var pName=pNode.previousElementSibling.nodeName;
+				var pValue=pNode.previousElementSibling.innerHTML;
+				
+				//nextElementSibling:下一个兄弟节点
+				var nextName=pNode.nextElementSibling.nodeName;
+				var nextValue=pNode.nextElementSibling.innerHTML;
+				
+				alert("名称:"+pName+",value="+pValue+",下一个name="+nextName+",nextvalue="+nextValue);
+			}
+		</script>
+	</head>
+	<body>
+		<p>第一段文字,在表格之前</p>
+		<div>
+			<table id="tbl" border="1px" cellpadding="1px" cellspacing="0px">
+				<tr>
+					<td>第1行,第1列</td>
+					<td>第1行,第2列</td>
+				</tr>
+				<tr>
+					<td>第2行,第1列</td>
+					<td>第1行,第2列</td>
+				</tr>
+			</table>
+		</div>
+		<span>在表格后面的区域</span>
+		<br />
+		<button onclick="domFunc()">获取dom值</button>
+	</body>
+</html>

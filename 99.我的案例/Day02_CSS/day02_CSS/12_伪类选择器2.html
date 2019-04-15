@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪类选择器</title>
+		<style>
+			p:last-child{
+				background: red;
+			}
+			
+			p:nth-child(3){
+				background: blue;
+			}
+			
+			li:first-child{
+				color: blue;
+			}
+			
+			li:nth-child(2),li:nth-child(4){
+				color: red;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div>
+			<p>段落1</p>
+			<p>段落2</p>
+			<p>段落3</p>
+			<p>段落4</p>
+		</div>
+		
+		<ol>
+			<li>榴莲</li>
+			<li>西瓜</li>
+			<li>樱桃</li>
+			<li>葡萄</li>
+		</ol>
+	</body>
+</html>

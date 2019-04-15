@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- package:指明包的范围 -->    
+<hibernate-mapping package="com.syc.hibernate.domain">
+	<!-- 类与表的映射关系 -->
+	<class name="Person" table="person">
+		<!-- id代表主键 -->
+		<id name="id" column="id">
+			<!-- foreign:该属性表示id是作为外键来用,id给card属性来使用 -->
+			<generator class="foreign">
+				<param name="property">card</param>
+			</generator>
+		</id>
+		
+		<!-- 针对普通的属性,列 -->
+		<property name="name"/>
+		
+		<!-- 体现一对一关系的配置 -->
+		<!-- constrained:约束,constrained="true",给本表添加外键约束,给card表添加外键约束 -->
+		<!-- 注意:constrained,只能用在one-to-one中,constrained="true",只能用在双向一对一里面. -->
+		<!-- constrained="true":此时具有级联操作的功能,如果是添加操作,会先添加主表,再添加从表;如果是修改和删除,会先修改从表再修改主表 -->
+		<!-- 注意:constrained="true"配置之后,关联查询使用左外连接来实现的. -->
+		<one-to-one name="card" constrained="true"/>
+	</class>
+</hibernate-mapping>

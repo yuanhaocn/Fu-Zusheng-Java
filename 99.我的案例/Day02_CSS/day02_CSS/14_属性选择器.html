@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>属性选择器</title>
+		<style>
+			/*[title]属性选择器*/
+			[title]{
+				color: red;
+			}
+			
+			/*将属性=tips的标签改变*/
+			[title=tips]{
+				color: blue;
+			}
+			
+			/*多个属性的组合*/
+			a[href="http://www.baidu.com"][title="tips"]{
+				color: orange;
+			}
+			
+			/*~=,只要属性值中有一部分满足条件即可*/
+			p[class~="long"]{
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p title="hello">hello,nihao,啦啦啦啦啊</p>
+		<p>hello,nihao,啦啦啦啦啊</p>
+		<h1 title="tips">一级标题</h1>
+		<a href="http://www.baidu.com" title="tips">百度</a>
+		<p class="user Name long long">属性约等于啦啦啦啦啦了</p>
+	</body>
+
+</html>

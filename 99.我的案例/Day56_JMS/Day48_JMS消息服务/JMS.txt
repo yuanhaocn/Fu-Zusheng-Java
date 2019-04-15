@@ -1,0 +1,45 @@
+
+1.JMS概念:
+  JMS:Java Message Service.
+  JMS:是Java中提供的一种用来实现消息传递的标准规范.目前有挺多的框架
+  实现了JMS规范,从而实现Java消息的创建,发送,接收,读取.
+  比如ActiveMQ,RocketMQ等.
+
+2.JMS中的消息模型:(客户端和服务端)
+  ①.P2P(point to point):端到端的模式,一般情况下,p2p都是一对一的;
+    在P2P中,有消息的发送方(Sender),接收方(Receiver),消息队列(Queue).
+  ②.P/S(Publish/Subscribe):发布/订阅模式,必须先由客户端去服务端那里建立起订阅关系.
+    在P/S中,有消息的发布者(Publisher),订阅者(Subscriber),主题(Topic).
+
+3.消息的同步和异步:
+  p2p和p/s都可以采用同步和异步的方式来发送消息.
+
+4.JMS中的相关API
+  ①.ConnectionFactory:用来生成一个Connection对象. 根据消息模型的不同,    ConnectionFactory有2个子类:QueueConnectionFactory和TopicConnectionFactory.
+
+  ②.Connection:表示客户端和服务端之间的一个连接对象(该对象是对TCP/IP协议的一个封装).
+    Conection用来创建一个或多个Session对象.
+    Connection也分为2种:QueueConnection和TopicConnection.
+
+  ③.Session:是操作消息的一个主要接口,可以用来产生消息的生产者,消费者,消息等.
+    Session也分为2种,QueueSession和TopicSession.
+
+  ④.Destination:目的地,消息的发送方/生产者产生消息后,会把该消息发送到这个Destination中,
+    然后Destination再把消息发送给接收方/消费者.
+    Destination有2个子类:Queue和Topic.
+
+  ⑤.生产者:用来产生消息;
+
+  ⑥.消费者:用来处理消息.
+
+  ⑦.消息的监听器:MessageListener,用来监听新消息是否产生,然后调用自己的onMessage()方法,用来处理这个新消息.  
+
+5.ActiveMQ:
+  ActiveMQ是Apache提供的开源的,很火的一款消息中间件(MOM:Message Orient MiddleWare).
+  
+  消息中间件的优点:
+  防止消息重发,丢失;提高消息发送的可靠性;
+
+  
+
+

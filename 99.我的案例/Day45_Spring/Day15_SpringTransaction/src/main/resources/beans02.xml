@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+           				http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                        http://www.springframework.org/schema/tx 
+    					http://www.springframework.org/schema/tx/spring-tx.xsd
+                        http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:property-placeholder location="db.properties" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${driverClass}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${name}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<bean id="dao" class="com.syc.spring.transaction02.dao.AccountDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="service" class="com.syc.spring.transaction02.service.AccountServiceImpl">
+		<property name="dao" ref="dao" />
+	</bean>
+
+	<bean id="web" class="com.syc.spring.transaction02.web.AccountAction">
+		<property name="service" ref="service" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 关于事务的切面配置 -->
+	<tx:advice transaction-manager="transactionManager" id="perform">
+		<!-- 配置事务切面的属性 -->
+		<tx:attributes>
+			<!-- tx:method:指定要添加事务的方法. -->
+			<tx:method name="translateMoney" isolation="DEFAULT"
+				propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 进行切面配置,指明要添加事务的目标类 -->
+	<aop:config>
+		<aop:advisor advice-ref="perform"
+			pointcut="execution(* com.syc.spring.transaction02.service.AccountServiceImpl.*(..))" />
+	</aop:config>
+
+</beans>

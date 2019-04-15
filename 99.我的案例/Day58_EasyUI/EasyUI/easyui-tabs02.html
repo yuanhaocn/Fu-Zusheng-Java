@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的选项卡tabs</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<!--fit:true,自动填充适配父窗体-->
+		<div id="tabs" class="easyui-tabs" style="width: 600px;height: 200px;padding: 20px;">
+			<div title="选项卡1" style="padding: 20px;">
+				选项卡1里的内容
+			</div>
+			<div title="选项卡2" style="padding: 20px;">
+				选项卡2里的内容
+			</div>
+			<div title="添加" iconCls="icon-add" style="padding: 20px;">
+				选项卡3里的内容
+			</div>
+		</div>
+
+		<script>
+			/*$("#tabs").tabs({
+							border:false,
+							onSelect:function(title,index){//事件
+								alert(title+"被选择了...index="+index);
+							}
+						})*/
+
+			$("#tabs").tabs({
+				onSelect: function(title) {
+					if("添加" == title) {
+						$("#tabs").tabs('add', {//add,是方法.
+							title: '新选项卡',
+							content: '新选项卡里的内容',
+							closable: true,
+							tools:[
+								{
+									iconCls:'icon-reload',
+									handler:function(){
+										alert("点击事件");
+									}
+								}
+							]
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>自定义对象2</title>
+	</head>
+
+	<body>
+		<script>
+			/*自定义对象的第二种方式:*/
+			
+			/*Person对象的构造方法*/
+			function Person(){};
+			
+			var p=new Person();
+			p.name="鲁智深";
+			p.nickname="花和尚";
+			p.show=function(){
+				//js中也有this关键字
+				alert("我是:"+this.name+",我会倒拔垂杨柳!");
+			}
+			
+			p.show();
+		</script>
+	</body>
+
+</html>

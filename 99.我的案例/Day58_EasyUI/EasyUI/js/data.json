@@ -1,0 +1,7 @@
+[
+	{"id":"001","name":"iphoneX","price":100},
+	{"id":"002","name":"iphone8","price":90},
+	{"id":"003","name":"iphone7","price":80},
+	{"id":"004","name":"iphone6","price":70},
+	{"id":"005","name":"iphone5","price":60}
+]

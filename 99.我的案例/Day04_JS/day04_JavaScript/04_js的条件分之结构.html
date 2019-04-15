@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>条件分支</title>
+	</head>
+	<body>
+		<!--if...if...else...else if-->
+		<!--switch....-->
+		<script>
+			var age=10;
+			if(age>=18){
+				document.write("欢迎观看!");
+			}else{
+				document.write("小弟弟,你再等两年就可以看了...<br />");
+			}
+			
+			/*prompt:输入框*/
+			var value=prompt("请输入一个整数",1);
+			value=parseInt(value);
+			var msg="";
+			/*switch语句*/
+			switch(value){
+				case 1:
+					msg="星期一";
+				break;
+				case 2:
+					msg="星期2";
+				break;
+				case 3:
+					msg="星期3";
+				break;
+				case 4:
+					msg="星期4";
+				break;
+				case 5:
+					msg="星期5";
+				break;
+				case 6:
+					msg="星期6";
+				break;
+				case 7:
+					msg="星期7";
+				break;
+				default:
+					msg="必须输入整数值!";
+				break;
+			}
+			document.write(msg+"<br />");
+			
+		</script>
+	</body>
+</html>

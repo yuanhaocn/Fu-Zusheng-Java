@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的布局layout</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<!--easyui中把layout布局分为5个部分,东西南北中5个部分.上北下南,左西右东,中间必不可少!-->
+		<div class="easyui-layout" data-options="fit:true" style="width: 600px;height: 500px;">
+			
+			<div data-options="region:'north',title:'北区',iconCls:'icon-add',split:true,minHeight:150" style="height: 100px;padding: 10px;">
+				北区里的内容
+			</div>
+
+			<div data-options="region:'west',title:'西区'" style="width: 100px;padding: 10px;">
+				西区里的内容
+			</div>
+			
+			<div data-options="region:'center',title:'中间'" style="padding: 10px;background: #2984A4;">
+				中间区里的内容
+			</div>
+			
+			<div data-options="region:'east',title:'东区'" style="width: 100px;padding: 10px;">
+				东区里的内容
+			</div>
+			
+			<div data-options="region:'south',title:'南区'" style="height: 100px;padding: 10px;">
+				南区里的内容
+			</div>
+
+		</div>
+		
+	</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪元素选择器</title>
+		<style>
+			p.secondP:before{
+				/*content: "sssss";*/
+				content: url(img/foot.jpg);
+			}
+			
+			p.secondP:after{
+				content: "在后面插入的文字....";
+			}
+		</style>
+	</head>
+	<body>
+		
+		<p>一堆文字1........</p>
+		
+		<p class="secondP">一堆文字2........</p>
+		
+		<p>一堆文字3........</p>
+	</body>
+</html>

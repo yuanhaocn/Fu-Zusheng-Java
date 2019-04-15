@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 配置bean -->
+	<bean class="com.syc.spring.construct09.AudiCar" id="audi">
+		<property name="logo" value="奥迪"/>
+	</bean>
+
+	<!-- 通过构造方法传参 -->
+	<bean id="car" class="com.syc.spring.construct09.Car">
+		<!-- index:表示参数的索引,从0开始 -->
+		<constructor-arg index="0" value="汽车"/>
+		<constructor-arg index="1" ref="audi"/>
+	</bean>
+
+
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.syc.hibernate.domain.TestBean" table="test">
+		<!-- 主键自增长 -->
+		<id column="id" name="id" length="10">
+			<!-- 常见的情况,主键自增长,我们一般无法手动给主键赋值; -->
+			<!-- <generator class="increment"></generator> -->
+			
+			<!-- assigned,分配,我们要手动给该主键赋值,如果不赋值会报异常! -->
+			<!-- <generator class="assigned"></generator> -->
+			
+			<!-- identity效率比increment更高一些,此时必须将表中id的自增长功能给打开. -->
+			<generator class="identity"></generator>
+		</id>
+		<property name="name" type="string" length="30"/>
+	</class>
+</hibernate-mapping>

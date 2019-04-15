@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- package:指明包的范围 -->    
+<hibernate-mapping package="com.syc.hibernate.domain">
+	<!-- 类与表的映射关系 -->
+	<class name="Student" table="student">
+		<!-- sid代表主键 -->
+		<id name="sid" column="sid">
+			<generator class="increment"/>
+		</id>
+		
+		<!-- 针对普通的属性,列 -->
+		<property name="name"/>
+		
+		<set name="courses" cascade="save-update" inverse="false" table="student_course">
+			<key>
+				<column name="sid"/>
+			</key>
+			
+			<!-- 体现多对多关系 -->
+			<many-to-many class="Course" column="cid"/>
+		</set>
+	</class>
+</hibernate-mapping>

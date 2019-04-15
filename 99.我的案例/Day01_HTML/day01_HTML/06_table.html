@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表格</title>
+	</head>
+	<body>
+		<!--table表格-->
+		<table border="1px">
+			<!--tr:行-->
+			<tr>
+				<!--td:列-->
+				<td>王介祥</td><td>郑爽</td><td>蒋胤</td>
+			</tr>
+			<tr>
+				<td>王介祥2</td><td>郑爽2</td><td>蒋胤2</td>
+			</tr>
+		</table>
+		
+		<!--指定表格的宽,高-->
+		<table border="1px" width="300px" height="400px" align="center" >
+			<!--tr:行-->
+			<tr align="center">
+				<!--td:列-->
+				<td>王介祥</td><td>郑爽</td><td>蒋胤</td>
+			</tr>
+			<tr align="center">
+				<td>王介祥2</td><td>郑爽2</td><td>蒋胤2</td>
+			</tr>
+		</table>
+		
+		<!--指定表格的宽,高-->
+		<!--cellpadding:cell,单元格,padding:内边距,指定单元格中的内容与边框的距离-->
+		<!--cellspacing:单元格与单元格之间的间距-->
+		<table cellpadding="100px" cellspacing="0px" border="1px" width="300px" height="400px" >
+			<!--tr:行-->
+			<tr align="center">
+				<!--td:列-->
+				<td>王介祥</td><td>郑爽</td><td>蒋胤</td>
+			</tr>
+			<tr align="center">
+				<td>王介祥2</td><td>郑爽2</td><td>蒋胤2</td>
+			</tr>
+		</table>
+		
+		<!--div也是一种容器,与span作用一样,但是它属于块级标签-->
+		<div style="width: 300px;height: 400px;">
+			<!--80%,40%值得是该表格所在父容器的百分比-->
+			<table cellpadding="100px" cellspacing="0px" border="1px" width="80%" height="40%" background="foot.jpg">
+				<!--tr:行-->
+				<tr align="center">
+					<!--td:列-->
+					<td>王介祥</td><td>郑爽</td><td>蒋胤</td>
+				</tr>
+				<tr align="center">
+					<td>王介祥2</td><td>郑爽2</td><td>蒋胤2</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+</html>

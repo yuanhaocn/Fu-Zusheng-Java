@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- 目标类 -->
+	<bean id="showSalery" class="com.syc.spring.annotation02.ShowSalery"/>
+
+	<!-- 切面类 -->
+	<bean id="logger" class="com.syc.spring.annotation02.Logger"/>
+	<bean id="check" class="com.syc.spring.annotation02.CheckSafe"/>
+	<bean id="privilege" class="com.syc.spring.annotation02.Privilege">
+		<property name="access" value="admin2"/>
+	</bean>
+
+	<!-- 配置切面 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.syc.spring.annotation02.ShowSalery.*(..))" id="perform"/>
+		
+		<!-- 改变通知执行顺序的方式一:aop:aspect中配置order属性. -->
+		<!-- order:用来改变通知的执行顺序,值越小,优先级越高! -->
+		<!-- 配置切面一 -->
+		<aop:aspect ref="logger" order="2">
+			<aop:before method="logger" pointcut-ref="perform"/>
+		</aop:aspect>
+		
+		<!-- 配置切面二 -->
+		<aop:aspect ref="check" order="1">
+			<aop:before method="check" pointcut-ref="perform"/>
+		</aop:aspect>
+		
+		<!-- 配置切面三 -->
+		<aop:aspect ref="privilege">
+			<aop:around method="isAccess" pointcut-ref="perform"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

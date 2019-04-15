@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui面板</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body>
+
+		<!--layui-collapse:折叠效果-->
+		<!--lay-accordion:开启了手风琴效果,也就是每次只能展开一个面板-->
+		<div class="layui-collapse" lay-accordion>
+			
+			<!--面板项-->
+			<div class="layui-colla-item">
+				<!--面板标题-->
+				<div class="layui-colla-title">李白</div>
+				
+				<!--面板内容-->
+				<div class="layui-colla-content">李白的诗....</div>
+			</div>
+			
+			<div class="layui-colla-item">
+				<!--面板标题-->
+				<div class="layui-colla-title">杜甫</div>
+				
+				<!--面板内容-->
+				<div class="layui-colla-content">杜甫的诗....</div>
+			</div>
+			
+			<div class="layui-colla-item">
+				<!--面板标题-->
+				<div class="layui-colla-title">白居易</div>
+				
+				<!--面板内容-->
+				<div class="layui-colla-content">白居易的诗....</div>
+			</div>
+			
+		</div>
+		
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element', function() {
+				//获取模块变量
+				var elmt = layui.element;
+
+				//elmt.render();
+			});
+		</script>
+	</body>
+
+</html>

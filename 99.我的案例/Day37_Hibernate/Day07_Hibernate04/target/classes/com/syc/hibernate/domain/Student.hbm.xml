@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- package:指明包的范围 -->    
+<hibernate-mapping package="com.syc.hibernate.domain">
+	<!-- 类与表的映射关系 -->
+	<class name="Student" table="stu">
+		<!-- id代表主键 -->
+		<id name="sid" column="sid">
+			<generator class="increment"/>
+		</id>
+		
+		<!-- 针对普通的属性,列 -->
+		<property name="name"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 启动对@AspectJ注解的支持 -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- task任务扫描注解 -->
+    <!--<task:annotation-driven/>-->
+    <mvc:annotation-driven/>
+
+    <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:conf/*.properties"/>
+
+    <context:component-scan base-package="com.syc.manager.controller"/>
+
+    <!--SpringMVC视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置多媒体解析器 -->
+    <!-- 定义文件上传解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
+    <!--配置资源映射-->
+    <mvc:resources mapping="/icon/**" location="/icon/"/>
+    <mvc:resources mapping="/lib/**" location="/lib/"/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/temp/**" location="/temp/"/>
+    <mvc:resources mapping="/upload/**" location="/upload/"/>
+
+    <!-- 引用dubbo服务 -->
+    <dubbo:application name="mall-manager-web"/>
+
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
+
+    <dubbo:reference interface="com.syc.manager.service.UserService" id="userService"/>
+
+    <dubbo:reference interface="com.syc.manager.service.SystemService" id="systemService"/>
+
+    <dubbo:reference interface="com.syc.manager.service.ItemService" id="itemService"/>
+
+    <dubbo:reference interface="com.syc.manager.service.ItemCatService" id="itemCatService"/>
+
+    <dubbo:reference interface="com.syc.content.service.ContentService" id="contentService"/>
+
+    <dubbo:reference interface="com.syc.content.service.ContentCatService" id="contentCatService"/>
+
+    <dubbo:reference interface="com.syc.content.service.ContentImageService" id="contentImageService"/>
+
+    <!-- 配置自定义Realm -->
+    <bean id="myRealm" class="com.syc.manager.shiro.MyRealm"/>
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+    <!--自定义权限过滤器-->
+    <bean id="perms" class="com.syc.manager.shiro.MyPermissionFilter"/>
+
+    <!-- Shiro过滤器 核心-->
+    <bean id="shiroFilter" class="com.syc.manager.shiro.MyShiroFilterFactoryBean">
+        <!-- Shiro的核心安全接口,这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败，则跳转到登录页面的配置 -->
+        <property name="loginUrl" value="/login"/>
+        <!-- 登录成功之后的 跳转页面 -->
+        <property name="successUrl" value="/"/>
+        <!-- 权限认证失败，则跳转到指定页面 -->
+        <property name="unauthorizedUrl" value="/403"/>
+        <!--自定义过滤器-->
+        <property name="filters">
+            <util:map>
+                <entry key="perms" value-ref="perms"/>
+                <entry key="roles" value-ref="perms"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value/>
+        </property>
+    </bean>
+
+    <!-- Shiro生命周期处理器 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--重要！将你的SwaggerConfig配置类注入-->
+    <bean class="com.syc.manager.swagger.SwaggerConfig"/>
+
+</beans>

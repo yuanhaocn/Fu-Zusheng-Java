@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>运算符</title>
+	</head>
+	<body>
+		<!--算术运算符-->
+		<script>
+			/*算术运算符,+,-,*,/,%,++,--*/
+			/*注意:js中没有类型提升这一说!*/
+			document.write(3/5);
+			var i=0;
+			/*++i与i++的区别?*/
+			document.write(i++);
+			
+			/*赋值运算符,=,+=,-=,*=,/=*/
+			var j=10;
+			j*=5;//j=j*5;
+			document.write(j);
+			
+			/*逻辑运算符,&&,||,!*/
+			var a=18;
+			var b=10;
+			document.write((b<5)&&(a>=18));
+			document.write((a>=18)||(b<5));
+			document.write("<br/>");
+			document.write(!(a>=18));
+			
+			//document.write("<h1>一级标题</h1>");
+			document.write("<br/>");
+			/*比较运算符,==,===,!=,!==,>,>=,<,<=*/
+			var x=20;
+			var y="20";
+			/*==:比较值是否一致*/
+			/*===:比较值和类型是否一致*/
+			document.write("x==y--->"+(x==y)+"<br />");
+			document.write("x===y-->"+(x===y)+"<br />");
+			
+			/*条件运算符:三目运算符*/
+			var age=16;
+			var msg=age>=18?"成年了,欢迎光临":"未成年人请在父母陪同下观看";
+			document.write(msg);
+		</script>
+	</body>
+</html>

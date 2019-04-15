@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>外部样式表</title>
+		<!--引用一个外部样式表-->
+		<!--rel:指明要引用的文件的类型;href:指明引用的样式表文件的地址-->
+		<!--<link rel="stylesheet" href="css/first.css" />-->
+		
+		<!--引用外部样式表的第二种方式-->
+		<style>
+			@import url("css/first.css");
+		</style>
+		
+	</head>
+	<body>
+		<div id="div1" class="mydiv">div1</div>
+		<div id="div2" class="mydiv">div2</div>
+		<div id="div3" class="mydiv">div3</div>
+		<div id="div4">div4</div>
+	</body>
+</html>

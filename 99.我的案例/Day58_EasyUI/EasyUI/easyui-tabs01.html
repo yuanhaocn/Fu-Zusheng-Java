@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的选项卡tabs</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+	<body>
+		<!--fit:true,自动填充适配父窗体-->
+		<div id="tabs" class="easyui-tabs" 
+			data-options="justified:true,plain:false,fit:false,border:true,tabPosition:'bottom',selected:1,pill:true,showHeader:true"  style="width: 600px;height: 200px;padding: 20px;">
+			<div title="选项卡1" data-options="closable:true"  style="padding: 20px;">
+				选项卡1里的内容
+			</div>
+			<div title="选项卡222222222222" data-options="iconCls:'icon-ok'" style="padding: 20px;">
+				选项卡2里的内容
+			</div>
+			<div title="选项卡3" style="padding: 20px;">
+				选项卡3里的内容
+			</div>
+		</div>
+	</body>
+</html>

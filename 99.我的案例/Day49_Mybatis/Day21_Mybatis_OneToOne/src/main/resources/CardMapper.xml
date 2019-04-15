@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.mybatis.domain.Card">
+
+	<resultMap type="card" id="cardMap">
+		<!-- id:表示主键 -->
+		<id column="id" property="id" />
+		<!-- result:普通列 -->
+		<result column="num" property="num" />
+
+		<!-- card类建立起与person类之间的关联关系 -->
+		<association property="person"
+			resultMap="com.syc.mybatis.domain.Person.personMap" />
+	</resultMap>
+
+	<!-- 根据人的身份证号,查询出这个人的相关信息 -->
+	<select id="findByNum" resultMap="cardMap">
+		select
+		p.pid,p.name,p.nickname,c.num
+		from card c
+		inner join person p
+		on c.id=p.cid
+		where c.num=#{num}
+	</select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 类与表的映射关系 -->
+	<!-- lazy="true":懒加载的属性 -->
+	<class name="com.syc.hibernate.domain.Employee" table="empl"
+		lazy="true" dynamic-insert="true" dynamic-update="true">
+		<!-- id代表主键 -->
+		<id name="id" column="id" length="20">
+			<generator class="increment" />
+		</id>
+
+		<!-- 针对普通的属性,列 -->
+		<property name="name" column="name" type="string" length="30" />
+		<!-- 如果列名和属性名一样,可以省略列名 -->
+		<property name="job" />
+		<property name="salery" type="double" />
+	</class>
+</hibernate-mapping>

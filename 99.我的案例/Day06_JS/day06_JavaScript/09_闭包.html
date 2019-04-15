@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>闭包--->"计数器困境"</title>
+		<script>
+			/*setTimeout是延迟多长时间后,执行....;setTimeout只会执行一次*/
+			/*var count=1;
+			function showCount(){
+				return count++;
+			}*/
+			
+			//另外的函数此时也可以修改count的值
+			/*function otherFunc(){
+				return count--;
+			}*/
+			
+			
+			function showCount() {
+				var count = 1;
+				return count++;
+			}
+			
+			//既要实现count的计数功能,又不能使count值被别的函数或者地方来修改调用.
+			//内嵌函数+函数自调用==闭包
+			
+			//内嵌函数
+			/*function counter(){
+				var count=0;
+				function plus(){
+					count++;
+				}
+				plus();
+				reutrn count;
+			}*/
+
+			//内嵌函数+函数自调用==闭包,原理类似于Java中的外部类嵌套内部类!
+			var counter=(function counter(){
+				var count=0;
+				//返回一个匿名的内部函数
+				return function(){
+					return count+=1;
+				}
+			})();
+
+			document.write("计数器结果=" + counter() + "<br/>");
+			document.write("计数器结果=" + counter() + "<br/>");
+			document.write("计数器结果=" + counter() + "<br/>");
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

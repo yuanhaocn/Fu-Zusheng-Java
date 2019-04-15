@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>location位置--URL位置</title>
+		<script>
+			function showLocation(){
+				var url=location.href;
+				document.write("url="+url+"<br />");
+				//协议
+				var prot=location.protocol;
+				document.write("url协议="+prot+"<br />");
+				var host=location.host;
+				document.write("主机+端口号="+host+"<br />");
+				var hostName=location.hostname;
+				document.write("主机地址="+hostName+"<br />");
+				var port=location.port;
+				document.write("端口号="+port+"<br />");
+				var path=location.pathname;
+				document.write("资源地址="+path+"<br />");
+			}
+			
+			//实现页面跳转方式一:<a href="...">百度一下</a>
+			//实现页面跳转方式二:location.href="...."
+			//实现页面跳转方式三:location.assign("http://www.baidu.com");
+			function startNewPage(){
+				location.href="http://www.baidu.com";
+			}
+			
+			function startNewPage2(){
+				//分配一个网址,实现跳转
+				location.assign("http://www.baidu.com");
+			}
+			
+			
+			function reloadPage(){
+				//重新加载
+				location.reload();
+			}
+			
+		</script>
+	</head>
+	<body>
+		<button onclick="showLocation()">location信息</button>
+		<button onclick="startNewPage()">页面跳转</button>
+		<button onclick="startNewPage2()">页面跳转2</button>
+		<button onclick="reloadPage()">刷新方法</button>
+	</body>
+</html>

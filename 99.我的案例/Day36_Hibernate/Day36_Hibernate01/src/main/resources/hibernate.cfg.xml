@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<!-- session-factory,每一个session-factory就对应着一个数据库的连接 -->
+	<session-factory>
+		<!-- 配置数据库的连接名称 -->
+		<property name="hibernate.connection.username">root</property>
+		<!-- 数据库密码 -->
+		<property name="hibernate.connection.password">syc</property>
+		<!-- 设置驱动类 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- 数据库的url地址 -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sql01</property>
+		
+		<!-- 在执行hibernate操作的时候,显示相应的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 格式化sql语句 -->
+		<property name="hibernate.format_sql">true</property>
+		
+		<!-- 设置数据库的生成策略 -->
+		<!-- update,create,create-drop,validate -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- 设置hibernate所使用的数据库的"方言",告诉Hibernate在底层创建出对应数据库的sql语句. -->
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		
+		<!-- 加载ORM的映射文件. -->
+		<mapping resource="com/syc/hibernate/domain/Employee.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

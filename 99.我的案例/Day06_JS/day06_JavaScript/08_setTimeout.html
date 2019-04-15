@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>setTimeout</title>
+		<script>
+			/*setTimeout是延迟多长时间后,执行....;setTimeout只会执行一次*/
+			
+			var count=1;
+			function showCount(){
+				count++;
+				var spCount=document.getElementById("sp_count");
+				spCount.innerHTML=count;
+			}
+			
+			var task;
+			function startCount(){
+				//开始任务,该方法只会执行一次!
+				task=setTimeout("showCount()",1000);
+			}
+			
+			//停止任务
+			function stopCount(){
+				clearTimeout(task);
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="startCount()">开始计数</button>
+		<button onclick="stopCount()">停止计数</button>
+		<br />
+		<span id="sp_count"></span>
+	</body>
+</html>

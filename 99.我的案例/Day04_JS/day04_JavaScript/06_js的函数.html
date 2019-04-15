@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>函数</title>
+	</head>
+	<body>
+		<script>
+			/*没有修饰符;可以有返回值,但是并不会明确写出来;也可以有参数*/
+			/*无参函数*/
+			function show(){
+				alert("Hello,JS");
+			}
+			
+			/*调用函数的方式之一:*/
+			//show();
+			/*调用函数方式二:在事件中调用*/
+			
+			/*带参数的函数*/
+			/*注意:不能在方法的参数中带var关键字*/
+			function showWithParams(msg){
+				alert(msg);
+			}
+			
+			/*带返回值的函数*/
+			function getCount(x,y){
+				
+				return x+y;
+			}
+			
+			function showCount(){
+				var count=getCount(4,5);
+				alert("结果="+count);
+				/*注意:document.wite()会清掉原有的标签内容*/
+				/*document.write("结果="+count);*/
+			}
+			
+			/*匿名函数*/
+			var tips=function(){
+				alert("哈哈哈,终于比Java牛逼了,我可以函数匿名!");
+			}
+			
+			/*构造函数*/
+			var showResult=new Function("x","y","return alert(x*y)");
+			
+			/*js的函数,属于对象*/
+			/*js中的函数可以以字符串的形式输出*/
+			//var str=showCount().toString();
+			//alert(str);
+			
+			/*js中的函数,可以做为一个结果来用*/
+			/*var result=getCount(2,4)*2;
+			alert(result);*/
+			
+			/*js中函数的自调用*/
+			/*(function callSelf(){
+				alert("函数自调用");
+			})();*/
+			
+			//callSelf();
+			
+			/*js的函数的参数详解*/
+			//var c=getCount(2,5,6,10);
+			//alert(c);
+			function getMax(){
+				//可以用arguments[0]取出函数的参数值
+				var max=arguments[0];
+				if(arguments.length<2){
+					return alert("最大值是:"+max);
+				}
+				for(var i=0;i<arguments.length;i++){
+					if(arguments[i]>max){
+						max=arguments[i];
+					}
+				}
+				return alert("最大值是:"+max);
+			}
+			
+			//getMax(4,5,1,9,2,90);
+			
+		</script>
+		
+		<!--回调-->
+		<input type="button" value="点我" onclick="show()" />
+		<br />
+		<input type="button" value="点我,传参数" onclick="showWithParams('闯进来的参数,22222')" />
+		<br />
+		<input type="button" value="显示结果" onclick="showCount()" />
+		<br />
+		<input type="button" value="匿名函数" onclick="tips()" />
+		<br />
+		<input type="button" value="构造函数" onclick="showResult(3,4)" />
+		<br />
+		<input type="button" value="计算最大值" onclick="getMax(3,4,1,9,300,2)" />
+	</body>
+</html>

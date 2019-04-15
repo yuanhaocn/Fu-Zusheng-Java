@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>常量变量</title>
+	</head>
+	<body>
+		<script>
+			/*js的数据类型:字符串类型,数值型,布尔型,null,未定义类型undefined,对象类型*/
+			/*常量:*/
+			/*字符串常量*/
+			document.write("字符串--->字符串常量");
+			document.write('字符串--->字符串常量');
+			/*数值型常量*/
+			document.write(123);
+			/*布尔型常量*/
+			document.write(true);
+			/*null类型*/
+			document.write(null);
+			/*undefined未定义*/
+			document.write(undefined);
+			
+			/*变量:*/
+			/*字符串变量*/
+			name="金三胖";
+			//name=29;
+			document.writeln(name);
+			
+			/*数值型*/
+			age=29;
+			document.writeln(age);
+			
+			/*var:用来声明一个变量*/
+			var isMarried=true;
+			document.writeln(isMarried);
+			
+			/*null类型*/
+			var wife=null;
+			document.writeln(wife);
+			
+			/*undefined类型,js的一个变量如果没有赋值,默认是undefined*/
+			var son;
+			document.writeln(son);
+			
+			/*对象类型:*/
+			/*构建对象类型方式一:*/
+			var person=new Object();
+			person.name="金四胖";
+			person.age=10;
+			document.writeln(person);
+			
+			/*构建对象类型方式二:json对象格式*/
+			var car={logo:"奔驰",price:300000};
+			document.writeln(car.logo+"---"+car.price);
+			
+		</script>
+	</body>
+</html>

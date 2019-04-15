@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>transform变换</title>
+		<style>
+			p{
+				width: 100px;
+				height: 100px;
+				line-height: 100px;/*line-height设置行高,要想实现垂直居中,line-height=height*/
+				background: paleturquoise;
+				color: cornflowerblue;
+				text-align: center;/*水平居中*/
+			}
+			
+			#p1{
+				/*H5中提供了一个动画属性.degree,角度*/
+				transform: rotate(-45deg);/*旋转变换*/
+			}
+			
+			#p2{
+				/*transform: scale(2,1);缩放变换*/
+				transform: scaleX(0.5);
+				transform: scaleY(1);
+			}
+			
+			#p3{
+				/*transform: skew(45deg,20deg);*/
+				transform: skewX(45deg);
+			}
+			
+			#p4{
+				transform: translate(400px);
+			}
+			
+			#p5{
+				/*屏幕坐标系:以屏幕的左上角为坐标原点,向右(x轴)为正,向下(y轴)为正*/
+				transform: translateY(-100px);
+			}
+			
+			/*变换的综合效果*/
+			#p6{
+				transform: translate(400px,100px) scale(2,1) rotate(45deg);
+			}
+		</style>
+	</head>
+	<body>
+		<p id="p1">p1</p>
+		<p id="p2">p2</p>
+		<p id="p3">p3</p>
+		<p id="p4">p4</p>
+		<p id="p5">p5</p>
+		<p id="p6">p6</p>
+	</body>
+</html>

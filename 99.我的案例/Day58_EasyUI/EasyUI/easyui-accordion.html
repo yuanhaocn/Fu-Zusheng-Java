@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的分类accordion</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<div  id="accor" class="easyui-accordion" data-options="selected:1" style="width: 300px;height: 200px;">
+				
+				<div title="分类1" data-options="iconCls:'icon-save'" style="padding: 20px;">
+					<span>分类1的内容</span>	
+					<ul>
+						<li>苹果1</li>
+						<li>苹果2</li>
+						<li>苹果3</li>
+					</ul>
+				</div>
+				<div title="分类2" style="padding: 20px;">
+					<span>分类2的内容</span>	
+					<ul>
+						<li>苹果1</li>
+						<li>苹果2</li>
+						<li>苹果3</li>
+					</ul>
+				</div>
+				<div title="分类3" data-options="selected:true" style="padding: 20px;">
+					<span>分类3的内容</span>	
+					<ul>
+						<li>苹果1</li>
+						<li>苹果2</li>
+						<li>苹果3</li>
+					</ul>
+				</div>
+		</div>
+		
+		<script>
+			$("#accor").accordion({
+				animate:true
+			})
+		</script>
+	</body>
+
+</html>

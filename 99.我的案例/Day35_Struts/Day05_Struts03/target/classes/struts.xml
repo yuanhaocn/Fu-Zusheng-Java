@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="interceptor" extends="struts-default">
+
+		<!-- 注册拦截器 -->
+		<interceptors>
+			<!-- 定义(注册)拦截器 -->
+			<interceptor name="interceptor01" class="com.syc.struts.MyInterceptor01" />
+			<interceptor name="interceptor02" class="com.syc.struts.MyInterceptor02" />
+
+			<!-- 定义拦截器栈,为了让拦截器的引用代码看起来更清晰明了 -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="interceptor01"/>
+				<interceptor-ref name="interceptor02"/>
+			</interceptor-stack>
+		</interceptors>
+
+		<action name="user" class="com.syc.struts.UserAction" method="hello">
+			<!-- 引用拦截器,只有引用了拦截器,拦截器才真正的开始工作. -->
+			<!-- <interceptor-ref name="interceptor01"/>
+			<interceptor-ref name="interceptor02"/> -->
+			
+			<!-- 引用拦截器栈 -->
+			<interceptor-ref name="myStack"/>
+			
+			<result>/home.html</result>
+		</action>
+	</package>
+</struts>

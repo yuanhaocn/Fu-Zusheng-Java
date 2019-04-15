@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>给标签赋值</title>
+		<script>
+			function test1(){
+				//var nameIpt=document.getElementById("name");
+				var nameIpt=document.getElementById("p1");
+				//如果是表单类的标签,尤其是input标签,利用value属性来赋值和取值;
+				//nameIpt.value="这是被赋的值";
+				
+				//如果是其他类型的标签,比如p,div等标签,利用innerText,innerHTML属性来赋值和取值;
+				//nameIpt.innerText="这是被赋的值";
+				nameIpt.innerHTML="这是被赋的值";
+			}
+			
+			function test2(){
+				var container=document.getElementById("container");
+				//如果是表单类的标签,尤其是input标签,利用value属性来赋值和取值;
+				//container.value="给div赋值";
+				
+				//如果是其他类型的标签,比如p,div等标签,利用innerText,innerHTML属性来赋值和取值;
+				container.innerText="这是被赋的值";
+				//container.innerHTML="这是被赋的值";
+			}
+			
+			function test3(){
+				var logo=document.getElementById("logo");
+				logo.src="img/foot.jpg";
+			}
+		</script>
+	</head>
+
+	<body>
+		<input type="text" id="name" />
+		<br />
+		<p id="p1"></p>
+		<div id="container">啦啦啦啦</div>
+		<br />
+		<img id="logo" />
+
+		<button onclick="test1()">测试1</button>
+		<button onclick="test2()">测试2</button>
+		<button onclick="test3()">测试3</button>
+
+	</body>
+
+</html>

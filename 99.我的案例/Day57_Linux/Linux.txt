@@ -1,0 +1,12 @@
+Linux
+
+1.虚拟机:VMWare,VirtualBox,Parralax....
+
+2.Linux:
+  Unix: 
+  Windows系列:Dos--->图形化界面(外壳);
+  Mac系列:
+  Linux系列:开源....
+
+  
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- Spring容器创建对象的方式:1.通过类的构造方法来创建;2.通过静态工厂来创建;3.通过实例工厂来创建 -->
+	<!-- <bean id="car" class="com.syc.spring.car02.Car"/> -->
+
+	<!-- 静态工厂创建 -->
+	<bean class="com.syc.spring.car02.StaticCarFactory" id="staticCar"
+		factory-method="createCar" />
+
+	<!-- 实例工厂创建 -->
+	<!-- 1.先创建工厂 -->
+	<bean class="com.syc.spring.car02.InstanceCarFactory" id="factory"/>
+	
+	<!-- 2.factory-bean:去引用工厂实例 -->
+	<bean factory-bean="factory" factory-method="createCar" id="instanceCar"/>
+
+</beans>

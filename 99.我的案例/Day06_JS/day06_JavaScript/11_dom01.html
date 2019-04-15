@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			function byIdFunc() {
+				//根据id获取一个element元素.
+				var elemName = document.getElementById("userName");
+				var elemPass = document.getElementById("pass");
+				alert("元素名称:" + elemName.nodeName + "\n元素类型:" + elemName.nodeType + "\n元素节点值:" + elemName.nodeValue + "\n元素值:" + elemName.value);
+				//alert("姓名值="+elemName.value+",\n密码值:"+elemPass.value);
+			}
+
+			function byNameFunc() {
+				//返回数组,name值可以重复
+				var elem = document.getElementsByName("pwd")[0];
+				alert("元素名称:" + elem.nodeName + "\n元素类型:" + elem.nodeType + "\n元素节点值:" + elem.nodeValue + "\n元素值:" + elem.value);
+			}
+
+			function byClassNameFunc() {
+				//返回数组,class值可以重复
+				var elem = document.getElementsByClassName("user")[0];
+				alert("元素名称:" + elem.nodeName + "\n元素类型:" + elem.nodeType + "\n元素节点值:" + elem.nodeValue + "\n元素值:" + elem.value);
+			}
+
+			function byTagNameFunc() {
+				//返回数组,class值可以重复
+				var elem = document.getElementsByTagName("input");
+				for (var i = 0; i < elem.length; i++) {
+					alert("元素名称:" + elem[i].nodeName + "\n元素类型:" + elem[i].nodeType + "\n元素节点值:" + elem[i].nodeValue + "\n元素值:" + elem[i].value);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<input type="text" id="userName" placeholder="请输入用户名" class="user" />
+		<br />
+		<input type="password" id="pass" name="pwd" placeholder="请输入密码" />
+
+		<input type="button" onclick="byIdFunc()" value="根据ID" />
+		<input type="button" onclick="byNameFunc()" value="根据Name" />
+		<input type="button" onclick="byClassNameFunc()" value="根据ClassName" />
+		<input type="button" onclick="byTagNameFunc()" value="根据TagName" />
+	</body>
+
+</html>

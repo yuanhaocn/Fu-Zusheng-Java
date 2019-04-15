@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>分页插件</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<!--分页插件所在的容器-->
+		<div id="myPage"></div>
+
+		<script src="layui/layui.js"></script>
+		
+		<script>
+			layui.use('laypage',function(){
+				var page=layui.laypage;
+				
+				page.render({
+					elem:'myPage',//注意:此处的分页插件的id,不能加#
+					count:100,//数据的总数量
+					limit:10,//每页数据的条数
+					limits:[10,30,50],//每页条数的选择项
+					curr:3,//当前页数
+					groups:3,//连续出现的页码数
+					prev:'前一页',//自定义'上一页'的内容
+					next:'后一页',//自定义'下一页'的内容
+					first:1,//第一页的索引
+					last:10,//一般是最后一页的索引
+					layout:['prev','page'],//自定义排版
+					theme:'#f00',//自定义主题
+					jump:function(obj,first){
+						//obj:当前的分页项
+						console.log("当前页:"+obj.curr);
+						console.log("每页数量:"+obj.limit);
+						if(!first){
+							console.log("非第一次");
+						}
+					}
+				});
+				
+			})
+			
+		</script>
+		
+	</body>
+
+</html>

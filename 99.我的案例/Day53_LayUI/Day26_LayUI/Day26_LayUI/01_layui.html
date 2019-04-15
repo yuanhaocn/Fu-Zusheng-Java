@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui基本使用</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+	</head>
+	
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+	<body class="layui-bg-cyan">
+		
+		<div class="layui-row">
+			
+			<!--md:适配中等屏幕;xs,sm,lg-->
+			<div class="layui-col-md3 layui-bg-green">占3/12</div>
+			
+			<!--注意:当一行容纳不下的时候,会自动切换到下一行.-->
+			<div class="layui-col-md9 layui-bg-red">占9/12</div>
+		</div>
+		
+		<!--layui-col-space30-->
+		<div class="layui-row layui-col-space30">
+			
+			<!--md:适配中等屏幕;xs,sm,lg-->
+			<div class="layui-col-md4 layui-bg-green">占4/12</div>
+			
+			<!--注意:当一行容纳不下的时候,会自动切换到下一行.-->
+			<div class="layui-col-md4 layui-bg-red">占4/12</div>
+			
+			<div class="layui-col-md4 layui-bg-orange">占4/12</div>
+		</div>
+		
+		<!--offset-->
+		<div class="layui-row">
+			
+			<!--md:适配中等屏幕;xs,sm,lg-->
+			<div class="layui-col-md4 layui-bg-green">占4/12</div>
+			
+			<!--注意:当一行容纳不下的时候,会自动切换到下一行.-->
+			<div class="layui-col-md4 layui-bg-red layui-col-lg-offset10">占4/12</div>
+			
+		</div>
+		
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 加载配置文件 -->
+	<properties resource="db.properties" />
+
+	<!-- 设置类型的别名 -->
+	<typeAliases>
+		<!-- 指明JavaBean所在的包 -->
+		<package name="com.syc.mybatis.domain"/>
+	</typeAliases>
+
+	<!-- 默认加载哪个数据库连接 -->
+	<environments default="mysql_conn">
+
+		<!-- environment:所使用的数据库环境 -->
+		<environment id="mysql_conn">
+			<!-- 表示以jdbc的形式设置事务管理器. -->
+			<transactionManager type="jdbc" />
+
+			<!-- pooled:以连接池的形式来管理数据源 -->
+			<dataSource type="pooled">
+				<property name="driver" value="${mysql.driver}" />
+				<property name="url" value="${mysql.url}" />
+				<property name="username" value="${mysql.username}" />
+				<property name="password" value="${mysql.password}" />
+			</dataSource>
+		</environment>
+
+		<!-- oracle的连接 -->
+		<environment id="orcl_conn">
+			<!-- 表示以jdbc的形式设置事务管理器. -->
+			<transactionManager type="jdbc" />
+
+			<!-- pooled:以连接池的形式来管理数据源 -->
+			<dataSource type="pooled">
+				<property name="driver" value="${orcl.driver}" />
+				<property name="url" value="${orcl.url}" />
+				<property name="username" value="${orcl.username}" />
+				<property name="password" value="${orcl.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 加载映射文件 -->
+	<mappers>
+		<mapper resource="com/syc/mybatis/mapper/PersonMapper.xml" />
+		<mapper resource="com/syc/mybatis/mapper/CardMapper.xml" />
+	</mappers>
+</configuration>

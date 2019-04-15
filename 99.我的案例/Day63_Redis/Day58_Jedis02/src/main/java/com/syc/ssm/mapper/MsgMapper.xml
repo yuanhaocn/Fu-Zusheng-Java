@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--加载映射文件的约束文档 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syc.ssm.mapper.MsgMapper">
+	
+	<insert id="addMsg" parameterType="com.syc.ssm.domain.Msg">
+		insert into tb_msg (msg,name)
+		values(#{msg},#{name}) 
+	</insert>
+	
+	<select id="queryAll" resultType="com.syc.ssm.domain.Msg">
+		select id,msg,name
+		from tb_msg
+	</select>
+	
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syc.manager.dao.RoleMapper">
+
+	<!-- 根据用户id查询对应的角色名称 -->
+	<select id="getUserRoleList" resultType="java.lang.String">
+		SELECT r.rolename
+		FROM
+		role r
+		LEFT JOIN user_role ur
+		ON r.roleid=ur.roleid
+		WHERE
+		ur.userid=#{userId}
+	</select>
+
+	<!-- 查询所有的角色 -->
+	<select id="getAllRoles" resultType="com.syc.manager.domain.Role">
+		SELECT
+		roleid,rolename,remark,createuserid,createtime
+		FROM role
+	</select>
+
+	<!-- 添加角色 -->
+	<insert id="addRole" parameterType="com.syc.manager.domain.Role">
+		<selectKey order="AFTER" resultType="int" keyProperty="roleId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO role (rolename,remark,createuserid,createtime)
+		VALUES
+		(#{roleName},#{remark},#{createUserId},#{createTime})
+	</insert>
+
+	<select id="findRoleById" resultType="com.syc.manager.domain.Role">
+		SELECT
+		roleid,rolename,remark,createuserid,createtime
+		FROM role
+		WHERE
+		roleid=#{roleId}
+	</select>
+
+	<delete id="deleteRole">
+		DELETE FROM role
+		WHERE roleid IN
+		<foreach collection="ids" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<update id="updateRole" parameterType="com.syc.manager.domain.Role">
+		<if test="role!=null">
+			UPDATE role
+			<set>
+				<if test="role.roleName!=null">
+					rolename=#{role.roleName},
+				</if>
+				<if test="role.remark!=null">
+					remark=#{role.remark}
+				</if>
+			</set>
+			WHERE roleid=#{role.roleId}
+		</if>
+	</update>
+
+</mapper>

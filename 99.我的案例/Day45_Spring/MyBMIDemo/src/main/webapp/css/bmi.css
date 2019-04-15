@@ -1,0 +1,182 @@
+
+/*设置所有的元素内外间距*/
+*{
+	margin: 0;
+	padding: 0;
+}
+
+/*设置html,body的总体宽高及背景色*/
+html,body{
+	width: 100%;
+	height: 100%;
+	background: #666;
+}
+
+/*设置整个大容器的样式*/
+.div_container{
+	width: 80%;
+	height: 80%;
+	margin: auto;
+	/*生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。
+元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。*/
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/*设置左侧div的样式*/
+.div_left{
+	width: 40%;
+	height: 100%;
+	background: whitesmoke;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 5px;
+}
+
+/*设置输入框所在的表格样式*/
+.table_msg{
+	width: 100%;
+	height: 60%;
+}
+
+/*设置输入框外的标题文字*/
+.title{
+	font-size: 15px;
+	color: #333;
+	text-align: center;
+}
+
+/*设置输入框所在的div的样式*/
+.input_box{
+	width: 80%;
+	height: 30px;
+	margin: 10px;
+	background: white;
+	border: 1px solid darkgray;
+	border-radius: 5px;
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/*设置输入框的样式*/
+.input{
+	width: 80%;
+	height: 100%;
+	border: none;
+	background: #F5F5F5;
+	float: left;
+}
+
+/*设置输入框后面的文字单位的样式*/
+.input_unit{
+	width: 20%;
+	height: 100%;
+	float: left;
+	font-size: 13px;
+	color: #555;
+	background: gainsboro;
+	text-align: center;
+	line-height: 30px;
+}
+
+/*设置radio的样式*/
+.male,.female{
+	float: left;
+	margin-left: 60px;
+	font-size: 13px;
+	color: #555555;
+}
+
+/*设置按钮的样式*/
+.submit{
+	width: 80%;
+	height: 30px;
+	margin-left: 10%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: rgb(220,140,150);
+	color: whitesmoke;
+	border: none;
+	border-radius: 5px;
+	font-size: 13px;
+}
+
+/*BMI标准表的样式*/
+.table_bmi{
+	width: 100%;
+	height: 39%;
+	color: whitesmoke;
+	background: rgba(0,0,0,0.8);
+	text-align: center;
+}
+/*设置BMI标准表的第2,3,4,5行背景色*/
+.table_bmi tr:nth-child(2){
+	background: rgb(132, 205, 252);
+}
+.table_bmi tr:nth-child(3){
+	background: rgb(180, 238, 180);
+}
+.table_bmi tr:nth-child(4){
+	background: gold;
+}
+.table_bmi tr:nth-child(5){
+	background: rgb(238, 99, 99);
+}
+
+/*设置BMI结果区域*/
+.div_result{
+	width: 58%;
+	height: 48%;
+	background: whitesmoke;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 5px;
+}
+
+/*设置图片样式*/
+#img_result{
+	width: 30%;
+	height: 100%;
+	border-radius:5px ;
+	float: left;
+}
+
+/*设置结果文字样式*/
+#bmi_result,#bmi_idealWeight{
+	width: 70%;
+	height: 50%;
+	float: left;
+	font-size: 50px;
+	font-weight: bolder;
+	text-align: center;
+	line-height: 140px;
+}
+
+/*设置历史表格所在的div的样式*/
+.div_history{
+	width: 58%;
+	height: 48%;
+	background: whitesmoke;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	border-radius: 5px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/*设置历史表格的样式*/
+.table_history{
+	width: 100%;
+	text-align: center;
+	color: whitesmoke;
+}
+
+/*表头样式*/
+.table_head{
+	background: rgba(0,0,0,0.8);
+}

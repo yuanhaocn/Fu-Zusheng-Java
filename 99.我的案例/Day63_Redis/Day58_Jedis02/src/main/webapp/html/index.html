@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redis实现留言信息的缓存</title>
+<!--easyui的样式-->
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+</head>
+<body>
+	<div>
+		<table>
+			<tr>
+				<td class="label">留言人:</td>
+				<td><textarea class="easyui-textbox" id="name" name="name"
+						style="width: 100%;"
+						data-options="required: true, validateOnCreate: false, missingMessage: '请输入留言人昵称'"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">内容:</td>
+				<td><input class="easyui-textbox" id="msg" name="msg"
+					style="width: 100%; height: 60px;"
+					data-options="multiline: true, required: true, validateOnCreate: false, missingMessage: '请输入留言内容', validType: 'length[0, 200]', invalidMessage:'最多输入200个字符'">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="formBtn">
+					<button class="easyui-linkbutton" type="button"
+						data-options="iconCls:'icon-ok'" onclick="addMsg()">保存</button>
+					<button class="easyui-linkbutton" type="button"
+						data-options="iconCls:'icon-undo'">重置</button>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+	<!--数据表格-->
+	<div>
+		<table id="dg"></table>
+	</div>
+
+	<!-- jquery -->
+	<script src="js/easyui/jquery.min.js"></script>
+	<!-- easyui -->
+	<script src="js/easyui/jquery.easyui.min.js"></script>
+	<script>
+		//设置数据表格
+		$('#dg').datagrid({
+			url : 'queryMsg',
+			columns : [ [ {
+				field : 'id',
+				title : '代码',
+				width : 100
+			}, {
+				field : 'name',
+				title : '留言人',
+				width : 100
+			}, {
+				field : 'msg',
+				title : '内容',
+				width : 100,
+				align : 'right'
+			} ] ]
+		});
+
+		//新增留言消息
+		function addMsg() {
+			//新增留言
+			$.post("addMsg", "msg=" + $("#msg").val() + "&name="
+					+ $("#name").val(), function(data) {
+				if (data) {//如果成功，就重新加载数据
+					$('#dg').datagrid('load');
+				}
+			});
+		}
+	</script>
+</body>
+</html>

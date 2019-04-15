@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="user" extends="struts-default">
+		<action name="login" class="com.syc.struts.UserAction"
+			method="login">
+			
+			<!-- 引用防止表单重复提交的拦截器 -->
+			<interceptor-ref name="token"/>
+			<!-- 引入默认的拦截器栈,可以享受到默认的功能. -->
+			<interceptor-ref name="defaultStack"/>
+			
+			<result name="success">/home.html</result>
+			<result name="input">/login.jsp</result>
+			<!-- 当表单重复提交时,跳转到一个提示页面,提示用户不要重复提交! -->
+			<result name="invalid.token">/msg.html</result>
+		</action>
+	</package>
+</struts>

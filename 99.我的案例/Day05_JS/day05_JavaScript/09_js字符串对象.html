@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串对象</title>
+	</head>
+
+	<body>
+		<script>
+			/*
+						charAt()
+						charCodeAt()
+						concat()
+						fromCharCode()
+						indexOf()
+						lastIndexOf()
+						match()
+						replace()
+						search()
+						split()
+						substr()
+						substring()
+						toLowerCase()
+						toUpperCase()
+									 * */
+
+			var msg = "HelloWorld";
+			document.write("长度=" + msg.length + "<br/>");
+			//取下标为n的字符
+			document.write("charAt=" + msg.charAt(2) + "<br/>");
+
+			var str = "A,My God";
+			//取下标为n的字符对应的ASCII编码
+			document.write("charCodeAt=" + str.charCodeAt(0) + "<br/>");
+
+			//字符串拼接
+			document.write("字符串拼接=" + msg.concat(str) + "<br/>");
+
+			//字符在字符串中第一次出现的索引
+			document.write("indexOf=" + msg.indexOf("l") + "<br/>");
+			//字符在字符串中最后一次出现的索引
+			document.write("lastIndexOf=" + msg.lastIndexOf("l") + "<br/>");
+
+			//match()方法中的参数是一个正则表达式,
+			str = 'abcDdcba';
+			newArray = str.match(/d/gi);
+			document.write(newArray+"<br />");
+			
+			//替换方法
+			document.write("replace="+msg.replace("l","x")+"<br />");
+			
+			//根据指定的正则表达式,来搜索满足条件的字符串
+			document.write("search="+msg.search("/D")+"<br />");
+			
+			var str2="Thank-You-Verry-Much";
+			//根据指定的规则,把字符串拆分成数组
+			document.write("split="+str2.split("-")+"<br />");
+			
+			//HelloWorld
+			//从index=1下标开始找,截止到下标为4的之前的那个字符
+			document.write("substring="+msg.substring(1,4)+"<br />");
+			//substr(index,length),从指定的下标开始找,截取length个字符.
+			document.write("substr="+msg.substr(1,4)+"<br />");
+			
+			//转为小写
+			document.write("toLowerCase="+msg.toLowerCase()+"<br />");
+			//转为大写
+			document.write("toUpperCase="+msg.toUpperCase()+"<br />");
+			
+			//下标和上标 
+			var x="X";
+			//上标
+			document.write("上标="+x+"2".sup()+"<br />");
+			//下标
+			document.write("下标="+x+"2".sub()+"<br />");
+			
+			/*与界面相关的方法*/
+			document.write("字体加粗="+msg.bold()+"<br />");
+			document.write("字体变大="+msg.big()+"<br />");
+			document.write("设置字号="+msg.fontsize(5)+"<br />");
+			document.write("设置字体颜色="+msg.fontcolor("#f00")+"<br />");
+			document.write("设置字体斜体="+msg.italics()+"<br />");
+			document.write("删除格式="+msg.strike()+"<br />");
+			
+		</script>
+	</body>
+
+</html>

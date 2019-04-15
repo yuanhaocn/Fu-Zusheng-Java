@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<!-- 配置ORM中的映射关系,将Employee类与empl表建立映射关系 -->
+ 	<!-- name:类的全路径;table:数据库的表名 -->
+ 	<class name="com.syc.hibernate.domain.Employee" table="empl">
+ 		<!-- 对应主键 -->
+ 		<!-- column:表中对应的列名;name:JavaBean中属性的名字;length:表中字段的长度;type:表中该字段的数据类型. -->
+ 		<id column="id" name="id" length="10">
+ 			<!-- generator:主键的自增长器,负责主键的自增长 -->
+ 			<generator class="increment"></generator>
+ 		</id>
+ 		
+ 		<!-- 如果JavaBean的属性名称与表中列的名称一致,column字段可以省略;否则不能省略 -->
+ 		<property name="name" type="string" length="30"/>
+ 		<property name="job" type="string" length="30"/>
+ 		<property name="salery" type="double" length="10"/>
+ 	</class>
+ </hibernate-mapping>   

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>动态表格</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<table id="tbl01"></table>
+
+		<script src="layui/layui.js"></script>
+
+		<script>
+			/*方法渲染:主要通过js来实现*/
+			layui.use('table', function() {
+				var tbl = layui.table;
+
+				//方法渲染.参数是对象类型!
+				tbl.render({
+					elem: '#tbl01', //指定要操作的标签
+					//width:800,//设置表格宽高
+					height: 400,
+					page:true,//是否开启分页
+					limit:10,//每页显示10条
+					limits:[10,30,60,90],//每页条数的选择项
+					//url:'#',//从服务器加载数据
+					done:function(){//当表格中的数据渲染完毕后的回调函数
+						//alert('渲染完毕...');
+						console.log('渲染完毕...');
+					},
+					//method:'get',//设置请求方法类型
+					cols: [ //设置表头
+						[{
+								field: '', //与服务器中json的key一致!
+								title: '全选', //表头中显示的标题
+								width: 80, //列宽
+								fixed: 'left',//固定在表格的左侧
+								type:'checkbox'
+							},
+							{
+								field: 'id', //与服务器中json的key一致!
+								title: 'ID', //表头中显示的标题
+								width: 80, //列宽
+								sort: true, //是否可以排序
+								//fixed: 'left' //固定在表格的左侧
+							},
+							{
+								field: 'username', //与服务器中json的key一致!
+								title: '用户名', //表头中显示的标题
+								width: 80 //列宽
+							},
+							{
+								field: 'sex', //与服务器中json的key一致!
+								title: '性别', //表头中显示的标题
+								width: 80 ,//列宽
+								align:'center'
+							},
+							{
+								field: 'city', //与服务器中json的key一致!
+								title: '城市', //表头中显示的标题
+								width: 80 //列宽
+							},
+							{
+								field: 'sign', //与服务器中json的key一致!
+								title: '签名', //表头中显示的标题
+								width: 80 //列宽
+							},
+							{
+								field: 'score', //与服务器中json的key一致!
+								title: '积分', //表头中显示的标题
+								sort: true,
+								width: 80 //列宽
+							},
+							{
+								field: 'job', //与服务器中json的key一致!
+								title: '职业', //表头中显示的标题
+								width: 80 //列宽
+							},
+							{//添加工具栏toolbar
+								title:'操作',
+								fixed:'right',
+								width:200,
+								align:'center',
+								toolbar:'#myBar'//关联Toolbar
+							}
+						]
+					],
+					data:[//加载数据,一般是从本地加载数据
+						{
+							id:'001',//注意:该json对象中的key要与cols中field的值一样!
+							username:'三胖',
+							sex:'男',
+							city:'平壤',
+							sign:'牛逼',
+							score:'99',
+							job:'宇宙无敌大将军'
+						},
+						{
+							id:'002',
+							username:'四呆子',
+							sex:'女',
+							city:'首尔',
+							sign:'傻吊',
+							score:'1',
+							job:'宇宙无敌不要脸'
+						}
+					]
+				});
+
+			});
+		</script>
+
+		<script type="text/html" id="myBar">
+			<a href="#" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>		
+			<a href="#" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="showDetail">查看</a>		
+			<a href="#" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">编辑</a>		
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的面板</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+	<body>
+		<div id="panel" class="easyui-panel" title="标题" iconCls="icon-edit" closable="true" collapsible="true" style="width: 200px;height: 100px;padding: 10px;">
+			<p>Panel面板</p>
+		</div>
+		
+		<!--data-options归纳属性-->
+		<div id="panel2" class="easyui-panel"  
+			data-options="iconCls:'icon-save',title:'标题',collapsible:true"
+			style="width: 200px;height: 100px;padding: 10px;">
+			<p>Panel面板2</p>
+		</div>
+		
+		<!--面板上的工具-->
+		<div id="panel3" class="easyui-panel"  
+			data-options="title:'标题',collapsible:true,closable:true,minimizable:true,maximizable:true"
+			style="width: 200px;height: 100px;padding: 10px;">
+			<p>Panel面板3</p>
+		</div>
+		
+		<!--panel是一个容器,里面可以装载其他的各种控件-->
+		<div id="panel4" class="easyui-panel"  
+			data-options="title:'标题',collapsible:true,closable:true,minimizable:true,maximizable:true"
+			style="width: 200px;height: 400px;padding: 10px;">
+			<p>重大新闻</p>
+			<ul>
+				<li>美国灭亡了</li>
+				<li>日本沉没了</li>
+				<li>韩国灭亡了</li>
+				<li>英国灭亡了</li>
+			</ul>
+		</div>
+	</body>
+</html>

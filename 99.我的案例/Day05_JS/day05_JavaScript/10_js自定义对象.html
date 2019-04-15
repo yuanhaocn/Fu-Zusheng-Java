@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>自定义对象</title>
+	</head>
+
+	<body>
+		<script>
+			/*定义自定义对象的方式一:json*/
+			//{}:代表一个对象
+			//[]:代表一个数组.
+			//key-value形式
+			var json = {
+				pname: "宋江",
+				nickname: "黑三郎"
+			};
+			//var jsons=[{pname:"宋江",nickname:"黑三郎"},
+			//	       {pname:"李逵",nickname:"黑旋风"}]
+			//var jsons=[{pname:"宋江",nickname:"黑三郎",wifies:[{wname:"阎婆惜"},{wname:"花荣"}]},
+			//          {pname:"李逵",nickname:"黑旋风"}]
+			
+			document.write(json.pname + "--" + json.nickname+"<br />");
+			
+			var movie={
+				name: "变形金刚5：最后的骑士",
+				highlight: "擎天柱对战“宇宙大帝”",
+				grade: "8.0",
+				logo: "http://pimg1.126.net/movie/product/movie/149577630134411511_148_197_webp.jpg",
+				actors: "马克·沃尔伯格 彼特·库伦 伊莎贝拉·莫奈 乔什·杜哈明 泰瑞斯·吉布森 安东尼·霍普金斯 劳拉·哈德克 约翰·古德曼 斯坦利·图齐 桑地亚哥·卡布瑞拉 吉尔·伯明翰 让·杜雅尔丹 渡边谦 约翰·迪·玛吉欧 弗兰克·维尔克 米彻·佩勒吉",
+				logo1: "http://pimg1.126.net/movie/product/movie/149577630072711508_520_692_webp.jpg",
+				category: "动作/冒险/科幻",
+				area: "美国"
+			}
+			document.write("电影名称:"+movie.name+"<br />");
+			
+			//HttpClient
+			//URLConnection
+			//图片地址
+			var logo=movie.logo;
+			var logo1=movie.logo1;
+			
+			//"<img src=''/>"
+			//"<img src=' " + logo +"   '/>"
+			document.write("<img src='"+logo+"'/>");
+			document.write("<img src='"+logo1+"'/>");
+		</script>
+		
+	</body>
+
+</html>

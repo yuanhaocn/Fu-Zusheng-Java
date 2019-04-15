@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 配置dubbo的注册中心地址 -->
+	<dubbo:registry address="zookeeper://10.11.51.43:2181"/>
+	
+	<!-- 设置服务的提供者和消费者交流的频道的端口号 -->
+	<dubbo:protocol name="dubbo" port="28888"/>
+	
+	<!-- 配置每个应用程序的名称,名称应该唯一! -->
+	<dubbo:application name="service-provider"/>
+	
+	<!-- 服务的具体实现类 -->
+	<bean id="serviceImpl" class="com.syc.dubbo.service.impl.HelloServiceImpl"/>
+	
+	<!-- 配置要提供的服务 -->
+	<!-- retries="0" timeout="5000":设置连接超时以及超时重试次数  delay:是否延迟-->
+	<!-- interface:要暴露的服务. -->
+	<dubbo:service retries="0" timeout="5000" delay="-1" interface="com.syc.dubbo.service.HelloService" ref="serviceImpl"/>
+	
+	
+</beans>

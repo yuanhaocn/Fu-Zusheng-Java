@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 目标对象 -->
+	<bean id="dao" class="com.syc.spring.aop01.UserDao" />
+
+	<bean id="service" class="com.syc.spring.aop01.UserService">
+		<property name="dao" ref="dao" />
+	</bean>
+
+	<bean id="web" class="com.syc.spring.aop01.UserAction">
+		<property name="service" ref="service" />
+	</bean>
+
+	<!-- 切面类 -->
+	<bean id="handler" class="com.syc.spring.aop01.ExeceptionHandler" />
+
+	<bean id="transaction" class="com.syc.spring.aop01.Transaction" />
+
+	<!-- 配置切面 -->
+	<aop:config>
+
+		<!-- 全局的,针对所有的切面都有效 -->
+		<aop:pointcut expression="execution(* com.syc.spring.aop01.UserDao.*(..))"
+			id="perform" />
+
+		<!-- 第一个切面 -->
+		<aop:aspect ref="handler">
+			<aop:after-throwing method="handleException"
+				pointcut-ref="perform" throwing="ex" />
+		</aop:aspect>
+
+		<!-- 第二个切面 -->
+		<aop:aspect ref="transaction">
+			<aop:before method="beginTransaction" pointcut-ref="perform" />
+
+			<aop:after method="commit" pointcut-ref="perform" />
+		</aop:aspect>
+	</aop:config>
+</beans>

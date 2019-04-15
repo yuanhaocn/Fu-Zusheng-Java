@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.mybatis.domain.Grade">
+
+	<resultMap type="grade" id="gradeMap">
+		<!-- id:表示主键 -->
+		<id column="id" property="id" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+	</resultMap>
+	
+	<!-- 根据学生姓名,查询出该学生所在班级 -->
+	<select id="findGradeByPersonName" resultMap="gradeMap">
+		select g.id,g.name
+		from grade g
+		inner join person p
+		on g.id=p.gid
+		where p.name=#{name}
+	</select>
+	
+
+</mapper>

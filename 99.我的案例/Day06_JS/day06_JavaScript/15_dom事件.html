@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>dom事件</title>
+		<!--
+			事件:要被触发执行的事情.
+			事件的执行,往往要结合函数来进行.
+			页面,<body>:
+				onload():加载事件
+				onunload():取消加载,关闭页面的时候执行,可以在该事件中进行一些资源的清理.
+			点击:
+			    onclick():单击事件
+			    ondblclick():双击事件
+			鼠标:
+			    onmouseover():鼠标悬停事件,悬浮在某个元素上面的时候;
+			    onmouseenter():鼠标进入...
+			    onmouseleave():鼠标离开...
+			    onmouseout():鼠标移开
+			    onmousedown():鼠标按下
+			    onmouseup():鼠标抬起
+			    onmousemove():鼠标移动...
+			    onmousewheel():鼠标滚轮事件
+			键盘:
+			    onkeydown():某个按键被按下,但是此时没有松开
+			    onkeyup():某个按键被抬起
+			    onkeypress():某个按键被按下并且松开
+			焦点(控制权):
+			    onfocus():获得焦点
+			    onblur():失去焦点
+			其他事件:
+			    onchange():内容被改变的事件
+			    onsubmit():提交事件
+		-->
+		
+		<script>
+			function loadFunc(){
+				alert("页面被加载了...");
+			}
+			
+			function unloadFunc(){
+				//alert("页面被关闭了...");
+				console.log("页面被关闭了...资源进行清理,不是用来显示界面的!");
+			}
+			
+			function clickFunc(){
+				alert("按钮被点击了...");
+			}
+			
+			function mouseEnterFunc(){
+				//alert("鼠标进入事件..");
+				var content=document.getElementById("content");	
+				content.style.background="yellow";
+			}
+			
+			function mouseLeaveFunc(){
+				//alert("鼠标进入事件..");
+				var content=document.getElementById("content");	
+				content.style.background="red";
+			}
+			
+			//限定输入的内容只能是数字
+			function onkeydownFunc(){
+				//获取键盘按键的编码
+				var code=event.keyCode;
+				//0---->48
+				//9---->57
+				if(!(code>=48&&code<=57)){
+					alert("请输入数字!");
+					//限定事件的返回值
+					event.returnValue=false;
+				}
+			}
+			
+			function onFocusFunc(){
+				var tips=document.getElementById("tips");
+				tips.value="获得了焦点...";
+				tips.style.color="red";
+			}
+			
+			function onBlurFunc(){
+				var tips=document.getElementById("tips");
+				tips.value="";
+			}
+			
+			function onchageFunc(){
+				var val=document.getElementById("province").value;
+				alert(val);
+			}
+			
+			function onSubmitFunc(){
+				alert("表单被提交了...");
+			}
+			
+		</script>
+	</head>
+	<body>
+		<button onclick="clickFunc()">点击事件</button>
+		<button ondblclick="clickFunc()">双击击事件</button>
+		<div id="content" style="width: 100px;height: 100px;background: red;" onmouseenter="mouseEnterFunc()" onmouseleave="mouseLeaveFunc()">
+			鼠标事件测试区域
+		</div>
+		<input onkeydown="onkeydownFunc()" placeholder="输入数字"/>
+		<br />
+		<input id="tips" placeholder="测试焦点事件" onfocus="onFocusFunc()" onblur="onBlurFunc()"/>
+		<br />
+		<select id="province" onchange="onchageFunc()">
+			<option>上海</option>
+			<option>安徽</option>
+			<option>浙江</option>
+			<option>江苏</option>
+		</select>
+		<form method="get" action="#" onsubmit="onSubmitFunc()">
+			<div>表单要被提交了</div>
+			<input type="submit" value="提交" />
+		</form>
+	</body>
+</html>

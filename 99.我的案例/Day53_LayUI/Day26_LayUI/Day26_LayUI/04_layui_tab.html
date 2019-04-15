@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui选项卡</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body>
+
+		<div class="layui-tab layui-tab-card" lay-allowClose="true">
+			
+			<!--选项卡标题-->
+			<ul class="layui-tab-title">
+				<!--注意:li中不要带<a></a>标签!-->
+				<li lay-id="1" class="layui-this">网站设置</li>
+				<li lay-id="2">权限分配</li>
+				<li lay-id="3">商品管理</li>
+				<li lay-id="4">订单管理</li>
+			</ul>
+			
+			<!--选项卡内容-->
+			<div class="layui-tab-content" style="height: 200px;">
+				<div class="layui-tab-item layui-show">内容1</div>
+				<div class="layui-tab-item">内容2</div>
+				<div class="layui-tab-item">内容3</div>
+				<div class="layui-tab-item">内容4</div>
+			</div>
+			
+		</div>
+		
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element', function() {
+				//获取模块变量
+				var elmt = layui.element;
+
+				//elmt.render();
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>基本选择器</title>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<style>
+			div{
+				width: 150px;
+				height: 150px;
+				background-color: burlywood;
+				margin: 10px;
+				padding: 10px;
+				border: red 2px solid;
+				float: left;
+			}
+			
+			span{
+				width:150px;
+				height: 150px;
+				margin: 10px;
+				padding: 10px;
+				background-color: green;
+				border: red solid 2px;
+				float: left;
+			}
+			
+		</style>
+		
+		<script>
+		$().ready(function(){
+			
+			$("#btn1").click(function(){
+				$("#one").css("background-color","red");
+			})
+			
+			$("#btn2").click(function(){
+				$(".one").css("background-color","green");
+			})
+			
+			$("#btn3").click(function(){
+				$("div").css("background","yellow");
+			})
+			
+			$("#btn4").click(function(){
+				$("*").css("background","red");
+			})
+			
+			$("#btn5").click(function(){
+				$("#one,.one,span").css("background","red");
+			})
+		})
+	</script>
+	</head>
+
+	<body>
+		<input type="button" value="id选择器" id="btn1" />
+		<input type="button" value="class选择器" id="btn2" />
+		<input type="button" value="标签选择器" id="btn3" />
+		<input type="button" value="匹配所有元素选择器" id="btn4" />
+		<input type="button" value="匹配任意元素选择器" id="btn5" />
+		<br />
+		<hr />
+		<div id="one">id为one的选择器</div>
+		<div class="one">class为one的div</div>
+		<div class="one">class为one的div</div>
+		<div id="two">id为two的div</div>
+		<span>span容器</span>
+	</body>
+	
+
+</html>

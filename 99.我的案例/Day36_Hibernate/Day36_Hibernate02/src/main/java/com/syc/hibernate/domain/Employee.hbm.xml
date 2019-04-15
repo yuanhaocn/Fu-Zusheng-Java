@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.syc.hibernate.domain.Employee" table="empl">
+		<!-- 主键自增长 -->
+		<id column="id" name="id" length="100" type="java.lang.String">
+			<!-- 常见的情况,主键自增长,我们一般无法手动给主键赋值; -->
+			<!-- <generator class="increment"></generator> -->
+			
+			<!-- assigned,分配,我们要手动给该主键赋值,如果不赋值会报异常! -->
+			<!-- <generator class="assigned"></generator> -->
+			
+			<!-- identity效率比increment更高一些,此时必须将表中id的自增长功能(Auto Incr...)给打开. -->
+			<!-- <generator class="identity"></generator> -->
+			
+			<!-- 此时JavaBean的id类型必须是String类型,否则会导致参数类型不匹配的异常. -->
+			<!-- 还必须注意主键的长度,太短也会导致异常. -->
+			<generator class="uuid"></generator>
+		</id>
+		<property name="name" type="string" length="30"/>
+		<property name="job" type="string" length="30"/>
+		<property name="salery" type="double" length="10"/>
+	</class>
+</hibernate-mapping>
+    

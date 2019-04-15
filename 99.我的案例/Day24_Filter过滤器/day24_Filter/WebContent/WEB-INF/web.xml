@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>day24_Filter</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 配置错误 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error500.html</location>
+	</error-page>
+
+	<filter>
+		<filter-name>FirstFilter</filter-name>
+		<filter-class>com.syc.filter.FirstFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FirstFilter</filter-name>
+		<!-- 指定过滤规则 -->
+		<!-- <url-pattern>/firstServlet</url-pattern> -->
+
+		<!-- 这是最核心的! -->
+		<!-- 1.html资源 -->
+		<!-- 1.1.过滤所有的html文件,注意:不要/*.html这样写,否则会导致服务器无法启动. -->
+		<!-- <url-pattern>*.html</url-pattern> -->
+		<!-- 1.2.过滤某个指定的html文件 -->
+		<!-- <url-pattern>/index.html</url-pattern> -->
+
+		<!-- 2.jsp资源 -->
+		<!-- 2.1.过滤所有的jsp文件,注意:不要/*.jsp这样写,否则会导致服务器无法启动. -->
+		<!-- <url-pattern>*.jsp</url-pattern> -->
+		<!--2.2.过滤某个指定的jsp文件 -->
+		<!-- <url-pattern>/index.jsp</url-pattern> -->
+
+		<!-- 3.servlet资源 -->
+		<!--3.1.过滤某个指定的Servlet文件 -->
+		<!-- <url-pattern>/secondServlet</url-pattern> -->
+		<!--3.2.过滤所有的Servlet文件,注意:不要/*.jsp这样写,否则会导致服务器无法启动. -->
+		<!-- 解决办法:①.统一servlet的命名;②.统一servlet的路径 -->
+		<!-- <url-pattern>*.do</url-pattern> -->
+		<!-- <url-pattern>/web/*</url-pattern> -->
+
+		<!-- 4.其他的资源:图片,xml文件,txt,properties配置等 -->
+
+		<!-- 5.匹配所有的资源 -->
+		<!-- <url-pattern>/*</url-pattern> -->
+
+		<url-pattern>/web/*</url-pattern>
+
+		<!-- dispatcher:过滤指定的请求类型 -->
+		<!-- REQUEST:默认值,直接访问某个资源时都是该请求类型,比如直接在浏览器中输入一个资源的地址,
+			 表单,超链接,重定向 -->
+		<!-- <dispatcher>REQUEST</dispatcher> -->
+		<!-- FORWARD:只有当转发的时候才会触发过滤器,RequestDispatcher.forward()
+			 或者<jsp:forward> -->
+		<!-- <dispatcher>FORWARD</dispatcher> -->
+		<!-- INCLUDE:只有当包含的时候才会触发过滤器,<jsp:include>或者
+			 RequestDispatcher.include() -->
+		<!-- <dispatcher>INCLUDE</dispatcher> -->
+		<!--ERROR:只有当要访问的资源中发生了异常,过滤器才会触发. -->
+		<!-- <dispatcher>ERROR</dispatcher> -->
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>FirstServlet</servlet-name>
+		<servlet-class>com.syc.filter.FirstServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FirstServlet</servlet-name>
+		<url-pattern>/web/firstServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SecondServlet</servlet-name>
+		<servlet-class>com.syc.filter.SecondServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SecondServlet</servlet-name>
+		<url-pattern>/web/secondServlet</url-pattern>
+	</servlet-mapping>
+</web-app>

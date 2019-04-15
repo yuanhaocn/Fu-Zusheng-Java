@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>层级选择器</title>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		
+		<script>
+			$().ready(function(){
+				
+				//指定某个祖先,将该祖先下所有的后代样式都改变掉.
+				$("#btn1").click(function(){
+					//去ol下面匹配所有的ul
+					$("ol ul").css("background","red");
+				})
+				
+				//指定父元素,匹配它内部的子元素.例如ol下面的li
+				$("#btn2").click(function(){
+					$("ol > li").css("background","red");
+				})
+				
+				//指定一个元素,匹配它后面的一个平级的元素(与该元素相邻的后续元素).例如id为item1的后面的一个li
+				$("#btn3").click(function(){
+					$("#item1 + li").css("background","red");
+				})
+				
+				//指定一个元素,匹配它后面的所有的平级的元素.例如id为item1的后面的所有的li
+				$("#btn4").click(function(){
+					$("#item1 ~ li").css("background","red");
+				})
+				
+			})
+			
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value="祖先后代选择器" id="btn1" />
+		<input type="button" value="parent > child选择器" id="btn2" />
+		<input type="button" value="pre+next选择器" id="btn3" />
+		<input type="button" value="pre~siblings选择器" id="btn4" />
+		<br />
+		<hr />
+		<ol id="list">
+			<li id="item1">理科:
+				<ul type="circle">
+					<li>物理</li>					
+					<li>化学</li>					
+					<li>数学</li>					
+				</ul>
+			</li>
+			<li>工科:
+				<ul type="disc">
+					<li>建筑</li>					
+					<li>计算机</li>					
+					<li>机械</li>					
+				</ul>
+			</li>
+			<li>文科:
+				<ul type="square">
+					<li>历史</li>					
+					<li>政治</li>					
+					<li>语文</li>					
+				</ul>
+			</li>
+		</ol>
+	</body>
+	
+
+</html>

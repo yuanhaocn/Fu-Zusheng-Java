@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syc.manager.dao.RoleMenuMapper">
+
+	<!-- 添加 -->
+	<insert id="addRoleMenu">
+		insert into role_menu(roleid,menuid) values
+		<foreach collection="menuIdList" item="menuId" open="("
+			separator="),(" close=")">
+			#{roleId},#{menuId}
+		</foreach>
+	</insert>
+
+	<!-- 根据roleId,查询对应的所有menuid -->
+	<select id="findMenuByRoleId" resultType="java.lang.Integer">
+		SELECT menuid FROM
+		role_menu
+		WHERE roleid=#{roleId}
+	</select>
+
+	<!-- 根据roleid,删除role_menu表中对应的用户角色信息 -->
+	<delete id="deleteRoleMenuById">
+		DELETE FROM role_menu WHERE roleid=#{roleId}
+	</delete>
+	
+	<!-- 根据menuid,删除role_menu表中对应的用户角色信息 -->
+	<delete id="deleteRoleMenuByMenuId">
+		DELETE FROM role_menu WHERE menuid=#{menuId}
+	</delete>
+
+</mapper>

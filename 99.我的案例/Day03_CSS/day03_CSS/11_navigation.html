@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>导航效果</title>
+		<style>
+			/*设置整个导航栏div的宽,高,背景色*/
+			
+			.navBar {
+				width: 100%;
+				height: 40px;
+				background: #01204f;
+			}
+			/*设置ul列表的背景色,与div导航栏一致*/
+			
+			ul {
+				background: #01204f;
+			}
+			/*去掉列表样式,水平排列*/
+			
+			ul li {
+				list-style-type: none;
+				float: left;
+			}
+			/*设置所有的a样式*/
+			
+			a {
+				display: inline-block;
+				color: white;
+				text-decoration: none;
+				padding: 14px 16px;
+				font-size: 20px;
+				/*border-right: 1px solid white;*/
+			}
+			/*悬浮在a标签时的背景色*/
+			
+			ul li a:hover,
+			.more:hover {
+				background: red;
+			}
+			/*首页超链接的样式,主要是添加小房子图片*/
+			
+			#home {
+				padding-left: 30px;
+				/*background-image: url(https://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/common/img/navbar/icon-index_2c3bd00.png);*/
+				background-image: url(img/icon-hourse.png);
+				background-repeat: no-repeat;
+				background-position: 6px 16px;
+				/*6px,设置左右方向;16px,设置上下方向*/
+				background-color: red;
+			}
+			/*整个下拉区域显示为一行*/
+			
+			.dropDown {
+				display: inline-block;
+			}
+			/*隐藏dropContent区域*/
+			
+			.dropContent {
+				display: none;
+				position: absolute;
+				min-width: 60px;
+			}
+			/*鼠标悬停在.dropDown上面时,.dropContent以块级元素显示*/
+			
+			.dropDown:hover .dropContent {
+				display: block;
+				/*让下拉区域整体显示*/
+			}
+			
+			.dropContent a {
+				background-color: #001E50;
+				display: block;
+				/*下拉内容里的a要以块级元素的风格显示*/
+			}
+			/*设置悬浮在下拉区域的a标签上时的背景色*/
+			
+			.dropContent a:hover {
+				background: rgba(0, 30, 80, 0.6);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="navBar">
+			<ul>
+				<li>
+					<a href="#" id="home">首页</a>
+				</li>
+				<li>
+					<a href="#">新闻</a>
+				</li>
+				<li>
+					<a href="#">体育</a>
+				</li>
+				<li>
+					<a href="#">军事</a>
+				</li>
+				<li>
+					<a href="#">娱乐</a>
+				</li>
+				<li>
+					<a href="#">科技</a>
+				</li>
+				<li>
+					<a href="#">国内</a>
+				</li>
+				<li>
+					<a href="#">国际</a>
+				</li>
+				<!--下拉区域-->
+				<div class="dropDown">
+					<a href="#" class="more" style="border-right: none;">更多</a>
+					<div class="dropContent">
+						<a href="#">笑话</a>
+						<a href="#">女人</a>
+						<a href="#">汽车</a>
+					</div>
+				</div>
+			</ul>
+			
+		</div>
+	</body>
+
+</html>

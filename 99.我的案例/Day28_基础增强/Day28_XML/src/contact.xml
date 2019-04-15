@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 根节点 -->
+<!-- 整个的XML被称为一个DOM. -->
+<!-- 整个的DOM文档叫做文档节点 -->
+<!-- DOM文档中的每一个根节点,子节点都是元素节点 -->
+<!-- 属性被称为属性节点 -->
+<!-- 文字属于文字节点 -->
+<!-- 注释属于注释节点 -->
+<contacts>
+	<contact id="001">
+		<name>三胖</name>
+		<tel>123456</tel>
+	</contact>
+	
+	<contact id="002">
+		<name>奥巴驴</name>
+		<tel>55555</tel>
+	</contact>
+	
+	<contact id="002">
+		<name>奥观海</name>
+		<tel>44444</tel>
+	</contact>
+	
+	<contact id="004">
+		<name>安倍吃屎</name>
+		<tel>222222</tel>
+	</contact>
+</contacts>

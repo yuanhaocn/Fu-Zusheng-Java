@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.dao.domain.Person">
+
+	<!-- type:要操作的JavaBean的全路径 -->
+	<!-- resultMap:建立起JavaBean和表的映射关系 -->
+	<!-- 直接引用别名 -->
+	<resultMap type="person" id="personMap">
+		<!-- id:表示主键 -->
+		<id column="pid" property="pid" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+	</resultMap>
+
+	<!-- insert:添加操作的标签,id:用来引用该标签 -->
+	<insert id="insertPerson">
+		insert into person (name,nickname)
+		values('扈三娘','一丈青')
+	</insert>
+
+	<!-- 带参数的标签 -->
+	<insert id="insertPersonWithParams" parameterType="person">
+		insert into
+		person (name,nickname)
+		values(#{name},#{nickname})
+	</insert>
+
+	<!-- 查询标签 -->
+	<!-- resultMap:集合的泛型类 -->
+	<select id="findAll" resultMap="personMap">
+		select * from person
+	</select>
+
+	<select id="findById" resultType="person" parameterType="int">
+		select *
+		from person
+		where pid=#{pid}
+	</select>
+
+	<!-- 修改 -->
+	<update id="updateById" parameterType="person">
+		update person set
+		name=#{name},nickname=#{nickname}
+		where pid=#{pid}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="person">
+		delete from person 
+		where pid=#{pid}
+	</delete>
+	
+	<!-- 注意:除了查询之外,其他的操作,增删改操作的,起始和标签名称没有关系! -->
+	<delete id="insertWithDeleteTag" parameterType="person">
+		insert into
+		person (name,nickname)
+		values(#{name},#{nickname})
+	</delete>
+
+</mapper>

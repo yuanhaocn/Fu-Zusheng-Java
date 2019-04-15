@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui导航</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+	</head>
+	
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+	<body>
+		
+		<!--layui-nav:导航样式-->
+		<div class="layui-nav">
+			
+			<!--layui-this:当前选择的默认项-->
+			<div class="layui-nav-item layui-this"><a href="#">最新活动</a></div>
+			
+			<div class="layui-nav-item"><a href="#">产品</a></div>
+			
+			<div class="layui-nav-item"><a href="#">大数据</a></div>
+			
+			<!--layui-nav-item:导航项-->
+			<div class="layui-nav-item">
+				<a href="#">解决方案</a>
+				<!--二级菜单,下拉菜单,layui-nav-child:子菜单-->
+				<dl class="layui-nav-child">
+					<dd><a href="#">移动模块</a></dd>
+					<dd><a href="#">后台模块</a></dd>
+					<dd><a href="#">电商平台</a></dd>
+				</dl>
+			</div>
+			
+			<div class="layui-nav-item"><a href="#">社区</a></div>
+			
+		</div>
+		
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element',function(){
+				//获取模块变量
+				var elmt=layui.element;
+				
+				//elmt.render();
+			});
+			
+		</script>
+	</body>
+</html>

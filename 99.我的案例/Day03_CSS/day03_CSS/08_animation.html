@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>animation动画</title>
+		<style type="text/css">
+			#one{
+				width: 100px;
+				height: 100px;
+				background: red;
+				color: white;
+				text-align: center;
+				line-height: 100px;
+			}
+			
+			#one:hover{
+				width: 1000px;
+				background: blue;
+				font-size: 30px;
+				color: white;
+				/*transition:属性名称 动画执行时间 预置的动画函数*/
+				transition: width 5s linear,background-color 3s ease-in,font-size 4s ease-in-out;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="one">我是div</div>
+	</body>
+
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.mybatis.domain.Student">
+
+	<resultMap type="student" id="studentMap">
+		<!-- id:表示主键 -->
+		<id column="id" property="id" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+		
+		<!-- 关联课程对象 -->
+		<!-- <association property="courses" resultMap="com.syc.mybatis.domain.Course.courseMap"/> -->
+	</resultMap>
+	
+	<!-- 根据课程名称,查询选择了该课程的学生有哪些? -->
+	<select id="findStudentByCourseName" resultMap="studentMap">
+		select s.id,s.name
+		from student s
+		inner join student_course sc
+		on s.id=sc.sid
+		inner join course c
+		on sc.cid=c.id
+		where c.name=#{name}
+	</select>
+	
+</mapper>

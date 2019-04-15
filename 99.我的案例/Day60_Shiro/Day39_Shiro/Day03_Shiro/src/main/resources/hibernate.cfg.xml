@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<!-- 不加该配置项,否则会报错? -->
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- <mapping resource="xxx.Role.hbm.xml"/> -->
+		<mapping class="com.syc.shiro.domain.User"/>
+		<mapping class="com.syc.shiro.domain.Role"/>
+		<mapping class="com.syc.shiro.domain.Permission"/>
+		<mapping class="com.syc.shiro.domain.UserRole"/>
+		
+	</session-factory>
+
+</hibernate-configuration>
+                                         

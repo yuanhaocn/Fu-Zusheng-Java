@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网页结构</title>
+		<style>
+			*{
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			body{
+				width: 100%;
+				height: 0 auto;
+				font-size: 2em;
+			}
+			
+			#head{
+				height: 15%;
+				background: #FFFFFF;
+				border: 1px solid gray;
+			}
+			
+			#head a{
+				color: black;
+			}
+			
+			#nav{
+				height:100px;
+				background:#eee;
+				margin-top:10px;
+				margin-bottom:10px;
+			}
+			#adver{
+				height: 100px;
+				background: #a00;
+				margin-top:10px;
+				margin-bottom:10px;
+			}
+			
+			#body{
+				height: 600px;
+				/*background: goldenrod;*/
+			}
+			
+			#left{
+				width: 69%;
+				height: 100%;
+				background: red;
+				float: left;
+			}
+			
+			#right{
+				width: 30%;
+				height: 100%;
+				background: green;
+				float: right;
+			}
+			
+			#bottom{
+				width: 100%;
+				height: 100px;
+				background: #999;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="head">
+			<a href="#">网页</a>
+			<a href="#">新闻</a>
+			<a href="#">贴吧</a>
+			<a href="#">知道</a>
+			<a href="#">图片</a>
+			<a href="#">音乐</a>
+		</div>
+		<div id="nav">导航区域</div>
+		<div id="adver">广告区域</div>
+		<div id="body">
+			<div id="left">左侧区域</div>
+			<div id="right">右侧区域</div>
+		</div>
+		<div id="bottom">底部区域</div>
+	</body>
+</html>

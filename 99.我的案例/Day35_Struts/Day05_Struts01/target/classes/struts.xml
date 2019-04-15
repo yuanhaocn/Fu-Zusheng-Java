@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- 开发静态方法调用功能 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	
+	<package name="data" extends="struts-default">
+		<action name="data1" class="com.syc.struts.DataAction01">
+			<result>/data1.jsp</result>
+		</action>
+		
+		<action name="data2" class="com.syc.struts.DataAction02">
+			<result>/data2.jsp</result>
+		</action>
+		
+		<action name="data3" class="com.syc.struts.DataAction03">
+			<result>/data3.jsp</result>
+		</action>
+		
+		<action name="data4" class="com.syc.struts.DataAction04">
+			<result>/data4.jsp</result>
+		</action>
+		
+		<action name="data5" class="com.syc.struts.DataAction05">
+			<result>/data5.jsp</result>
+		</action>
+	</package>
+</struts>

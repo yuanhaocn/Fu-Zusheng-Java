@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syc.manager.dao.UserMapper">
+	
+	<!-- 根据用户名查询对应的用户 -->
+	<select id="findUserByUserName" resultType="com.syc.manager.domain.User">
+		SELECT userid,username,password,email,status,createuserid,mobile,createtime
+		FROM user
+		WHERE username=#{username}
+	</select>
+	
+	<!-- 查询全部用户 -->
+	<select id="findAllUsers" resultType="com.syc.manager.domain.User">
+		SELECT userid,username,password,email,status,createuserid,mobile,createtime
+		FROM user
+	</select>
+	
+	<!-- 添加用户 -->
+	<insert id="addUser" parameterType="com.syc.manager.domain.User">
+		<!-- SelectKey在Mybatis中是为了解决Insert数据时不支持主键自动生成的问题,它可以很随意的设置生成主键的方式! -->
+		<!-- 这可以被设置为 BEFORE或 AFTER.如果设置为 BEFORE,那么它会首先选择主键,然后执行插入语句;
+			  如果设置为 AFTER,那么先执行插入语句,然后是 selectKey元素 -->
+		<!-- 注意:注意order属性，像Mysql一类支持自动增长类型的数据库中,
+			 order需要设置为after才会取到正确的值.像Oracle这样取序列的情况，需要设置为before,否则会报错 -->
+		<selectKey order="AFTER" resultType="int" keyProperty="userId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO user (username,password,email,status,createuserid,mobile,createtime)
+		VALUES
+		(#{username},#{password},#{email},#{status},#{createUserId},#{mobile},#{createTime})
+	</insert>
+	
+	<!-- 查询全部用户 -->
+	<select id="findUserById" resultType="com.syc.manager.domain.User">
+		SELECT userid,username,password,email,status,createuserid,mobile,createtime
+		FROM user
+		WHERE userid=#{userId}
+	</select>
+	
+	<!-- 修改用户信息 -->
+	<update id="updateUser" parameterType="com.syc.manager.domain.User">
+		<if test="user!=null">
+			UPDATE user
+			<set>
+				<if test="user.username!=null">
+					username=#{user.username},
+				</if>
+				<if test="user.password!=null">
+					password=#{user.password},
+				</if>
+				<if test="user.mobile!=null">
+					mobile=#{user.mobile},
+				</if>
+				<if test="user.email!=null">
+					email=#{user.email},
+				</if>
+				<if test="user.status!=null">
+					status=#{user.status},
+				</if>
+			</set>
+			WHERE userid=#{user.userId}
+		</if>
+	</update>
+	
+	<!-- 根据userId,删除对应的用户 -->
+	<delete id="deleteUser">
+		DELETE FROM user
+		WHERE userid IN
+		<foreach collection="userIds" item="userId" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+	</delete>
+	
+</mapper>

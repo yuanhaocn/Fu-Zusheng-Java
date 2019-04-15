@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syc.manager.dao.MenuMapper">
+	
+	<!-- 根据用户id查询对应的权限 -->
+	<select id="getUserPermissionsList" resultType="java.lang.String">
+		SELECT m.perms 
+		FROM menu m
+		LEFT JOIN role_menu rm 
+		ON rm.menuid = m.menuid
+		LEFT JOIN user_role ur
+		ON ur.roleid = rm.roleid
+		WHERE ur.userid=#{userId}
+	</select>
+	
+	<select id="findAllUrlPerms" resultType="com.syc.manager.vo.Perms">
+		SELECT url,perms FROM menu
+	</select>
+	
+	<!-- 查询所有的menu信息 -->
+	<select id="getAllMenu" resultType="com.syc.manager.domain.Menu">
+		SELECT menuid,parentid,menuname,url,perms,type,icon FROM menu
+	</select>
+	
+	<!-- 添加角色 -->
+	<insert id="addMenu" parameterType="com.syc.manager.domain.Menu">
+		<selectKey order="AFTER" resultType="int" keyProperty="menuId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO menu (parentid,menuname,url,perms,type,icon)
+		VALUES
+		(#{parentId},#{menuName},#{url},#{perms},#{type},#{icon})
+	</insert>
+	
+	<select id="findMenuById" resultType="com.syc.manager.domain.Menu">
+		SELECT menuid,parentid,menuname,url,perms,type,icon FROM menu
+		WHERE menuid=#{menuId}
+	</select>
+	
+	<update id="updateMenu" parameterType="com.syc.manager.domain.Menu">
+		UPDATE menu
+		<if test="menu!=null">
+			<set>
+				<if test="menu.menuName!=null">
+					menuname=#{menu.menuName},
+				</if>	
+				<if test="menu.url!=null">
+					url=#{menu.url},
+				</if>			
+				<if test="menu.parentId!=null">
+					parentid=#{menu.parentId},
+				</if>			
+				<if test="menu.perms!=null">
+					perms=#{menu.perms},
+				</if>			
+				<if test="menu.type!=null">
+					type=#{menu.type},
+				</if>			
+				<if test="menu.icon!=null">
+					icon=#{menu.icon}
+				</if>			
+			</set>
+			
+			WHERE menuid=#{menu.menuId}
+		</if>
+	</update>
+	
+	<delete id="deleteMenu">
+		DELETE FROM menu
+		WHERE menuid IN
+		<foreach collection="ids" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+</mapper>

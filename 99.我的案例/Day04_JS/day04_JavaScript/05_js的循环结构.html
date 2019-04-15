@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>循环结构</title>
+	</head>
+
+	<body>
+		<script>
+			/*for*/
+			/*1+2+3+...+100=?*/
+			var num=0;/*注意:字符串与普通数字拼接,结果变成字符串*/
+			//没有int类型啦.
+			for(var i=1;i<=100;i++){
+				num+=i;
+			}
+			document.write(num+"<br />");
+			
+			/*while循环*/
+			var num=0;
+			var i=1;
+			while(i<=100){
+				num+=i;
+				i++;
+			}
+			document.write(num+"<br />");
+			
+			/*do...while...*/
+			var i=1;
+			var num=0;
+			do{
+				num+=i;
+				i++;
+			}while(i<=100);
+			document.write(num+"<br />");
+			
+			/*for...in...增强for循环*/
+			var cars=["奔驰","奥迪","宝马","林肯","布加迪威龙"];
+			/*car:数组的下表*/
+			for(var car in cars){
+				document.write(car+":"+cars[car]+"<br />");
+			}
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>打印乘法表函数</title>
+		<style>
+			.tab{
+				margin: 0 auto;
+				padding: 10px;
+				border-collapse: collapse;/*折叠边框*/
+				/*border: 1px solid blue;*/
+			}
+			
+			.tab td{
+				border: 1px solid red;
+				padding: 10px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<input type="text" placeholder="请输入要打印的行数" id="line" />
+		<input type="button" value="确定" onclick="showTable()" />
+	
+		<script>
+			/*打印乘法表*/
+			function printlTable(lines) {
+				document.write("<table class='tab'>");
+				for (var i = 1; i <= lines; i++) {
+					document.write("<tr>");
+					for (var j = 1; j <= i; j++) {
+						document.write("<td>" + j + "*" + i + "=" + j * i + "</td>");
+					}
+					document.write("</tr>");
+				}
+				document.write("</table>");
+			}
+
+			/*调用打印乘法表的函数*/
+			function showTable() {
+				var lines = document.getElementById("line").value;
+				printlTable(lines);
+			}
+		</script>
+	
+	</body>
+
+</html>

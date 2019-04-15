@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 目标对象 -->
+	<bean id="dao" class="com.syc.spring.aop02.UserDao"/>
+	
+	<!-- 切面对象 -->
+	<bean id="transaction" class="com.syc.spring.aop02.Transaction"/>
+
+	<!-- 配置aop切面 -->
+	<aop:config>
+		<aop:aspect ref="transaction">
+			<!-- 切入点表达式的作用是用来指明目标类所在的位置 -->
+			<!-- *:通配符,如果有2个*号,第一个*号代表方法的修饰符;第二个*号代表返回值. -->
+			<aop:pointcut expression="execution( * com.syc.spring.aop02.UserDao.*(..))" 
+				id="perform"/>
+			
+			<!-- 配置通知(Advise),配置用来增强的代码 -->
+			<!-- 要把prepareSing()方法,给织入到目标方法前面,通过pointcut-ref来确定目标方法的位置 -->
+			<aop:before method="beginTransaction" pointcut-ref="perform"/>
+			
+			<!-- 配置环绕通知方法. -->
+			<aop:around method="aroundMethod" pointcut-ref="perform"/>
+			
+			<!-- 配置异常通知 -->
+			<!-- throwing:表示异常通知方法的参数.必须保证与切面类中对应的异常通知方法的参数名称完全一样! -->
+			<aop:after-throwing method="exectionMethod" pointcut-ref="perform" throwing="ex"/>
+			
+			<!-- 配置后置通知方法 -->
+			<!-- returning:表示后置通知方法的参数.必须保证与切面类中对应的后置通知方法的参数名称完全一样! -->
+			<aop:after-returning method="afterMethod" pointcut-ref="perform" returning="value"/>
+			
+			<!-- 配置最终通知 -->
+			<aop:after method="commit" pointcut-ref="perform"/>
+			
+		</aop:aspect>
+	</aop:config>
+
+</beans>

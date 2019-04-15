@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- hibernate-configuration,根节点,用于配置hibernate -->
+<hibernate-configuration>
+	<!-- 配置一个session-factory,session工厂 -->
+	<!-- session是数据库的会话的对象,通过session实现数据库的增删改查. -->
+	<session-factory>
+		<!-- property,属性,键值对的形式,用来配置不同的设置选项 -->
+		<!-- 必选项 -->
+		<!-- 设置数据库用户名 -->
+		<property name="hibernate.connection.username">root</property>
+		<!-- 密码 -->
+		<property name="hibernate.connection.password">syc</property>
+		<!-- 驱动包 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- url -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sql01</property>
+
+		<!-- 可选项 -->
+		<!-- 用来显示当前操作的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 格式化sql语句 -->
+		<property name="hibernate.format_sql">true</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- 设置数据库的方言 -->
+		<!-- 为了告诉Hibernate底层用来生成什么样的sql语句. -->
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+
+		<!-- 配置二级缓存 -->
+		<!-- 默认不支持二级缓存,需要开启二级缓存 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+
+		<!-- 默认也不支持查询缓存,开启该功能 -->
+		<property name="hibernate.cache.use_query_cache">true</property>
+		
+		<!-- 配置二级缓存的具体实现类 -->
+		<property name="hibernate.cache.region.factory_class">
+			org.hibernate.cache.ehcache.EhCacheRegionFactory
+		</property>
+		
+		<!-- 配置二级缓存的配置文件 -->
+		<property name="hibernate.cache.provider_configuration_file_resource_path">
+			ehcache.xml
+		</property>
+		
+		<!-- 开启二级缓存的统计功能 -->
+		<property name="hibernate.generate_statistics">true</property>
+		
+		<!-- 加载映射文件 -->
+		<!-- 该文件表示Java对象与数据库表之间的映射关系,ORM -->
+		<mapping resource="com/syc/hibernate/domain/Employee.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

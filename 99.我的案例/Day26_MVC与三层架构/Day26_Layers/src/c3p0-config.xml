@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+	<!-- MySQL的配置 -->
+	<default-config>
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/sql02</property>
+		<property name="user">root</property>
+		<property name="password">syc</property>
+		<property name="initialPoolSize">20</property>
+		<property name="maxPoolSize">100</property>
+		<property name="maxIdleTime">3000</property>
+	</default-config>
+	
+	<!-- Oracle的配置 -->
+</c3p0-config>

@@ -1,0 +1,16 @@
+JRebel-JVMTI [DEBUG] Initializing agent... 1.0.29-2017-07-28T09:42:52Z
+JRebel-JVMTI [DEBUG] Java 9+ detected: false
+JRebel-JVMTI [INFO] VM vendor: Oracle Corporation
+JRebel-JVMTI [DEBUG] Agent loaded from E:\javaee\eclipse-jee-mars-2-win32-x86_64\eclipse\plugins\org.zeroturnaround.eclipse.embedder_7.0.14.RELEASE\jrebel\lib\jrebel64.dll
+JRebel-JVMTI [DEBUG] Searching for jrebel.jar in E:\javaee\eclipse-jee-mars-2-win32-x86_64\eclipse\plugins\org.zeroturnaround.eclipse.embedder_7.0.14.RELEASE\jrebel\jrebel.jar
+JRebel-JVMTI [DEBUG] Found jrebel.jar in E:\javaee\eclipse-jee-mars-2-win32-x86_64\eclipse\plugins\org.zeroturnaround.eclipse.embedder_7.0.14.RELEASE\jrebel\jrebel.jar
+JRebel-JVMTI [DEBUG] Checking bootcache for 37eb83517f8c93d27933c8ee69eef705
+JRebel-JVMTI [DEBUG] Bootstrap jar found from bootcache: C:\Users\feng\.jrebel\bootcache\jrebel-bootstrap-37eb83517f8c93d27933c8ee69eef705.jar
+JRebel-JVMTI [DEBUG] Patching sun.boot.class.path ...
+JRebel-JVMTI [DEBUG] Prepended C:\Users\feng\.jrebel\bootcache\jrebel-bootstrap-37eb83517f8c93d27933c8ee69eef705.jar to sun.boot.class.path
+JRebel-JVMTI [DEBUG] Added E:\javaee\eclipse-jee-mars-2-win32-x86_64\eclipse\plugins\org.zeroturnaround.eclipse.embedder_7.0.14.RELEASE\jrebel\jrebel.jar to bootstrap ClassLoader search
+JRebel-JVMTI [DEBUG] Agent initialization completed.
+JRebel-JVMTI [DEBUG] VMStart
+JRebel-JVMTI [DEBUG] callback_VMInit
+JRebel-JVMTI [DEBUG] Calling premain of Java agent.
+JRebel-JVMTI [DEBUG] Java agent successfully initialized.

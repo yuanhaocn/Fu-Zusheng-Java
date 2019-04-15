@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>day17_Servlet01</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<!-- 描述信息 -->
+		<description></description>
+		<!-- Servlet的显示名称 -->
+		<display-name>FirstServlet</display-name>
+
+		<!-- 以下2行代码才是关键 -->
+		<!-- servlet-name,Servlet的名称,默认就是类名,但是可以不是类名. -->
+		<servlet-name>FirstServlet</servlet-name>
+		<!-- servlet-class,是这个Servlet的完整路径. -->
+		<servlet-class>com.syc.servlet.FirstServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<!-- 这个servlet-name与servlet的name是完全一样的! -->
+		<servlet-name>FirstServlet</servlet-name>
+		<!-- url的缩写 -->
+		<url-pattern>/first</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SecondServlet</servlet-name>
+		<servlet-class>com.syc.servlet.SecondServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SecondServlet</servlet-name>
+		<url-pattern>/second</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<!-- 在同一个web.xml文件中,servlet-name不能重复. -->
+		<!-- servlet-name名称是自定义的,随便写. -->
+		<servlet-name>Third</servlet-name>
+		<servlet-class>com.syc.servlet.ThirdServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Third</servlet-name>
+		<url-pattern>/third</url-pattern>
+	</servlet-mapping>
+</web-app>

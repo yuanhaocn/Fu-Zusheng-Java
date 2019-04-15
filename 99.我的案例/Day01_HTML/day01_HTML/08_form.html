@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>表单标签</title>
+	</head>
+
+	<body>
+		<!--表单-->
+		<!--method:指定请求的方式-->
+		<!--action:指定数据上传的地址-->
+		<form method="get" action="#">
+			<div>
+				<lable for="name">姓名:</lable>
+				<input type="text" name="name" placeholder="请输入用户名"/>
+			</div>
+			<div>
+				<lable for="pass">密码:</lable>
+				<input type="password" name="pass" placeholder="请输入密码"/>
+			</div>
+			<div>
+				<label for="sex">性别:</label>
+				<input type="radio" name="sex" value="male"/>男
+				<input type="radio" name="sex" value="female"/>女
+			</div>
+			<div>
+				<input type="checkbox" name="love" value="吃饭饭" />吃饭饭
+				<input type="checkbox" name="love" value="睡觉觉" />睡觉觉
+				<input type="checkbox" value="打豆豆" />打豆豆
+				<input type="checkbox" value="装豆豆" />装豆豆
+			</div>
+			<select name="address">
+				<option>
+					浙江
+				</option>
+				<option>江苏</option>
+				<option>安徽</option>
+				<option>江西</option>
+				<option>湖南</option>
+			</select>
+			<br />
+			<input type="file" />	
+			<br />
+			<input type="datetime-local" />
+			<br />
+			<input type="color" />
+			<br />
+			<input type="number" placeholder="请输入数字格式"/>
+			<br />
+			<input type="email" placeholder="请输入email"/>
+			<br />
+			<textarea rows="5" cols="10"></textarea>
+			<br />
+			<input type="submit" value="提交"/>
+			<input type="reset" value="重置"/>
+		</form>
+	</body>
+
+</html>

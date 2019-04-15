@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基本筛选选择器</title>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<style>
+			table{
+				width: 200px;
+				height: 200px;
+				border: 1px red;
+				/*H5中已经被废弃掉了.*/
+				/*同样的效果要border-collapse与border结合*/
+				/*cellpadding:1px
+				cellspacing:1px*/
+				border-collapse: collapse;
+			}
+			td{
+				padding: 1px,1px;
+				border: 1px solid black;
+			}
+		</style>
+		
+		<script>
+			
+			$().ready(function(){
+				
+				//:first,匹配ol下的第一个元素
+				$("#btn1").click(function(){
+					$("ol :first").css("background","red");
+				})
+				
+				//:last,匹配ol下的最后一个元素
+				$("#btn2").click(function(){
+					$("ol :last").css("background","red");
+				})
+				
+				//:not(),排除某个指定的元素
+				$("#btn3").click(function(){
+					$("ol :not(#item1)").css("background","red");
+				})
+				
+				//:not(),排除某个指定的元素
+				$("#btn4").click(function(){
+					$("li :not(.science1)[class='science2']").css("background","red");
+				})
+				
+				//:odd选择器,匹配奇数元素.tr:odd与tr :odd效果不同!
+				$("#btn5").click(function(){
+					$("tr:odd").css("background","red");
+				})
+				
+				//:even选择器,匹配偶数元素.tr:even与tr :even效果不同!
+				$("#btn6").click(function(){
+					$("tr:even").css("background","red");
+				})
+				
+				//gt(num):匹配大于某个值的元素
+				$("#btn7").click(function(){
+					$("tr:gt(0)").css("background","red");
+				})
+				
+				//lt(num):匹配小于某个值的元素
+				$("#btn8").click(function(){
+					$("tr:lt(2)").css("background","red");
+				})
+				
+				//lt(num):匹配小于某个值的元素
+				$("#btn9").click(function(){
+					$("tr:eq(2)").css("background","red");
+				})
+				
+				//:header只会匹配所有的<h></h>标签.
+				$("#btn10").click(function(){
+					$(":header").css("background","red");
+				})
+				
+				//:root匹配整个页面的根元素.<body>元素
+				$("#btn11").click(function(){
+					$(":root").css("background","gold");
+				})
+				
+			})
+			
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value=":first选择器" id="btn1" />
+		<input type="button" value=":last选择器" id="btn2" />
+		<input type="button" value=":not选择器" id="btn3" />
+		<input type="button" value=":not与其他选择器结合使用" id="btn4" />
+		<br />
+		<hr />
+		<ol id="list">
+			<li id="item1">理科:
+				<ul type="circle">
+					<li class="science1">物理</li>					
+					<li class="science2">化学1</li>		
+					<li class="science2">化学2</li>
+					<li class="science3">数学</li>					
+				</ul>
+			</li>
+			<li id="item2">工科:
+				<ul type="disc">
+					<li>建筑</li>					
+					<li>计算机</li>					
+					<li>机械</li>					
+				</ul>
+			</li>
+			<li id="item3">文科:
+				<ul type="square">
+					<li>历史</li>					
+					<li>政治</li>					
+					<li>语文</li>					
+				</ul>
+			</li>
+		</ol>
+		<hr />
+		<input type="button" value=":odd选择器" id="btn5"/>
+		<input type="button" value=":even选择器" id="btn6"/>
+		<input type="button" value=":gt选择器" id="btn7"/>
+		<input type="button" value=":lt选择器" id="btn8"/>
+		<input type="button" value=":eq选择器" id="btn9"/>
+		<br />
+		<br />
+		<table>
+			<tr>
+				<td>用户编号</td>
+				<td>用户姓名</td>
+				<td>用户薪资</td>
+			</tr>
+			<tr>
+				<td>001</td>
+				<td>张三</td>
+				<td>8000.0</td>
+			</tr>
+			<tr>
+				<td>002</td>
+				<td>李四</td>
+				<td>8020.0</td>
+			</tr>
+			<tr>
+				<td>003</td>
+				<td>王五</td>
+				<td>8030.0</td>
+			</tr>
+			<tr>
+				<td>004</td>
+				<td>赵六</td>
+				<td>8040.0</td>
+			</tr>
+		</table>
+		
+		<hr />
+		<br />
+		<input type="button" id="btn10" value=":header选择器" />
+		<h3>标题3</h3>
+		<h4>标题4</h4>
+		<h5>标题5</h5>
+		
+		<hr />
+		<input type="button" id="btn11" value=":root选择器" />
+	</body>
+
+</html>

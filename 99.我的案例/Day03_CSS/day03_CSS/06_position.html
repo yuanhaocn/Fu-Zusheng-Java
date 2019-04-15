@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>position位置属性</title>
+		<style>
+			/*position的值,常用的有4个*/
+			/*1.static,静态定位,默认就是该值,所以用不用都一样.*/
+			/*2.fixed:固定不变,相当于浏览器窗口来说始终固定自己的位置不变*/
+			/*3.absolute:绝对定位,一般情况下都要结合top,left,right,bottom来一起使用.
+			 注意:absolute定位的时候,有2个参照系统:
+			 ①.默认是浏览器窗口;
+			 ②.参照父容器,并且父容器还得是相对定位才行.*/
+			/*4.相对定位:是相对自己,相对于它自己之前在浏览器中的位置.*/
+			
+			#container{
+				width: 600px;
+				height: 500px;
+				background: gray;
+				position: relative;/*当父容器是相对定位的时候,子元素的绝对定位才能按照父容器的标准来走.*/
+				top: 20px;
+				left: 20px;
+			}
+			
+			#one {
+				background: red;
+				color: white;
+				position: absolute;
+				/*top: 400px;*/
+				/*top:该元素距父容器顶部的距离*/
+				/*left: 100px;*/
+				top: 20px;
+				right: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="one">第一个div</div>
+		</div>
+
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+		<p>段落1</p>
+	</body>
+
+</html>

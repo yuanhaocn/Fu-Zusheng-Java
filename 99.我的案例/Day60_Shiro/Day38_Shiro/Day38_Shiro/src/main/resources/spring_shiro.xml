@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 配置自定义的Realm -->
+	<!-- 一个项目中可以自定义N个Realm -->
+	<bean id="myRealm" class="com.syc.shiro.realm.MyRealm"/>
+
+	<bean id="shirManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myRealm"/>
+		<!-- 如果要同时配置多个Realm,就用realms属性! -->
+		<!-- <property name="realms">
+			<list></list>
+		</property> -->
+	</bean>
+
+	<!-- 该bean用来创建ShiroFilter对象.一般XXXFactoryBean,都是用来创建XXX对象的! -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 必须配置 -->
+		<property name="securityManager" ref="shirManager"/>
+			
+		<!-- loginUrl:登陆时访问的地址 -->	
+		<property name="loginUrl" value="/"/>	
+		
+		<!-- successUrl:登陆成功时的访问的地址 -->
+		<!-- <property name="successUrl" value="/home.jsp"/>	 -->
+		
+		<!-- unauthorizedUrl:未授权时访问的url地址 -->
+		<property name="unauthorizedUrl" value="/"/>
+		
+		<!-- 基本上必须配置该属性! -->
+		<!-- 该配置,用来决定用户可以访问哪些资源! -->
+		<property name="filterChainDefinitions">
+			<!-- 定义资源访问的一些规则! -->
+			<value>
+				/visitor/visitor** = anon
+				/home** = authc
+				/user/user** = authc
+				/admin/admin** = authc,perms[admin:manager]
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 管理Shiro的生命周期 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>

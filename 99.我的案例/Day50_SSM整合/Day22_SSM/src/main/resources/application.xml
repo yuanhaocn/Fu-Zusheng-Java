@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<context:component-scan base-package="com.syc.ssm"/>
+	
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->	
+	
+	<!-- 在没有处理器映射器的情况下,如何配置拦截器? -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<bean class="com.syc.ssm.interceptor.UserInterceptor"/>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 当配置了这个设置之后,以上的两个处理器映射器和适配器,就可以不用再配置了! -->
+	<mvc:annotation-driven/>
+	
+	<!-- 在这里配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- mvc:mapping:设置拦截规则,对哪些请求进行拦截? -->
+			<mvc:mapping path="/**"/>
+			<!-- 注册并引用拦截器 -->
+			<bean class="com.syc.ssm.interceptor.UserInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 设置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+	
+	<!-- 关联数据库 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${mysql.driver}"/>
+		<property name="jdbcUrl" value="${mysql.url}"/>
+		<property name="user" value="${mysql.username}"/>
+		<property name="password" value="${mysql.password}"/>
+	</bean>
+	
+	<!-- 配置SessionFactory对象 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 加载mybatis的配置文件 -->
+		<property name="configLocation" value="classpath:mybatis.xml"/>
+	</bean>
+</beans>

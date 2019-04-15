@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- 常量,声明了一个全局的baseName -->
+	<constant name="struts.custom.i18n.resources" 
+		value="com.syc.struts.resource.msg" />
+
+	<package name="i18n" extends="struts-default">
+		<action name="i18n" class="com.syc.struts.action.I18NAction"
+			method="showMsg">
+			<result>/home.html</result>
+		</action>
+	</package>
+</struts>

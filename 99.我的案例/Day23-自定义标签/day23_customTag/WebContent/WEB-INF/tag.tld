@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- tld文件的作用,相当于是"公安局",所有自定义出来的标签,必须在这里进行注册. -->
+
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<!-- 标签库,所有的标签都需要在这里面进行注册 -->
+<taglib>
+	<!--指定标签库所用的版本 -->
+	<tlib-version>1.2</tlib-version>
+	<!-- 指定该标签使用哪个版本的jsp -->
+	<jsp-version>2.0</jsp-version>
+	<!-- 指定自定义标签的缩写名称 -->
+	<short-name>custom</short-name>
+	<!-- 指定自定义标签的路径 -->
+	<uri>http://com.syc.customlabel</uri>
+
+	<!-- 注册标签 -->
+	<tag>
+		<!-- 标签名称 -->
+		<name>showIP</name>
+		<!-- 标签对应的类的完整路径 -->
+		<tag-class>com.syc.customlabel.ShowIpTag</tag-class>
+		<!-- 标签的约束规则和作用范围 -->
+		<!-- JSP,scriptless,tagdependent -->
+		<!-- jsp:该标签体可以包含jsp的各种元素(el表达式,动作元素,脚本) -->
+		<!-- scriptless:该标签体可以el表达式和jsp的动作元素,但是不能包含js脚本 -->
+		<!-- tagdependent:该属性值很少用,作用与JSP类似,但是不会对el表达式进行计算 -->
+		<body-content>scriptless</body-content>
+	</tag>
+
+	<tag>
+		<name>printBoby</name>
+		<tag-class>com.syc.customlabel.PrintBodyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<!-- 给自定义标签添加属性 -->
+		<attribute>
+			<!-- 属性名称 -->
+			<name>lines</name>
+			<!-- 属性值是否必须 -->
+			<required>true</required>
+			<!-- 是否支持el表达式 -->
+			<rtexprvalue>false</rtexprvalue>
+			<!-- 属性的类型 -->
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<!-- 属性名称 -->
+			<name>upCase</name>
+			<!-- 属性值是否必须 -->
+			<required>false</required>
+			<!-- 是否支持el表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+			<!-- 属性的类型 -->
+			<type>boolean</type>
+		</attribute>
+	</tag>
+
+	<!-- 自定义的forEach注册 -->
+	<tag>
+		<name>forEach</name>
+		<tag-class>com.syc.customlabel.ForEachTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

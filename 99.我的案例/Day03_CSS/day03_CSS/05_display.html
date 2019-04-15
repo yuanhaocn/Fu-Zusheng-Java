@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>display显示属性</title>
+		<style>
+			div{
+				width: 100px;
+				height: 60px;
+				border: 1px solid red;
+				display: inline;/*div本来块级元素,用了inline之后,就编程了行内元素*/
+			}
+			
+			span{
+				width: 100px;
+				height: 60px;
+				border: 1px solid blue;
+				display: block;
+			}
+			
+			a{
+				width: 100px;
+				height: 60px;
+				border: 1px solid yellowgreen;
+				display: inline-block;/*inline-block,此时该元素属于块,但是又有某些行的特点.*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>块级元素一</div>
+		<div>块级元素二</div>
+		<span>行内标签</span>
+		<a href="#">百度一下</a>
+	</body>
+
+</html>

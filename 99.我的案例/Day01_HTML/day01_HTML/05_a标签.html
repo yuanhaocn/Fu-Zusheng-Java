@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>超链接标签</title>
+	</head>
+	<body>
+		<!--a:超链接标签,href的值是url地址-->
+		<a href="#">百度一下,你就知道</a>
+		<br />
+		<!--uri:统一资源标识符-->
+		<!--scheme://host:port/path-->
+		<!--url:统一资源定位符,url是uri的一个子集-->
+		<!--http(s)://www.baidu.com:80/index.html-->
+		<!--浏览器本身会读取href的值,读到了http协议,然后这时候浏览器就会去加载http的解析引擎,该引擎就会读取www.baidu.com-->
+		<!--www.baidu.com是百度的主机.浏览器此时会去电脑的本地找host文件,如果能够找到该网址,就把该网址对应的ip地址给读出来,然后访问-->
+		<!--但是如果本地的host文件没有该网址,这时候浏览器会让DNS(域名解析服务)去寻找网址对应的ip地址.-->
+		<!--最后再把ip地址转换成二进制,00010100.10101010.....(0.0.0.0~255.255.255.255)-->
+		<!--host:ip地址与网址的映射关系-->
+		<!--host文件内容:www.baidu.com 61.135.169.125-->
+		<a href="http://www.baidu.com">百度</a>
+		
+		<br />
+		<a href="http://www.baidu.com">
+			<img src="img/foot.jpg" width="100px" height="100px"/>
+		</a>
+		
+		<br />
+		<!--跳转到本地网页中-->
+		<a href="04_img.html">04页面</a>
+		<br />
+		<a href="login/user/04_html.html">跳转到user目录下的html</a>
+	
+		<!--适用于同一个页面内容非常多,一页显示不完整的时候,比如一个文档的目录和内容之间-->
+		<a href="#flag">国旗法</a>
+		<br />
+		<img src="img/foot.jpg" width="200px" height="200px"/>
+		<br />
+		<img src="img/foot.jpg" width="200px" height="200px"/>
+		<br />
+		<img src="img/foot.jpg" width="200px" height="200px"/>
+		<br />
+		<img src="img/foot.jpg" width="200px" height="200px"/>
+		<br />
+		<p>
+			据香港《大公报》25日报道，全国人大常委会24日分组审议《国歌法(草案)》，全国人大常委会委员范徐丽泰会后表示，参考过去的《国旗法》及《国徽法》，若“国歌法”日后通过，相信会被纳入《基本法》附件三，并由香港通过本地立法实施。她强调，在香港居住的绝大部分都是中国公民，有责任保障国家形象，要尊重国歌，恶意损害国歌应该受罚。不过她提到，草案现在是初审阶段，相信不会在这次会议会期内通过。
+			<a name="flag">国旗法</a>
+		</p>
+	
+	</body>
+</html>

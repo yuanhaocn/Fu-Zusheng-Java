@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.dao.domain.Person">
+
+	<!-- type:要操作的JavaBean的全路径 -->
+	<!-- resultMap:建立起JavaBean和表的映射关系 -->
+	<!-- 直接引用别名 -->
+	<resultMap type="person" id="personMap">
+		<!-- id:表示主键 -->
+		<id column="pid" property="pid" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+	</resultMap>
+
+	<select id="findByPage" parameterType="map" resultMap="personMap">
+		select *
+		from person
+		limit #{start},#{size}
+	</select>
+
+	<select id="findByPageWithLike" parameterType="map" resultMap="personMap">
+		select * from person
+		<!-- where name like #{name} -->
+		<!-- where name like '%${name}%' -->
+		where name like CONCAT(CONCAT('%', #{name}), '%')
+		limit
+		#{start},#{size}
+	</select>
+
+	<!-- 用一个标签,来表示几种可能性. -->
+	<!-- 动态SQL语句 -->
+	<select id="findByCondition" parameterType="map" resultMap="personMap">
+		select * from person
+		<where>
+			<!-- 第一个条件中,and,or等条件连接符可有可无! -->
+			<if test="name!=null">
+				name=#{name}
+			</if>
+			<!-- 注意:当有多个条件的时候,从第二个条件开始,and,or等条件连接符必须有! -->
+			<if test="nickname!=null">
+				and nickname=#{nickname}
+			</if>
+		</where>
+	</select>
+
+	<!-- 动态更新 -->
+	<update id="updateDynamic" parameterType="map">
+		update person
+		<!-- set语句部分 -->
+		<set>
+			<!-- 注意:set里面的列名后面,要添加逗号! -->
+			<if test="name!=null">
+				name=#{name},
+			</if>
+			<if test="nickname!=null">
+				nickname=#{nickname},
+			</if>
+		</set>
+
+		<!-- where语句部分 -->
+		<where>
+			<if test="pid!=null">
+				pid=#{pid}
+			</if>
+		</where>
+	</update>
+
+	<!-- 动态删除 -->
+	<delete id="deleteDynamic" parameterType="person">
+		delete from person
+		<where>
+			<if test="pid!=null">
+				pid=#{pid}
+			</if>
+			<if test="name!=null">
+				and name=#{name}
+			</if>
+			<if test="nickname!=null">
+				and nickname=#{nickname}
+			</if>
+		</where>
+	</delete>
+
+	<!-- 批量删除 -->
+	<delete id="deleteByArray">
+		delete from person where pid in
+		<!-- item的名称,要与方法中参数的名称一样! -->
+		<foreach collection="array" open="(" separator="," close=")"
+			item="ids">
+			<!-- 遍历该集合 -->
+			#{ids}
+		</foreach>
+	</delete>
+
+	<delete id="deleteByList">
+		delete from person where pid in
+		<foreach collection="list" open="(" separator="," close=")"
+			item="ids">
+			<!-- 遍历该集合 -->
+			#{ids}
+		</foreach>
+	</delete>
+
+	<!-- 定义sql代码片段,实现代码复用! -->
+	<sql id="columns">
+		<!-- suffixOverrides=",":表示用","来替换默认的列与列之间的分隔符. -->
+		<trim suffixOverrides=",">
+			<if test="name!=null">
+				name,
+			</if>
+			<if test="nickname!=null">
+				nickname,
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 另一个sql代码片段 -->
+	<sql id="values">
+		<trim suffixOverrides=",">
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="nickname!=null">
+				#{nickname},
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 动态的添加语句 -->
+	<insert id="insertDynamic" parameterType="map">
+		insert into person
+		(
+		<!-- 引用列名的sql代码片段 -->
+		<include refid="columns" />
+		)
+		values
+		(
+		<!-- 引用值的sql代码片段 -->
+		<include refid="values" />
+		)
+		<!-- choose:类似于switch语句. -->
+		<!-- <choose>
+			<when test="name!=null"></when>
+			<when test="na"></when>
+			<otherwise></otherwise>
+		</choose> -->
+		<!-- <bind name="name" value="sss"/> -->
+	</insert>
+	
+</mapper>

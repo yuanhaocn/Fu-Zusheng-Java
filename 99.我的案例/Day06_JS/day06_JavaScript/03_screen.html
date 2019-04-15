@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>屏幕尺寸</title>
+		<script>
+			function getScreenSize(){
+				//window.innerWidth:获取屏幕宽度的最通用的方法.
+				//浏览器的内容宽度和高度
+				var width=window.innerWidth
+				||window.body.innerWidth   //比较旧的浏览器
+				||window.documentElement.width; //比较旧的浏览器
+				
+				var height=window.innerHeight
+				||window.body.innerHeight
+				||window.documentElement.height;
+				
+				alert("宽度="+width+",高度="+height);
+				
+				//获取屏幕可用的宽和高
+				var aw=window.screen.availWidth;
+				var ah=window.screen.availHeight;
+				alert("可用宽度="+aw+",可用高度="+ah);
+			}
+		</script>
+	</head>
+
+	<body>
+		<button onclick="getScreenSize()">获取屏幕尺寸</button>
+	</body>
+
+</html>

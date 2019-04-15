@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	
+	<!-- 注意:动态方法功能的实现,首先必须struts-2.5.dtd版本;然后还必须开启动态方法调用功能;
+		然后还有设置allowed-methods! -->
+	<!-- 当使用了动态方法调用的时候,action中不需要配置method! -->
+	<!-- 动态方法的调用,也必须配合allowed-methods! -->
+	<!-- 因为动态方法调用,存在安全隐患,所以默认就不支持了! -->
+
+	<package name="user" extends="struts-default">
+		<action name="user" class="com.syc.struts.dynamic02.UserAction">
+			<result name="success">/home.html</result>
+			<!-- <allowed-methods>regex:.*</allowed-methods> -->
+			<!-- 最好配置局部的allowed-methods!并且最好是列举出要进行动态方法调用的方法名称,这样动态调用的影响降低到了最低限度. -->
+			<allowed-methods>login,register</allowed-methods>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 目标对象 -->
+	<bean id="showSalery" class="com.syc.spring.aop02.ShowSalery" />
+
+	<!-- 切面对象 -->
+	<!-- <bean id="aspect" class="com.syc.spring.aop02.PrivilegeAspect" /> -->
+	
+	<bean id="privilege" class="com.syc.spring.aop02.Privilege">
+		<property name="access" value="admin2"/>
+	</bean>
+	
+	<bean id="aspect" class="com.syc.spring.aop02.PrivilegeAspect" >
+		<property name="privileges">
+			<list>
+				<ref bean="privilege"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置切面 -->
+	<aop:config>
+		<!-- 全局的,针对所有的切面都有效 -->
+		<aop:pointcut expression="execution(* com.syc.spring.aop02.ShowSalery.*(..))"
+			id="perform" />
+	
+		<aop:aspect ref="aspect">
+			<aop:around method="isAccess" pointcut-ref="perform"/>
+		</aop:aspect>		
+		
+	</aop:config>
+</beans>

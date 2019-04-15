@@ -1,0 +1,56 @@
+事务：
+Connection conn;
+SavePoint savePoint=null;
+try{
+	conn.setAutoCommit(false);
+	t.beginTransaction();
+
+	A
+	B
+	savePoint=conn.setSavePoint();//设置保存点
+	C
+	D
+	conn.commit();
+   }catch(Exception e){
+        if(savePoint!=null){
+	  conn.rollBack(savePoint);//回滚到保存点
+	}else{
+	   conn.rollBack();
+	}
+   }
+
+事务详情：
+
+1：事务的传播行为：
+   
+PROPAGATION_REQUIRED：当前有事务就使用当前的事务，如果不存在事务会创建一个新的事务
+   
+PROPAGATION_SUPPORTS：当前有事务就使用当前的事务，没有事务就在无事务下执行
+
+PROPAGATION_MANDATORY：当前有事务就使用当前的事务，没有事务会抛出异常
+   
+PROPAGATION_REQUIRES_NEW：无论当前是否有事务，都会创建一个新的事务
+   
+PROPAGATION_NOT_SUPPORTED：不支持当前事务，总是在无事务下执行
+   
+PROPAGATION_NEVER：不支持当前事务，如果存在事务会抛出异常
+   
+PROPAGATION_NESTED：在嵌套事务中执行，存在保存时
+
+
+2：隔离级别
+      
+ISOLATION_DEFAULT：使用默认的隔离级别
+   
+ISOLATION_READ_UNCOMMITTED：1
+  
+ ISOLATION_READ_COMMITTED：2
+   
+ISOLATION_REPEATABLE_READ：4
+  
+ ISOLATION_SERIALIZABLE：8
+
+3：
+
+超时时间：
+   TIMEOUT_DEFAULT

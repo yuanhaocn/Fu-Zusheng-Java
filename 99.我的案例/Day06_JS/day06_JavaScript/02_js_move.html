@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>move滚动方法</title>
+		<script>
+			function moveToTest(){
+				//url如果没有内容,则打开一个空白页面
+				var win=window.open("","","width=200px,height=300px");
+				win.document.write("输出的内容....");
+				//移动到....
+				win.moveTo(200,200);
+			}
+			
+			function moveByTest(){
+				//url如果没有内容,则打开一个空白页面
+				var win=window.open("","","width=200px,height=300px");
+				win.document.write("输出的内容....");
+				//移动到....
+				win.moveTo(200,200);
+				//相对于当前的坐标,移动到一个新的位置上去.
+				win.moveBy(40,50);
+			}
+			
+			function resizeToTest(){
+				//url如果没有内容,则打开一个空白页面
+				var win=window.open("","","width=200px,height=300px");
+				win.document.write("输出的内容....");
+				//重新调整窗口大小
+				win.resizeTo(80,90);
+			}
+			
+			//模拟闪屏效果--->resizeBy()
+			//注意:不同的浏览器,对该段代码的支持不一样.IE有效果.
+			function splash(){
+				//url如果没有内容,则打开一个空白页面
+				var win=window.open("","","width=200px,height=200px");
+				win.document.write("输出的内容....");
+				win.moveTo(20,30);
+				win.resizeBy(100,200);
+				for(var i=0;i<40;i++){
+					win.moveBy(20,0);//x,y
+					win.moveBy(0,20);
+					win.moveBy(-20,0);
+					win.moveBy(0,-20);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="moveToTest()">moveTo方法</button>
+		<button onclick="moveByTest()">moveBy方法</button>
+		<button onclick="resizeToTest()">resizeTo方法</button>
+		<button onclick="splash()">闪屏效果</button>
+	</body>
+</html>

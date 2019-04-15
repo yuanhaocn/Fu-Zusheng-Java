@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Day16_SSH</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 核心过滤器 -->
+	<filter>
+		<filter-name>Struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 加载application.xml文件 -->
+	<!-- ContextLoaderListener:当Tomcat服务器一启动,该监听器就会工作,
+		用来监听ApplicationContext环境 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- <servlet> <servlet-name></servlet-name> <servlet-class></servlet-class> 
+		init-param是一个局部的初始化参数 <init-param></init-param> </servlet> -->
+
+	<!-- ApplicationContext的参数,context-param全局的初始化参数 -->
+	<context-param>
+		<!-- contextConfigLocation:是JavaEE提供的API -->
+		<param-name>contextConfigLocation</param-name>
+		<!-- 只要Tomcat一启动,就会自动加载appliation.xml -->
+		<param-value>classpath:application.xml</param-value>
+	</context-param>
+
+</web-app>

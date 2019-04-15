@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>layer</title>
+	</head>
+
+	<body class="layui-layout-body">
+		
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p>人不风流枉少年</p>
+		<p id="node">人不风流枉少年2</p>
+		
+
+		<script src="layui/layui.js"></script>
+		
+		<script>
+			layui.use('layer',function(){
+				var layer=layui.layer;
+				
+				//layer.msg('提示信息...');
+				
+				layer.open({
+					type:4,
+					title:'标题',
+					content:['赞','#node'],
+					tips: [3, '#00f']//tips:[]更改tip的位置及样式
+				})
+			})
+		</script>		
+		
+	</body>
+
+</html>

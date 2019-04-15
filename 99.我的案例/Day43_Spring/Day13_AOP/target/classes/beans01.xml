@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 目标对象 -->
+	<bean id="star" class="com.syc.spring.aop01.SingStar"/>
+	
+	<!-- 切面对象 -->
+	<bean id="broker" class="com.syc.spring.aop01.Broker"/>
+
+	<!-- 配置aop切面 -->
+	<aop:config>
+		
+		<!-- 配置切入点表达式 -->
+		<!-- <aop:pointcut expression="" id=""/> -->
+	
+		<!-- 对切面进行具体配置 -->
+		<!-- ref:指明切面是哪个切面类,表示该切面是broker这个切面 -->
+		<aop:aspect ref="broker">
+			<!-- 切入点表达式的作用是用来指明目标类所在的位置 -->
+			<!-- *:通配符,如果有2个*号,第一个*号代表方法的修饰符;第二个*号代表返回值. -->
+			<aop:pointcut expression="execution( * com.syc.spring.aop01.SingStar.*(..))" id="perform"/>
+			
+			<!-- 配置通知(Advise),配置用来增强的代码 -->
+			<!-- 要把prepareSing()方法,给织入到目标方法前面,通过pointcut-ref来确定目标方法的位置 -->
+			<aop:before method="prepareSing" pointcut-ref="perform"/>
+			
+			<!-- 配置最终通知 -->
+			<aop:after method="afterSing" pointcut-ref="perform"/>
+			
+		</aop:aspect>
+	</aop:config>
+
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="result" extends="struts-default">
+	
+		<!-- 配置全局的结果视图 -->
+		<!-- 注意:全局视图需要配置在所有的action之前;当配置了局部result的时候,遵循就近原则 -->
+		<global-results>
+			<result name="success">/home.html</result>
+		</global-results>
+	
+		<action name="login" class="com.syc.struts.result06.ResultAction"
+			method="login">
+			<!-- <result name="success">/home.html</result> -->
+		</action>
+		
+		<action name="register" class="com.syc.struts.result06.ResultAction"
+			method="register">
+			<!-- <result name="success">/home.html</result> -->
+		</action>
+	</package>
+</struts>

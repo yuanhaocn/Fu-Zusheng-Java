@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 配置要扫描的组件包 -->
+	<context:component-scan base-package="com.syc.controller" />
+
+	<!-- 开启注解的扫描功能 -->
+	<mvc:annotation-driven />
+
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- 优雅REST风格的资源URL不希望带 .html 或 .do 等后缀.
+		 由于早期的Spring MVC不能很好地处理静态资源,
+		 所以在web.xml中配置DispatcherServlet的请求映射,
+		 往往使用 *.do 、 *.xhtml等方式。这就决定了请求URL必须是一个带后缀的URL,
+		 而无法采用真正的REST风格的URL。
+	              如果将DispatcherServlet请求映射配置为"/"，则Spring MVC将捕获Web容器所有的请求，
+	              包括静态资源的请求，Spring MVC会将它们当成一个普通请求处理，因此找不到对应处理器将导致错误。
+	              如何让Spring框架能够捕获所有URL的请求，同时又将静态资源的请求转由Web容器处理，
+	              是可将DispatcherServlet的请求映射配置为"/"的前提。
+	              由于REST是Spring3.0最重要的功能之一，所以Spring团队很看重静态资源处理这项任务，
+	              给出了堪称经典的两种解决方案。 -->
+	<!-- 资源映射,在spring3.0.4出现的,主要是用来进行静态资源的访问 -->
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+	
+	<!-- 文件上传 -->
+	<!-- 如果不配置这个,则会产生如下异常:Expected MultipartHttpServletRequest: is a MultipartResolver configured? -->
+	<!-- 注意:此处的id必须是multipartResolver这个id名,否则也会导致这个异常出现. -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5008888"/>
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+</beans>

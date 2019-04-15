@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- namespace="/",默认值是"/" -->
+	<!-- namespace限定了域名+项目名之后的根路径! -->
+	<!-- /user/login.action -->
+	<!-- /user/a/b/login.action -->
+	<!-- 1.匹配url的过程:/user/a/b/目录下去寻找login.action -->
+	<!-- 2.匹配url的过程:/user/a/目录下去寻找login.action -->
+	<!-- 3.匹配url的过程:/user/目录下去寻找login.action -->
+	<!-- /a/b/user/c/d/login.action -->
+	<!-- 1.匹配url的过程:/a/b/user/c/d/目录下去寻找login.action -->
+	<!-- 2.匹配url的过程:/a/b/user/c/目录下去寻找login.action -->
+	<!-- 3.匹配url的过程:/a/b/user/目录下去寻找login.action -->
+	<!-- 4.匹配url的过程:/a/b/目录下去寻找login.action -->
+	<!-- 5.匹配url的过程:/a/目录下去寻找login.action -->
+	
+	<package name="space" extends="struts-default" namespace="/user">
+		<action name="login" class="com.syc.struts.namespace03.LoginAction"
+			method="login">
+			<result name="success">/home.html</result>
+		</action>
+	</package>
+</struts>

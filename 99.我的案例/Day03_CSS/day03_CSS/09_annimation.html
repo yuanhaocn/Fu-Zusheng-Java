@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>动画写法2</title>
+		<style>
+			div {
+				width: 0px;
+				height: 100px;
+				background: red;
+				/*transition: ;*/
+				animation-name: changeWidth, changeColor;
+				animation-duration: 5s,5s;
+				animation-iteration-count: 3;
+				/*infinite,无限执行*/
+				animation-direction: normal;
+				/*动画执行模式*/
+				animation-delay: .25s, 100ms;
+				/*动画的延迟执行时间*/
+			}
+			
+			div:hover {
+				animation-play-state: paused;/*设置动画的播放状态*/
+			}
+			
+			/*@keyframes,关键帧,*/
+			
+			@keyframes changeWidth {
+				/*执行时间的100%*/
+				100% {
+					width: 1000px;
+				}
+			}
+			
+			@keyframes changeColor {
+				20% {
+					background: pink;
+				}
+				50% {
+					background: green;
+				}
+				75% {
+					background: blue;
+				}
+				100% {
+					background: yellow;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div></div>
+	</body>
+
+</html>

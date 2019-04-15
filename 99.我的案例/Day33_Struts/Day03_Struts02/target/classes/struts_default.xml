@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!-- package:最简化的情况,也必须得有name和extends -->
+	<package name="default" extends="struts-default">
+		<!-- action:method,可以省略.class,也可省略,默认的执行的类是com.opensymphony.xwork2.ActionSupport -->
+		<action name="default">
+			<!-- type="dispatcher",默认值,可以省略.redirect:重定向;redirectAction:重定向到另一个Action中 -->
+			<!-- name的默认值是success. -->
+			<result type="redirect">/home.html</result>
+		</action>
+	</package>
+</struts>

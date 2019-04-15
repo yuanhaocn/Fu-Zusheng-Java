@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 配置dubbo的注册中心地址 -->
+	<dubbo:registry address="zookeeper://10.11.51.43:2181"/>
+	
+	<!-- 集群的实现 -->
+	<!-- <dubbo:registry address="zookeeper://10.11.51.43:2181?backup=10.11.51.44:2181,10.11.51.45:2181"/> -->
+	
+	<!-- 设置服务的提供者和消费者交流的频道的端口号 -->
+	<!-- <dubbo:protocol name="dubbo" port="28888"/> -->
+	
+	<!-- 配置每个应用程序的名称,名称应该唯一! -->
+	<dubbo:application name="service-consumer"/>
+	
+	<!-- 配置接收服务 -->
+	<!-- id:服务的名称;check:检查依赖关系,默认是true -->
+	<dubbo:reference id="helloService" check="false" interface="com.syc.dubbo.service.HelloService"/>
+	
+</beans>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui左侧导航</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body>
+
+		<!--layui-nav:导航样式-->
+		<!--layui-nav-tree:以树形结构排列-->
+		<ul class="layui-nav layui-nav-side layui-nav-tree layui-bg-cyan">
+			<!--layui-nav-itemed:设置默认选择项-->
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="#">商品种类</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="#">商品1</a>
+					</dd>
+					<dd>
+						<a href="#">商品2</a>
+					</dd>
+					<dd>
+						<a href="#">商品3</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="#">解决方案</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="#">方案1</a>
+					</dd>
+						<dd>
+						<a href="#">方案2</a>
+					</dd>
+					<dd>
+						<a href="#">方案3</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="#">大数据</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="#">管理</a>
+			</li>
+		</ul>
+
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element', function() {
+				//获取模块变量
+				var elmt = layui.element;
+
+				//elmt.render();
+			});
+		</script>
+	</body>
+
+</html>

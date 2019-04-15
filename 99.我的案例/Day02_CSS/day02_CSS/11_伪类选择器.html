@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪类选择器</title>
+		<style>
+			a{
+				/*用来修改超链接下面的线的样式*/
+				text-decoration: none;
+			}
+			
+			/*a标签的伪类选择器必须按照lvha这个顺序!*/
+			
+			/*改变未选择之前的状态*/
+			a:link{
+				color: dodgerblue;
+			}
+			
+			/*已经点击过的状态*/
+			a:visited{
+				color: greenyellow;
+			}
+			
+			/*鼠标悬停在超链接上面时的状态*/
+			a:hover{
+				color: red;
+			}
+			
+			/*鼠标选中了超链接,但是此时还没有松开*/
+			a:active{
+				color: orchid;
+			}
+			
+			/*focus焦点*/
+			input:focus{
+				background: red;
+			}
+		
+			/*修改首字母的样式*/
+			p:first-letter{
+				font-variant: small-caps;
+				color: blue;
+				font-size: 30px;
+			}
+		</style>
+		
+	</head>
+	<body>
+		
+		<a href="http://www.baidu.com">百度一下</a>
+		<br />
+		<input type="text" placeholder="请输入内容"/>
+		
+		<p>this is css ......</p>
+		<p>文字this is css ......</p>
+	</body>
+</html>

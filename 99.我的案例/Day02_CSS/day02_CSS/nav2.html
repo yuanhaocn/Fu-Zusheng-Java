@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>导航效果2</title>
+		<style>
+			#nav ul{
+				padding: 0px;
+				margin: 0px;
+				list-style-type: none;
+				background: #001E50;
+			}
+			
+			ul li{
+				float: left;
+			}
+			
+			ul li a {
+				color: white;
+				font-size: 1.5em;
+				text-decoration: none;
+				padding: 14px 16px;		
+				display: inline-block;
+			}
+			
+			.dropdown{
+				display: inline-block;
+			}
+			
+			a:hover,.dropdown:hover .dropBtn{
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="nav">
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">百家号</a></li>
+				<li><a href="#">国内</a></li>
+				<li><a href="#">国际</a></li>
+				<li><a href="#">军事</a></li>
+				<li><a href="#">社会</a></li>
+				<li><a href="#">体育</a></li>
+				<li><a href="#">财经</a></li>
+				<li><a href="#">娱乐</a></li>
+				<li><a href="#">房产</a></li>
+				<div class="dropdown">
+					<a href="#" class="dropBtn">更多</a>
+					<div class="drop_content">
+						<a href="#">汽车</a>
+						<a href="#">时尚</a>
+						<a href="#">女人</a>
+					</div>
+				</div>
+			</ul>
+		</div>
+	</body>
+
+</html>

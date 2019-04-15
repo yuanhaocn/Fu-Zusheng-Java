@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:这里的值,可以随便写!但是要保证它的值唯一.一般开发过程中,都是JavaBean的全路径. -->
+<mapper namespace="com.syc.mybatis.domain.Person">
+
+	<!-- 如果要对该对象做二级缓存,则添加该节点 -->
+	<!-- type:指明二级缓存由哪个类来具体实现 -->
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+	<resultMap type="person" id="personMap">
+		<!-- id:表示主键 -->
+		<id column="pid" property="pid" />
+		<!-- result:普通列 -->
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+		
+		<!-- association:联合,关联,联系 -->
+		<!-- resultMap:要关联的那个resultMap的id,namespace+id -->
+		<association property="card" resultMap="com.syc.mybatis.domain.Card.cardMap"/>
+	</resultMap>
+	
+	<!-- 当person表和card建立起关联关系后,根据person的pid,查询出该Person的name,nickname以及num -->
+	<select id="findById" resultMap="personMap">
+		select p.name,p.nickname,c.num 
+		from person p
+		inner join card c
+		on p.cid=c.id
+		where pid=#{pid}
+	</select>
+	
+	<!-- 根据person的name,查询出该Person的信息及num -->
+	<select id="findByName" resultMap="personMap">
+		select p.pid,p.name,p.nickname,c.num 
+		from person p
+		inner join card c
+		on p.cid=c.id
+		where p.name=#{name}
+	</select>
+	
+</mapper>

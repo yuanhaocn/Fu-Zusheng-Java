@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="bmi" extends="struts-default">
+		<!-- 注意:此处的class不能再写Action类的全路径,
+			因为该Action对象的创建我们交给了Spring容器负责. -->
+		<!-- 此处引用去引用Spring容器中bean的id. -->	
+			
+		<action name="queryBMI" class="bmiAction" method="queryBMI"/>
+		
+		<action name="addBMI" class="bmiAction" method="addBMI"/>
+		
+		<action name="deleteBMI" class="bmiAction" method="deleteBMI"/>
+	</package>
+</struts>
+    

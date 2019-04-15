@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<context:component-scan base-package="com.syc.oa"/>
+	
+	<!-- 处理器映射器和处理器适配器 -->
+	<mvc:annotation-driven>
+		<!-- 等同于在处理器适配器中添加对象与json的转换器 -->
+		<!-- register-defaults=false,不适用SpringMVC自带的转换器 -->
+		<mvc:message-converters register-defaults="false">
+			<!--spring消息转换器 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+
+			<!--解决@Responcebody中文乱码问题 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+			
+			<!-- 添加FastJson的转换器 -->
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="charset" value="UTF-8"/>
+				<property name="supportedMediaTypes">
+					<list>
+						<!--顺序保持这样,避免IE下载出错 -->
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<!-- 对FastJSON进行配置 -->
+				<property name="fastJsonConfig" ref="fastJsonConfig"/>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!--fastJsonConfig -->
+	<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+		<!--默认编码格式 -->
+		<property name="charset" value="UTF-8" />
+		<!-- 指定FastJSON可以对哪些格式的信息进行转换 -->
+		<property name="serializerFeatures">
+			<list>
+				<value>WriteNullListAsEmpty</value>
+				<value>WriteDateUseDateFormat</value>
+				<value>PrettyFormat</value>
+				<value>WriteMapNullValue</value>
+				<value>WriteNullStringAsEmpty</value>
+				<value>WriteNullListAsEmpty</value>
+				<value>DisableCircularReferenceDetect</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- Spring框架默认情况下,是对所有的资源(各种类,.html,.jsp,图片,.xml等)进行过滤.如果我们想放行静态资源,此时的解决方式有2步: -->
+	<!-- 1.在web.xml文件中的url-pattern写/ -->
+	<!-- 2.添加如下配置 -->
+	<mvc:default-servlet-handler/>
+
+</beans>

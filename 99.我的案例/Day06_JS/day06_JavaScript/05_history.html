@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>history</title>
+		<script>
+			function getLength(){
+				document.write(history.length);
+			}
+			
+			function historyBack(){
+				history.back();
+			}
+			
+			function historyForward(){
+				history.forward();
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="getLength()">历史记录的长度</button>
+		<button onclick="historyBack()">后退</button>
+		<button onclick="historyForward()">前进</button>
+	</body>
+</html>

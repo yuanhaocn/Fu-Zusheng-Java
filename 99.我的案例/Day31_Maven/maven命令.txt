@@ -1,0 +1,7 @@
+mvn deploy:deploy-file -DgroupId=mysql -DartifactId=mysql-connector-java -Dversion=5.0.8 -Dpackaging=jar -Dfile=\\psf\Home\Desktop\mysqlconnector5.0.8.jar -Durl=http://127.0.0.1:8081/repository/3rd_party/  -DrepositoryId=3rd-party
+
+mvn deploy:deploy-file -DgroupId=test -DartifactId=com-syc.test -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=\\psf\Home\Desktop\test.jar -Durl=http://127.0.0.1:8081/repository/3rd_party/  -DrepositoryId=3rd-party
+
+mvn deploy:deploy-file -DgroupId=test -DartifactId=com-syc-test -Dversion=0.0.1 -Dpackaging=jar -Dfile=\\psf\Home\Desktop\test.jar -Durl=http://127.0.0.1:8081/repository/3rd_party/  -DrepositoryId=3rd-party
+
+mvn deploy:deploy-file -DgroupId=sycbd -DartifactId=syc.bd -Dversion=1.1.1 -Dpackaging=jar -Dfile=\\psf\Home\Desktop\sycbd.jar -Durl=http://127.0.0.1:8081/repository/3rd-party/  -DrepositoryId=3rd-party

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui图标</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body class="layui-layout-body">
+
+		<i class="layui-icon">&#xe68e;</i>
+
+		<i class="layui-icon">&#xe63d;</i>
+
+		<button class="layui-btn layui-btn-xs">按钮</button>
+
+		<button class="layui-btn layui-btn-danger">按钮</button>
+
+		<button class="layui-btn">
+  			<i class="layui-icon">&#xe608;</i> 添加
+		</button>
+
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('element', function() {
+				//获取模块变量
+				var elmt = layui.element;
+
+				//elmt.render();
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="data" extends="struts-default">
+		<action name="data" class="com.syc.struts.data05.DataAction"
+			method="showData">
+			<!-- param: 是在struts.xml文件中给action传值-->
+			<param name="username">三胖</param>
+			<!-- type:限定Action类跳转到别的页面的请求类型! -->
+			<result name="success" type="dispatcher">/data.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>外边距margin</title>
+		<style>
+			/*两个相邻元素同时设置margin时，两个元素的间距不是两个margin值相加，而是选取最大的那个margin值*/
+			p{
+				background: green;
+				color: white;
+				/*padding: 10px;*//*距4边都是10px*/
+				padding-top: 10px;
+				padding-right: 20px;
+				padding-bottom: 30px;
+				padding-left: 40px;
+			}
+			
+			/*padding的值,方向规则:上右下左*/
+			#p1{
+				background: red;
+				/*padding: 10px;*/
+				padding: 10px 40px;/*10px:上下;40px:左右*/
+				margin: 10px 20px 30px 40px;
+			}	
+					
+			#p2{
+				background: blue;
+				/*padding: 10px;*/
+				padding: 10px 20px 30px;/*10px:上边;20px:左右,30px:下面*/
+			}		
+				
+			#p3{
+				background: blue;
+				/*padding: 10px;*/
+				padding: 10px 20px 30px 40px;/*10px:上边;20px:右边,30px:下面,40px:左边*/
+			}			
+		</style>
+	</head>
+	<body>
+		<p>这里是内容,啦啦啦啦</p>
+		
+		<p id="p1">padding的简化写法</p>
+		
+		<p id="p2">padding的简化写法2</p>
+		
+		<p id="p3">padding的简化写法3</p>
+	</body>
+</html>

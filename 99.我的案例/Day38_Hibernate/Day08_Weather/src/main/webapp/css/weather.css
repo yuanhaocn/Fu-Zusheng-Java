@@ -1,0 +1,344 @@
+
+/*设置所有标签的样式*/
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/*设置整个body的样式*/
+body{
+	background: url(../img/background.jpg) no-repeat center;
+	background-size: cover;
+	background-attachment: fixed;
+	text-align: center;
+	font-family: 'Open Sans',sans-serif;
+}
+
+/*
+ * 1.padding:10px,20px,30px,40px;
+ * 上,右,下,左;
+ * 2.padding:10px 5px 15px;
+ * 上内边距是 10px
+   右内边距和左内边距是 5px
+   下内边距是 15px
+   3.padding:10px,20px;
+   上下10px,左右20px;
+   4.padding:10px;
+   上下左右都是10px
+ * */
+
+/*设置搜索框的样式*/
+.search{
+	width: 25%;
+	height: 30px;
+	background: rgba(255,255,255,0.4);
+	border: 1px solid #eee;
+	border-radius: 20px;
+	padding-left: 20px;
+	margin: 20px 20px 0 0;
+}
+
+/*搜索按钮的样式*/
+.submit{
+	width: 60px;
+	height: 30px;
+	padding: 2px;
+	/*background: rgba(0,0,0,0.3);*/
+	background: rgb(222, 83, 71);
+	/*border-radius: 50%;*/
+	border-radius: 10px;
+	color: white;
+	font-size: 16px;
+	position: relative;
+}
+
+/*设置容器的样式*/
+.container{
+	width: 70%;
+	margin: 50px auto;
+	background: rgba(0,0,0,0.5);
+	border-radius: 10px;
+}
+
+/*左侧区域样式*/
+.div_left{
+	width: 60%;
+	min-height: 500px;
+	background: url(../img/city.jpg) no-repeat center;
+	background-size: cover;
+	float: left;
+	position: relative;
+	border-radius: 10px;
+}
+
+.div_msg{
+	padding: 40px 40px 0 0;
+	float: right;
+}
+.div_msg h2{
+	color: white;
+	font-size:30px;
+	text-align: right;
+}
+.div_msg h3{
+	color: #EEEEEE;
+	font-size: 16px;
+	text-align: right;
+	margin-top: 10px;
+}
+.div_msg p{
+	color: #EEEEEE;
+	font-size: 14px;
+	text-align: right;
+	margin-top: 10px;
+}
+
+.div_temperature{
+	width: 90%;
+	color: white;
+	padding: 0 30px 10px 30px;
+	position: absolute;
+	bottom: 0;
+}
+.div_temperature .div_time{
+	width: 50%;
+	text-align: left;
+	float: left;
+	font-size: 36px;
+	font-weight: bolder;
+	letter-spacing: 3px;
+	padding-top: 80px;
+	margin-bottom: 10px;
+}
+.div_temperature .temperature{
+	width: 50%;
+	text-align: right;
+	font-size: 60px;
+	font-weight: bolder;
+	float: right;
+	padding-top: 60px;
+	margin-bottom: 10px;
+}
+
+/*右侧区域的样式*/
+.div_right{
+	width: 40%;
+	float: left;
+}
+
+/*天气图片*/
+.div_right .forecast-icon{
+	margin: 25px 0;
+}
+
+.today-weather h3{
+	width: 80%;
+	color: white;
+	font-size: 50px;
+	margin: 0 auto 20px;
+}
+.today-weather ul{
+	list-style: none;
+}
+.today-weather ul li{
+	width: 70%;
+	color: white;
+	text-align: left;
+	padding-left: 10px;
+	margin: 0 auto;
+	line-height: 40px;
+	border-bottom: 1px solid white;
+}
+.today-weather ul span{
+	float: right;
+	margin-right: 10px;
+}
+/*nth-child(1)：根据下标（从1开始）寻找子元素*/
+.today-weather ul li:nth-child(5){
+	border-bottom: none;
+}
+
+/*设置该元素左右不允许出现浮动元素,为了防止前边的浮动元素影响后边元素的存在*/
+.clear{
+	/*clear 属性规定元素的哪一侧不允许其他浮动元素。*/
+	/*左侧和右侧均不允许出现浮动元素*/
+	clear: both;
+}
+
+/*响应式布局的样式*/
+@media only screen and (max-width:1920px) {
+	.container {
+		width: 65%;
+	}
+}
+
+@media only screen and (max-width:1440px) {
+	.container {
+		width: 55%;
+	}
+}
+
+@media only screen and (max-width:1280px) {
+	.container {
+		width: 60%;
+	}
+}
+
+@media only screen and (max-width:1024px) {
+	.container {
+		width: 75%;
+	}
+}
+
+@media only screen and (max-width:996px) {
+	.container {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width:800px) {
+	h1 {
+		font-size: 35px;
+	}
+	.temperture p {
+		font-size: 100px;
+	}
+	.dmy {
+		padding-top: 25px;
+	}
+}
+
+@media only screen and (max-width:736px) {
+	.temperture p {
+		font-size: 80px;
+	}
+	.dmy {
+		padding-top: 10px;
+	}
+	div .txt {
+		font-size: 30px;
+	}
+	.forecast-icon img {
+		width: 110px;
+	}
+}
+
+@media only screen and (max-width:667px) {
+	h1 {
+		font-size: 40px;
+		margin-top: 30px;
+	}
+	.container {
+		width: 95%;
+		margin-top: 30px;
+	}
+}
+
+@media only screen and (max-width:640px) {
+	h1 {
+		font-size: 30px;
+		margin-top: 45px;
+	}
+	div .txt {
+		font-size: 25px;
+	}
+	.dmy {
+		padding-top: 17px;
+	}
+	.temperture p {
+		padding-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width:603px) {
+	h1 {
+		font-size: 35px;
+	}
+	.city {
+		width: 100%;
+		min-height: 300px;
+	}
+	.temperture {
+		text-align: right;
+	}
+	.temperture p {
+		font-size: 100px;
+	}
+	.dmy {
+		padding-top: 35px;
+	}
+	.forecast-icon {
+		margin: 10px 0;
+	}
+	.forecast {
+		width: 100%;
+		padding-bottom: 30px;
+	}
+}
+
+@media only screen and (max-width:533px) {
+	h1 {
+		font-size: 33px;
+	}
+}
+
+@media only screen and (max-width:480px) {
+	h1 {
+		font-size: 28px;
+		letter-spacing: 2px;
+	}
+	.container {
+		margin-top: 20px;
+	}
+	.forecast-icon {
+		margin: 40px 0 10px;
+	}
+	.forecast-icon img {
+		width: 100px;
+	}
+	.today-weather h3 {
+		font-size: 40px;
+	}
+	.city {
+		min-height: 450px;
+	}
+	.title h2 {
+		font-size: 25px;
+	}
+	.title h3 {
+		font-size: 14px;
+	}
+	.date-time {
+		width: 100%;
+		padding: 0;
+	}
+	.dmy {
+		padding: 0;
+		margin-bottom: 35px;
+		text-align: center;
+		width: 100%;
+	}
+	div .txt {
+		font-size: 40px;
+	}
+	.temperture {
+		text-align: center;
+		width: 100%;
+	}
+	.temperture p {
+		font-size: 60px;
+		padding-bottom: 30px;
+	}
+	.forecast-icon img {
+		width: 65px;
+	}
+	.today-weather h3 {
+		font-size: 30px;
+	}
+}
+
+
+
+
+

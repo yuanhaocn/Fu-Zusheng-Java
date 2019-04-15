@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- struts.i18n.encoding=UTF-8 -->
+	<!-- struts.multipart.saveDir= struts.multipart.maxSize=2097152 -->
+	<!-- struts.action.extension=action,, -->
+	<!-- struts.enable.DynamicMethodInvocation = false -->
+	<!-- struts.devMode = false -->
+	
+	<!-- 更改默认的编码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	
+	<!-- 更改默认的action后缀 -->
+	<constant name="struts.action.extension" value="action,do,syc,,"/>
+	
+	<!-- 开启动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	
+	<!-- 进入开发模式 -->
+	<constant name="struts.devMode" value="true"/>
+	
+	<package name="hello" extends="struts-default">
+		<action name="hello" class="com.syc.struts.constant01.HelloAction"
+			method="hello">
+			<result name="success">/home.html</result>
+		</action>
+	</package>
+</struts>

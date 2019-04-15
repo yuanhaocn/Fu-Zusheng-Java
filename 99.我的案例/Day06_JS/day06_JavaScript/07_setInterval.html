@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>setInterval方法</title>
+		<!---->
+		<script>
+			//setInterval(code,time)
+			//code:要执行的代码;
+			//time:一个时间值,每隔多长时间,就执行一次code.
+			
+			function getTime(){
+				//将时间转换为本地的时间格式
+				var time=new Date().toLocaleString();	
+				var timeSpan=document.getElementById("showTime");
+				//将时间值填充到span中
+				timeSpan.innerHTML=time;
+				//通过js代码设置span的样式
+				timeSpan.style.color="#f00";
+				timeSpan.style.fontSize="30px";
+				timeSpan.style.fontWeight="bold";
+			}
+			
+			var task;
+			function startTime(){
+				//注意:第一个参数要用引号括起来,并且方法名称后面要跟括号.
+				task=setInterval("getTime()",1000);
+			}
+			
+			function stopTime(){
+				//停止一个循环事件
+				clearInterval(task);
+			}
+			
+			/*倒计时效果*/
+			var count=10;
+			function showCount(){
+				count--;
+				var showCount=document.getElementById("showTime");
+				showCount.innerHTML=count;
+			}
+			
+			var countTask;
+			function startCount(){
+				countTask=setInterval("showCount()",1000);
+			}
+			
+			function stopCount(){
+				clearInterval(countTask);
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="startTime()">开始计时</button>
+		<button onclick="stopTime()">停止计时</button>
+		<button onclick="startCount()">开始计数</button>
+		<button onclick="stopCount()">停止计数</button>
+		<br />
+		<span id="showTime"></span>
+	</body>
+</html>

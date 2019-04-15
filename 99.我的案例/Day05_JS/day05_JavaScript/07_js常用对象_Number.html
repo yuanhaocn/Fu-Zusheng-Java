@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Number对象</title>
+	</head>
+	<body>
+		<script>
+			var num=10.9;
+			document.write("取出整数部分"+parseInt(num)+"<br />");
+			var num1=10;
+			document.write("取出浮点部分"+parseFloat(num1)+"<br />");
+			var num2="222sss";
+			document.write("取出整数部分"+parseInt(num2)+"<br />");
+			var num3="sss222sss";
+			//返回NaN,not a number,不是一个数字
+			document.write("取出整数部分"+parseInt(num3)+"<br />");
+			
+			var num4=5;
+			document.write("10转为2进制,结果="+num4.toString(2)+"<br />");
+			var num5=15;
+			document.write("10转为2进制,结果="+num5.toString(16)+"<br />");
+			
+			document.write("2进制转为10进制,结果="+parseInt("1101",2)+"<br />");
+			document.write("16进制转为10进制,结果="+parseInt("fa19",16)+"<br />");
+		</script>
+	</body>
+</html>

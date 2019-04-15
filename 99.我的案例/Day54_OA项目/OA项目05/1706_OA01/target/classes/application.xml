@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:component-scan base-package="com.syc.oa"/>
+	
+	<!-- 取代处理器映射器和适配器,注意:该节点中可以配置json的转换器 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="false">
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			
+			<bean
+				class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+
+			<!--解决@Responcebody中文乱码问题 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+
+			<!-- 添加FastJson的转换器FastJsonHttpMessageConverter,该转换器支持Spring框架 -->
+			<bean
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="charset" value="UTF-8" />
+				<property name="supportedMediaTypes">
+					<list>
+						<!--顺序保持这样,避免IE下载出错 -->
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<!-- 对FastJSON进行配置 -->
+				<property name="fastJsonConfig" ref="fastJsonConfig" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!--fastJsonConfig -->
+	<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+		<!--默认编码格式 -->
+		<property name="charset" value="UTF-8" />
+		<!-- 指定FastJSON可以对哪些格式的信息进行转换 -->
+		<property name="serializerFeatures">
+			<list>
+				<value>WriteNullListAsEmpty</value>
+				<value>WriteDateUseDateFormat</value>
+				<value>PrettyFormat</value>
+				<value>WriteMapNullValue</value>
+				<value>WriteNullStringAsEmpty</value>
+				<value>WriteNullListAsEmpty</value>
+				<value>DisableCircularReferenceDetect</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 和web.xml中的Servlet的url-pattern="/"配合使用. -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 配置文件上传的解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/>
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	
+</beans>

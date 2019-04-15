@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>jQuery库使用</title>
+		<!--引用jQuery库-->
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+		<script>
+			$().ready(function(){
+				$("#btn").click(function(){
+					//val():用于给input等标签赋值和取值.
+					var name=$("#name").val();
+					alert(name);
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value="获取输入框内容" id="btn" />
+		<input type="text" id="name" placeholder="用户名"/>
+	</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>动态表格</title>
+		<!--引入css文件-->
+		<link rel="stylesheet" href="layui/css/layui.css" />
+	</head>
+	<!--layout:布局-->
+
+	<body>
+
+		<table id="tbl"></table>
+
+		<!--引入js文件-->
+		<script src="layui/layui.js"></script>
+		
+		<script>
+			layui.use("table",function(){
+				var table=layui.table;
+				
+				//渲染表格数据
+				table.render({
+					elem:'#tbl',//关联要操作的标签
+					//width:1000,//表格宽度
+					height:400,//表格高度
+					loading:true,//是否显示加载进度
+					page:true,//是否分页
+					limit:10,//每页数据条数
+					limits:[10,20,30,40],//每页展示条数的可选项
+					cols:[
+						[
+							{field:'',title:'全选',width:80,type:'checkbox',fixed:'left'},
+							{field:'id',title:'ID',width:80,sort:true},
+							{field:'username',title:'用户名',width:80,style:'background-color: #5FB878; color: #fff;'},
+							{field:'sex',title:'性别',width:80,align:'center'},
+							{field:'age',title:'年龄',width:80,sort:true,edit:'text'}
+						]
+					],
+					data:[
+						//每一个对象是一行数据
+						{
+							id:'1001',
+							username:'三胖',
+							sex:'男',
+							age:30
+						},
+					    {
+							id:'1002',
+							username:'四呆子',
+							sex:'女',
+							age:28
+						},
+						{
+							id:'1003',
+							username:'二狗子',
+							sex:'男',
+							age:38
+						}
+					],
+					done:function(){//处理渲染完毕后的回调事件
+						//alert("数据渲染完毕!");
+						console.log("数据渲染完毕....");
+					}
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

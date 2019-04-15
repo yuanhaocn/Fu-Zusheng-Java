@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>动态表格</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<table id="tbl01" lay-filter="myFilter"></table>
+
+		<script src="layui/layui.js"></script>
+
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+				
+				//渲染事件
+				table.render({
+					elem: '#tbl01',
+					height: 400,
+					page: true,
+					url: 'user/msg', //加载服务器的url
+					cols: [//表头
+						[{
+							width: 80,
+							fixed: 'left',
+							type: 'checkbox'
+						}, {
+							field: 'id',
+							title: 'ID',
+							width: 80,
+							sort: true,
+							//fixed : 'left'
+						}, {
+							field: 'username',
+							title: '用户名',
+							width: 80
+						}, {
+							field: 'sex',
+							title: '性别',
+							width: 80
+						}, {
+							field: 'city',
+							title: '城市',
+							width: 80
+						}, {
+							field: 'sign',
+							title: '签名',
+							width: 120
+						}, {
+							field: 'experience',
+							title: '积分',
+							width: 80,
+							sort: true
+						}, {
+							field: 'score',
+							title: '评分',
+							width: 80,
+							sort: true
+						}, {
+							field: 'classify',
+							title: '职业',
+							width: 80
+						}, {
+							field: 'wealth',
+							title: '财富',
+							width: 120,
+							sort: true
+						}, { //添加toolbar工具栏
+							fixed: 'right',
+							title: '操作',
+							//width : 200,
+							align: 'center',
+							toolbar: '#alf',
+							event: 'tool' //自定义单元格点击事件名,工具条事件名,随意写.
+						}]
+					]
+				});
+				
+				//处理toolbar中按钮的点击事件
+				//tool()函数是layui自带的函数机制,该函数的名称是域event属性的值是一致的,需要一个参数,参数就是要操作的表格的lay-filter的值!
+				//function(obj):回调函数,obj是操作的那一行数据所代表的对象!
+				table.on('tool(myFilter)',function(obj){
+					//data代表的是每一行的数据
+					var data=obj.data;
+					//event:每一行里的事件,也就是lay-event
+					var layEvent=obj.event;
+					//tr:每一行的dom对象
+					var tr=obj.tr;
+					
+					if(layEvent==='delete'){
+						layer.confirm('确定要删除该数据吗?',function(index){
+							//删除该对象
+							obj.del();
+							layer.close(index);
+							//需要向服务器,发起删除该数据的请求!
+						})
+					}else if(layEvent==='showDetail'){
+						layer.msg('姓名:'+data.username);
+					}else if(layEvent==='edit'){//编辑
+						obj.update({//更新当前对象
+							username:'TomXXX',
+							sex:'女'
+						})
+						//需要向服务器,发起删除该数据的请求!
+					}
+				})
+				
+			});
+		</script>
+
+		<script type="text/html" id="myBar">
+			<a href="#" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+			<a href="#" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="showDetail">查看</a>
+			<a href="#" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">编辑</a>
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Day17_SpringMVC01</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 1.一个中心,配置前端控制器 -->
+	<servlet>
+		<!--默认情况下,servlet-name的名称是有要求的,该名称与Spring的xml文件有关联  -->
+		<!-- 默认情况下,Spring的配置文件名称,必须是servlet的name-servlet.xml -->
+		<!-- 比如本案例中,Spring配置文件名称应该为:springMVC-servlet.xml -->
+		<!-- 而且该配置文件的位置,默认存放在WEB-INF下面 -->
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

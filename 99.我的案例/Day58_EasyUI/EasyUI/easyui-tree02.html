@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的树tree</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+
+		<ul id="tree1" class="easyui-tree"></ul>
+		
+		<script>
+			$("#tree1").tree({
+				data:[
+					{
+						id:1,
+						text:'软件技术',
+						state:'closed',
+						children:[
+							{
+								id:11,
+								text:'JavaEE'
+							},
+							{
+								id:11,
+								text:'HTML5'
+							}
+						]
+					},
+					{
+						id:2,
+						text:'维修技术',
+						state:'opend',
+						children:[
+							{
+								id:21,
+								text:'车辆维修'
+							},
+							{
+								id:22,
+								text:'桌椅维修'
+							}
+						]
+					}
+				],
+				onClick:function(node){
+					alert("点击"+node.text+",id="+node.id);
+				}
+			});
+			
+		</script>
+		
+	</body>
+
+</html>

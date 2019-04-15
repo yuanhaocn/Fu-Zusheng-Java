@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#starnd {
+				width: 100px;
+				height: 100px;
+				background: orange;
+				color: white;
+				font-size: 20px;
+			}
+			
+			#top {
+				width: 100px;
+				height: 100px;
+				padding: 10px;
+				box-sizing: border-box;
+				border: 10px solid green;
+				margin-top: 10px;
+				background: red;
+				color: white;
+				font-size: 20px;
+			}
+			
+			#bottom {
+				width: 100px;
+				height: 100px;
+				padding: 10px;
+				border: 10px solid red;
+				margin-top: 10px;
+				background: blue;
+				color: white;
+				font-size: 20px;
+			}
+			/*设置整个导航条的样式.*/
+			
+			ul {
+				/*去掉列表样式*/
+				list-style-type: none;
+				/*设置黑色背景*/
+				background-color: #001E50;
+				/*调整间距*/
+				padding: 0px;
+				margin: 0px;
+				/*overflow: hidden;*/
+			}
+			
+			li {
+				/*改变列表的方向*/
+				float: left;
+			}
+			/*设置每个a标签的样式*/
+			
+			a {
+				/*display:inline; 内联元素，简单来说就是在同一行显示。
+				  display:block; 块级元素，简单来说就是就是有换行，会换到第二行。
+				  display:inline-block; 就是在同一行内的块级元素。*/
+				/*注意:内联元素是不能设置宽高和间距的,转为块级元素后才可以*/
+				display: inline-block;
+				/*14:上下方向的;16:左右方向的.*/
+				padding: 14px 16px;
+				text-align: center;
+				color: #fff;
+				font-size: 20px;
+				text-decoration: none;
+			}
+			/*.dropdown:hover .dropBtn:多个选择器配合使用*/
+			
+			li a:hover,
+			.dropdown:hover .dropBtn {
+				background-color: red;
+			}
+			
+			.dropdown {
+				/*让整个div显示为一行*/
+				display: inline-block;
+			}
+			
+			.drop_content {
+				display: none;
+				/*设置位置,固定*/
+				position: absolute;
+				background-color: #001E50;
+				min-width: 60px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			}
+			
+			.drop_content a {
+				color: #fff;
+				display: block;
+				padding: 12px 16px;
+				text-decoration: none;
+			}
+			/*.drop_content a:hover {
+				background-color: #f1f1f1;
+			}*/
+			
+			.dropdown:hover .drop_content {
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="starnd">标准</div>
+		<div id="top">sss</div>
+		<div id="bottom">vvvv</div>
+
+		<div id="nav">
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">百家号</a></li>
+				<li><a href="#">国内</a></li>
+				<li><a href="#">国际</a></li>
+				<li><a href="#">军事</a></li>
+				<li><a href="#">社会</a></li>
+				<li><a href="#">体育</a></li>
+				<li><a href="#">财经</a></li>
+				<li><a href="#">娱乐</a></li>
+				<li><a href="#" style="border-right: none;">房产</a></li>
+				<div class="dropdown">
+					<a href="#" class="dropBtn">更多</a>
+					<div class="drop_content">
+						<a href="#">汽车</a>
+						<a href="#">时尚</a>
+						<a href="#">女人</a>
+					</div>
+				</div>
+			</ul>
+		</div>
+
+	</body>
+
+</html>

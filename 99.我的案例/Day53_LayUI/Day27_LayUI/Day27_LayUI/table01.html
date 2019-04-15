@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<title>静态表格</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<!--lay-skin="row":设置表格风格; lay-size="lg":表格尺寸; lay-even:是否开启隔行背景色-->
+		<table class="layui-table" lay-skin="row" lay-size="lg" lay-even>
+
+			<!--表头-->
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>职务</th>
+				</tr>
+			</thead>
+
+			<!--表体-->
+			<tbody>
+				<tr>
+					<td>001</td>
+					<td>张三</td>
+					<td>20</td>
+					<td>销售</td>
+				</tr>
+				<tr>
+					<td>002</td>
+					<td>李四</td>
+					<td>30</td>
+					<td>经理</td>
+				</tr>
+				<tr>
+					<td>003</td>
+					<td>王五</td>
+					<td>35</td>
+					<td>CEO</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+		<script src="layui/layui.js"></script>
+	</body>
+
+</html>

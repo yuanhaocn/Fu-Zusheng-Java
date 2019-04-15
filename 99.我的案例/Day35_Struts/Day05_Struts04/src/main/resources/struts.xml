@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="user" extends="struts-default">
+		
+		
+		
+		<!-- 注册拦截器 -->
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.syc.struts.UserActionInterceptor"/>
+			
+			<!-- 定义拦截器栈 -->
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 设置默认的拦截器引用 -->
+		<default-interceptor-ref name="loginStack"/>
+		
+		<!-- 全局结果视图 -->
+		<global-results>
+			<result name="input">/login.jsp</result>
+		</global-results>
+	
+		<action name="login" class="com.syc.struts.UserAction" method="login">
+			
+			<interceptor-ref name="loginStack">
+				<!-- excludeMethods排除某个方法 -->
+				<param name="loginInterceptor.excludeMethods">login</param>
+			</interceptor-ref>
+			
+			<result name="success" type="redirectAction">show</result>
+		</action>
+
+		<!-- 展示页面的Action -->
+		<action name="show" class="com.syc.struts.UserAction">
+			<result name="success">/WEB-INF/show.jsp</result>
+		</action>
+
+		<action name="logout" class="com.syc.struts.UserAction" method="logout">
+			<!-- <result name="input">/login.jsp</result> -->
+		</action>
+	</package>
+</struts>

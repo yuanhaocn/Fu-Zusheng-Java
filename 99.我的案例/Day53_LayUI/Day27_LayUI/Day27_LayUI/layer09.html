@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<title>layer</title>
+	</head>
+
+	<body class="layui-layout-body">
+
+		<script src="layui/layui.js"></script>
+
+		<script>
+			layui.use('layer', function() {
+				var layer = layui.layer;
+
+				///var index=layer.load(2);
+
+				//关闭特定的某个层
+				//layer.close(index);
+
+				//关闭所有层
+				//layer.closeAll(type) 
+
+				layer.tab({
+					area: ['600px', '300px'],
+					tab: [{
+						title: '选项卡1',
+						content: '内容1'
+					}, {
+						title: 'TAB2',
+						content: '内容2'
+					}, {
+						title: 'TAB3',
+						content: '内容3'
+					}]
+				});
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>float浮动</title>
+		<style>
+			
+			#container{
+				width: 600px;
+				height: 400px;
+				background: gray;
+				font-size: 30px;
+				color: white;
+			}
+			
+			#div1{
+				width: 200px;
+				height: 100px;
+				background: red;
+				float: left;
+				/*float会造成父元素空间的高度塌陷*/
+			}
+			#div2{
+				width: 200px;
+				height: 100px;
+				background: green;
+				float: left;
+			}
+			#div3{
+				width: 200px;
+				height: 100px;
+				background: blue;
+				float: left;	
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--整个的html页面,加载到浏览器运行的过程中,该html页面可以被称为一个文档流(普通流)-->
+		<!--文档流对内部的标签(元素)默认排列方式,是垂直排列的.-->
+		<!--脱离文档流:可以采用float浮动来从正常的显示顺序中脱离.-->
+		
+		<div id="container">
+			<div id="div1">div1</div>
+			<div id="div2">div2</div>
+			<div id="div3">div3</div>
+		</div>
+	</body>
+	
+</html>

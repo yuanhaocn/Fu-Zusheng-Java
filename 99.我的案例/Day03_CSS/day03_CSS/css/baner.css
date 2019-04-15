@@ -1,0 +1,117 @@
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+#baner{
+	width: 1000px;
+	height: 300px;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+}
+
+/*图片的容器*/
+#baner div{
+	width: 5000px;/*1000*5*/
+	height: 300px;
+	animation:moveLeft 10s infinite alternate linear;
+}
+
+/*设置图片的样式*/
+#baner div img{
+	width: 1000px;
+	height: 300px;
+	float: left;
+}
+
+/*设置a标签*/
+#baner a{
+	width: 30px;
+	height: 30px;
+	color: white;
+	background: gray;
+	text-decoration: none;
+	border-radius: 15px;
+	text-align: center;
+	line-height: 30px;
+	position: absolute;
+	bottom: 8px;
+}
+
+#baner a:hover{
+	background: red;
+}
+
+/*把5个a标签分开*/
+/*操作第5个a镖旗,让它距右边的距离是40px*/
+#baner a:nth-of-type(1){right:200px}
+#baner a:nth-of-type(2){right:160px}
+#baner a:nth-of-type(3){right:120px}
+#baner a:nth-of-type(4){right:80px}
+#baner a:nth-of-type(5){right:40px}
+
+/*实现左右轮播的动画*/
+@keyframes moveLeft{
+	0%,18%{
+		margin-left: 0px;
+	}
+	
+	21%,38%{
+		margin-left: -1000px;
+	}
+	41%,58%{
+		margin-left: -2000px;
+	}
+	61%,78%{
+		margin-left: -3000px;
+	}
+	81%,100%{
+		margin-left: -4000px;
+	}
+}
+
+#baner a:nth-of-type(1):hover~div{
+	animation: anim1 0.5s linear forwards;
+}
+#baner a:nth-of-type(2):hover~div{
+	animation: anim2 0.5s linear forwards;
+}
+#baner a:nth-of-type(3):hover~div{
+	animation: anim3 0.5s linear forwards;
+}
+#baner a:nth-of-type(4):hover~div{
+	animation: anim4 0.5s linear forwards;
+}
+#baner a:nth-of-type(5):hover~div{
+	animation: anim5 0.5s linear forwards;
+}
+
+@keyframes anim1{
+	100%{
+		margin-left: 0px;
+	}
+}
+@keyframes anim2{
+	100%{
+		margin-left: -1000px;
+	}
+}
+@keyframes anim3{
+	100%{
+		margin-left: -2000px;
+	}
+}
+@keyframes anim4{
+	100%{
+		margin-left: -3000px;
+	}
+}
+@keyframes anim5{
+	100%{
+		margin-left: -4000px;
+	}
+}
+
+

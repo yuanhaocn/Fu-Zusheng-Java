@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- struts的根节点 -->
+<struts>
+	<!-- package:包,name随便写,但是必须保证唯一. extends="struts-default",
+	必须继承struts-default.xml -->
+	<package name="hello" extends="struts-default">
+		<!-- action代表了要执行的动作,可以理解为是Servlet. -->
+		<!-- action的name随便写,可以理解为Servlet的url-pattern. -->
+		<!-- class:name对应的Action的类的全路径,相当于是web.xml中servlet-class -->
+		<!-- method:action要执行的方法 -->
+		<action name="hello" class="com.syc.struts2.HelloAction" method="execute">
+			<!-- result代表了Action的执行结果. -->
+			<!-- result节点中要配置即将跳转到的页面 -->
+			<result name="success">/home.html</result>
+		</action>
+	</package>
+</struts> 
+   

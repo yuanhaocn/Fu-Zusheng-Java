@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>自定义对象3</title>
+	</head>
+
+	<body>
+		<script>
+			/*提供get和set方法*/
+			
+			function Car(logo,price){
+				this.logo=logo;
+				this.price=price;
+				this.setLogo=function(logo){
+					this.logo=logo;
+				}
+				
+				this.getLogo=function(){
+					return this.logo;
+				}
+				
+				this.setPrice=function(price){
+					this.price=price;
+				}
+				
+				this.getPrice=function(){
+					return this.price;
+				}
+			}
+			
+			var car=new Car("奥迪","200000");
+			document.write("Logo="+car.getLogo()+",价格="+car.getPrice());
+		</script>
+	</body>
+
+</html>

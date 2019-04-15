@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Layui表单</title>
+		<!--引入核心css文件-->
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+	</head>
+
+	<!--layui中,可以给所有的标签添加class,而且该class都是以layui开头!-->
+
+	<body class="layui-body">
+
+		<form class="layui-form" method="post" action="#">
+
+			<!--表单项-->
+			<div class="layui-form-item">
+
+				<!--文本标签-->
+				<label class="layui-form-label">输入框</label>
+
+				<!--输入框-->
+				<div class="layui-input-block">
+					<!--lay-verify="required":验证属性,必填-->
+					<input class="layui-input" name="username" autocomplete="off" placeholder="输入用户名" type="text" required="required" lay-verify="required" />
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+
+				<!--文本标签-->
+				<label class="layui-form-label">密码框</label>
+
+				<!--输入框-->
+				<div class="layui-input-block">
+					<!--lay-verify="required":验证属性,必填-->
+					<input class="layui-input" name="password" autocomplete="off" placeholder="输入用户名" type="password" required="required" lay-verify="required" />
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">选择框</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="required">
+						<option value=""></option>
+						<option value="0">北京</option>
+						<option value="1">上海</option>
+						<option value="2">广州</option>
+						<option value="3">深圳</option>
+						<option value="4">杭州</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">复选框</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="like[write]" title="写作">
+					<input type="checkbox" name="like[read]" title="阅读" checked>
+					<input type="checkbox" name="like[dai]" title="发呆">
+				</div>
+			</div>
+
+			<!--lay-skin="switch":开关按钮-->
+			<div class="layui-form-item">
+				<label class="layui-form-label">开关</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="switch" lay-skin="switch">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<!--lay-submit:将一个普通的按钮,变成submit按钮!-->
+					<!--lay-filter:相当于是该标签的id.-->
+					<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+
+		<!--引入核心js文件-->
+		<script src="layui/layui.js"></script>
+		<script>
+			//必须添加该模块,才可以正常使用element模块!
+			layui.use('form', function() {
+				//获取模块变量
+				var form = layui.form;
+
+				//当点击提交按钮的时候,提交该表单.
+				form.on('submit(formDemo)',function(data){
+					console.log('按钮被点击了...');
+					return false;
+				});
+			});
+		</script>
+	</body>
+
+</html>

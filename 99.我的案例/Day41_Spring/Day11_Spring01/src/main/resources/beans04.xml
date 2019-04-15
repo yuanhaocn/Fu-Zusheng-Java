@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- lazy-init:懒加载,默认值是false.用来改变bean的创建时机. -->
+	<!-- 默认情况下,该xml文件只有已加载,就会把所有的bean对象创建出来;懒加载之后,只有调用了getBean()方法之后,才会创建该对象. -->
+	<bean id="car" class="com.syc.spring.lazyinit04.Car" lazy-init="true" />
+
+</beans>

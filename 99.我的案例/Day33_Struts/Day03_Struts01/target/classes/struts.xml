@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="user" extends="struts-default">
+
+		<!-- 全局的allowed-method -->
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+
+		<action name="user_*" class="com.syc.struts.UserAction"
+			method="{1}">
+			<result name="{1}">/{1}.html</result>
+			<!-- 局部的allowed-method -->
+			<!-- 配置一些例外的情况 -->
+			<!-- <allowed-methods>login,register</allowed-methods> -->
+			<!-- regex:.*,表示允许UserAction类中所有的方法都可以执行-->
+			<!-- <allowed-methods>regex:.*</allowed-methods> -->
+		</action>
+		
+		<!-- 更复杂的通配符用法 -->
+		<action name="*_*" class="com.syc.struts.{1}" method="{2}">
+			<result name="{2}">/order/{1}_{2}.html</result>
+		</action>
+		
+	</package>
+</struts>

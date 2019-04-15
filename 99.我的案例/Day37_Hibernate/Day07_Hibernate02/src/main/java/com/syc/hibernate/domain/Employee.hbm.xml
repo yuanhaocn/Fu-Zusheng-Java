@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 类与表的映射关系 -->
+	<class name="com.syc.hibernate.domain.Employee" table="empl">
+		<!-- id代表主键 -->
+		<id name="id" column="id" length="20">
+			<!-- 主键的自增长策略 -->
+			<!-- increment:表示id会自增长,先查询表中id的最大值,然后在该值的基础上加1. -->
+			<!-- assigned:分配,此时表示id需要程序员自己手动分配,否则可能是用的默认值,或者直接报异常. -->
+			<!-- identity,效果上与increment类似,但是效率更高一些.此时必须保证该列是increment,否则会出现异常! -->
+			<!-- uuid:JavaBean中id的类型必须是String;表中id的类型应该是char/varchar,而且长度不能太短! -->
+			<generator class="increment"/>
+		</id>
+		
+		<!-- 针对普通的属性,列 -->
+		<property name="name" column="name" type="string" length="30"/>
+		<!-- 如果列名和属性名一样,可以省略列名 -->
+		<property name="job"/>
+		<property name="salery" type="double"/>
+	</class>
+</hibernate-mapping>

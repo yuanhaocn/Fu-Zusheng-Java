@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Date对象</title>
+		<script>
+			
+			function getWeek(num){
+				var weeks=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+				return weeks[num];
+			}
+		
+			function showTime(){
+				//Date对象.
+				var mDate=new Date();
+				//获取年份
+				var year=mDate.getFullYear();
+				//获取月份
+				var month=mDate.getMonth();
+				//获取日
+				var day=mDate.getDate();
+				//获取小时
+				var hour=mDate.getHours();
+				//获取分钟
+				var minute=mDate.getMinutes();
+				//获取秒
+				var second=mDate.getSeconds();
+				//返回的是0-6之间的一个数字
+				var num=mDate.getDay();
+				
+				//日期以2位数的格式显示
+				if(day<10){
+					day="0"+day;
+				}
+				
+				document.write("今天是:"+year+"年"+(month+1)+"月"+day+"日"+hour+"时"+minute+"分"+second+"秒"+","+getWeek(num));
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="showTime()">显示日期时间</button>
+	</body>
+</html>

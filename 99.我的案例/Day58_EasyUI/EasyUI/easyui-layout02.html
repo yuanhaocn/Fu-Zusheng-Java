@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>easy的布局layout</title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+		<!--jquery.js必须在前面-->
+		<script src="easyui/jquery.min.js"></script>
+		<script src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body class="easyui-layout">
+		<!--easyui中把layout布局分为5个部分,东西南北中5个部分.上北下南,左西右东,中间必不可少!-->
+
+		<div data-options="region:'north'" style="height: 100px;" title="北区"></div>
+
+		<div data-options="region:'center'">
+			<div class="easyui-layout" data-options="fit:true">
+				<div data-options="region:'west',collapsed:false" style="width: 100px;"></div>
+				<div data-options="region:'center'"></div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

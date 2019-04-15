@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bone-config>
+	<!-- 默认配置 -->
+	<default-config>
+		<!-- 必须配置的属性 -->
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/db01</property>
+		<property name="username">root</property>
+		<property name="password">syc</property>
+		
+		<!-- 设置连接池的区块,分成了3块,默认是2,推荐3~4块 -->
+		<property name="partitionCount">3</property>
+		<!-- 设置每个分区的最大连接数量 -->
+		<property name="maxConnectionsPerPartition">20</property>
+		<!-- 每次去连接池中获取连接的数量:就是一次性拿几个连接.默认是2 -->
+		<property name="acquireIncrement">3</property>
+		<!-- 设置连接的最大存活时间,单位是分钟. -->
+		<property name="idleMaxAge">60</property>
+		<!-- 每次释放连接的数量,默认是3 -->
+		<property name="releaseHelperThreads">3</property>
+	</default-config>
+</bone-config>

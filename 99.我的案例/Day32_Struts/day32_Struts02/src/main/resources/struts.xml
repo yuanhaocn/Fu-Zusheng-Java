@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- package类似于是Java本身的包,可以把同一个模块下的所有Action都放到一个package中. -->
+	<!-- abstract,表示当前包是一个抽象的包,name就不能在该package中配置具体的action. -->
+	<!-- namespace="/",默认值是/,namespace中的内容会作为url的一部分,用来定义访问页面时url的规则. -->
+	<package name="actions" extends="struts-default">
+		<!-- <action name="first" class="com.syc.struts.FirstAction"> <result name="success">/index.html</result> 
+			<result name="error">/error.html</result> </action> -->
+
+		<action name="first" class="com.syc.struts.FirstAction" method="firstMethod">
+			<result name="first">/index.html</result>
+			<result name="error">/error.html</result>
+		</action>
+
+		<action name="second" class="com.syc.struts.SecondAction"
+			method="login">
+			<result name="login">/index.html</result>
+		</action>
+		
+		<action name="third" class="com.syc.struts.ThirdAction"
+			method="register">
+			<result name="register">/index.html</result>
+		</action>
+	</package>
+
+</struts>

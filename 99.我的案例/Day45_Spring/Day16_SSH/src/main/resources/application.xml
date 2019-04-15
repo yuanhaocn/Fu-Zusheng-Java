@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+           				http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                        http://www.springframework.org/schema/tx 
+    					http://www.springframework.org/schema/tx/spring-tx.xsd
+                        http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- SSH整合项目中,最核心的配置文件,要保证当Tomcat服务器一启动的时候,就可以自动加载该文件. -->
+
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+
+	<!-- 配置c3p0数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${driverClassName}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<!-- destroy-method="destory":当bean被销毁的时候,就关闭SessionFactory -->
+	<bean id="factory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" 
+		destroy-method="destroy">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 加载hibernate.cfg.xml文件 -->
+		<property name="configLocations" value="classpath:hibernate.cfg.xml"/>
+	</bean>
+
+	<bean id="dao" class="com.syc.ssh.dao.impl.UserDaoImpl">
+		<property name="factory" ref="factory"></property>
+	</bean>
+	
+	<bean id="service" class="com.syc.ssh.service.impl.UserServiceImpl">
+		<property name="dao" ref="dao"/>
+	</bean>
+	
+	<bean id="userAction" class="com.syc.ssh.web.UserAction">
+		<property name="service" ref="service"/>
+	</bean>
+	
+</beans>            
+                        

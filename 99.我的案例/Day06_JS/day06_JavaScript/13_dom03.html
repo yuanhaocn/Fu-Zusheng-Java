@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>获取属性值</title>
+		<script>
+			function getValue(){
+				var ft=document.getElementById("ft");
+				//得到color这个属性节点
+				var colorNode=ft.getAttributeNode("color");
+				alert("元素名称:" + colorNode.nodeName + "\n元素类型:" + colorNode.nodeType + "\n元素节点值:" + colorNode.nodeValue + "\n元素值:" + colorNode.value);
+			}
+			
+			function getTextValue(){
+				var ft=document.getElementById("ft");
+				//获取标签的文本内容
+				
+				//var msg=ft.textContent;
+				//返回font中的第一个节点,返回的节点类型
+				
+				//var textNode=ft.firstChild;
+				//alert(textNode.nodeValue+"--节点名称:"+textNode.nodeName);
+				
+				//都是用来获取html网页里的内容的方法
+				//var msg=ft.innerHTML;
+				var msg=ft.innerText;
+				alert(msg);
+				
+				//alert("元素名称:" + colorNode.nodeName + "\n元素类型:" + colorNode.nodeType + "\n元素节点值:" + colorNode.nodeValue + "\n元素值:" + colorNode.value);
+			}
+			
+		</script>
+	</head>
+
+	<body>
+		<!--文本也属于节点的一种:文本节点-->
+		<font color="red" size="5" id="ft">被包含的文字</font>		
+		<br />
+		<button onclick="getValue()">获取属性值</button>
+		<br />
+		<button onclick="getTextValue()">获取文本值</button>
+	</body>
+
+</html>

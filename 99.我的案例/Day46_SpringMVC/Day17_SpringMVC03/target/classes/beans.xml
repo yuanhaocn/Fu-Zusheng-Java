@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<!-- 配置3个基本组件 -->
+	<!-- 注意:可以同时配置多个处理器映射器和适配器! -->
+
+	<!-- 2.配置处理器映射器 -->
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<!-- 另一个处理器映射器 -->
+	<!-- SimpleUrlHandlerMapping:可以批量管理多个bean的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- key所对应的是请求的url地址,value是处理器或者控制器类的id -->
+				<prop key="/first01.action">first</prop>
+				<prop key="/first02.action">first</prop>
+				<prop key="/first03.action">first</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 3.配置处理器适配器 -->
+	<!-- 注意:SimpleControllerHandlerAdapter该处理器,只能处理实现了Controller接口的类! -->
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+	<!-- HttpRequestHandlerAdapter:该适配器用来处理实现了HttpRequestHandler接口的类 -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+
+	<!-- 4.配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<!-- 配置后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- 5.配置处理器 -->
+	<!-- name类似于struts2中action的name,是用来访问该资源的url地址 -->
+	<bean id="first" name="/first.action" class="com.syc.mvc.FirstHandler" />
+
+	<bean name="/second.action" class="com.syc.mvc.SecondController" />
+
+</beans>
